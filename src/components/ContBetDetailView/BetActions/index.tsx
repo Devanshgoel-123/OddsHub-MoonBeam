@@ -69,8 +69,8 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
     if (!outcomes || outcomes.length == 0) return;
 
     const percentages = calcPrice([
-      outcomes[0].num_shares_in_pool.toString(),
-      outcomes[1].num_shares_in_pool.toString(),
+      outcomes[0].numSharesInPool.toString(),
+      outcomes[1].numSharesInPool.toString(),
     ]);
     setPrice1(percentages[0]);
     setPrice2(percentages[1]);

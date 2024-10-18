@@ -42,7 +42,7 @@ export interface Outcome {
 
 export interface FPMMOutcome {
   name: string;
-  num_shares_in_pool: number;
+  numSharesInPool: number;
   winner: boolean;
 }
 

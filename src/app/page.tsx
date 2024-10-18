@@ -9,7 +9,7 @@ export default function Home() {
       <div className='Heading-Section'>
         <span className='Heading'>Use your Insights & Trade on Opinions with ForeCast</span>
         <span className='Sub-Heading'>
-        India’s Primary Prediction Market - built on <img src="/assets/logos/baselogo.svg" alt="Base Logo" class="base-logo"></img>
+        India’s Primary Prediction Market - built on <img src="/assets/logos/baselogo.svg" alt="Base Logo" className="base-logo"></img>
         </span>
       </div>
       <BetSection />

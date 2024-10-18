@@ -1,95 +1,101 @@
 "use client";
 import BetActions from "@/components/ContBetDetailView/BetActions";
 import BetDetails from "@/components/ContBetDetailView/BetDetails";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import { usePathname, useRouter } from "next/navigation";
-import { useAccount, useContract } from "@starknet-react/core";
-import abi from "../../../../abi/AMMMarketABI.json";
-import {
-  CONTRACT_ADDRESS,
-  FPMM_CONTRACT_ADDRESS,
-} from "@/components/helpers/constants";
+import { useReadContract } from "wagmi";
+import {abi} from "../../../../abi/FPMMMarket.json";
+import { contractAddress } from "@/components/helpers/constants";
 import {
   FPMMMarket,
   FPMMMarketInfo,
   FPMMOutcome,
-  Market,
 } from "@/components/helpers/types";
 import { NextPage } from "next";
-import { enqueueSnackbar } from "notistack";
 import CustomLogo from "@/components/common/CustomIcons";
 import { BACK_LOGO } from "@/components/helpers/icons";
-import { Box, Skeleton } from "@mui/material";
-import { HiLockClosed } from "react-icons/hi";
+import { Skeleton } from "@mui/material";
 import axios from "axios";
 import { handleToast } from "@/components/helpers/functions";
 
+
+
+interface ContractData{
+  numOutcomes:number,
+  deadline:number,
+  isActive:boolean,
+  isSettled:boolean
+}
+interface ContractReadResult {
+  data: ContractData | undefined;
+  error: Error | null;
+  isError: boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
+  status: string;
+}
 const BetDetailView: NextPage = () => {
   const router = useRouter();
-  const { address } = useAccount();
-  const [market, setMarket] = useState<FPMMMarket | null>(null);
-  const [marketInfo, setMarketInfo] = useState<FPMMMarketInfo>();
+  const pathname = usePathname();
+
+  const encoded = pathname.split("/")[3];
+  const hexPart = encoded.slice(0, -4);
+  const marketId = parseInt(hexPart, 16);
+  const [market, setMarket] = useState<FPMMMarketInfo | null>(null);
   const [outcomes, setOutcomes] = useState<FPMMOutcome[]>([]);
-  const [passedDeadline, setPassedDeadline] = useState(false);
+
+  const marketResult = useReadContract({
+    abi,
+    address: `${contractAddress}`,
+    functionName: 'getMarket',
+    args: [marketId], // The correct marketId is passed here
+  }) as ContractReadResult;
+  console.log(marketResult.data);
+  const contractData=(marketResult.data) as ContractData | undefined;
+  const outcomeResult1=useReadContract({
+    abi,
+    address: `${contractAddress}`,
+    functionName: 'getOutcome',
+    args: [marketId,0],
+  })
+ 
+  const outcomeResult2=useReadContract({
+    abi,
+    address: `${contractAddress}`,
+    functionName: 'getOutcome',
+    args: [marketId,1],
+  })
+  
+  useEffect(() => {
+    if (outcomeResult1.data && outcomeResult2.data) {
+      const tempOutcomes = [outcomeResult1.data, outcomeResult2.data];
+      console.log(tempOutcomes);
+      setOutcomes(tempOutcomes);
+    }
+  }, [outcomeResult1.data,outcomeResult2.data]);
+
+  useEffect(() => {
+    const getMarketInfo = async () => {
+      try {
+        const response = await axios.get(`${process.env.SERVER_URL}/get-current-market/${marketId}`);
+        console.log(response.data);
+        setMarket(response.data[0]);
+      } catch (err) {
+        handleToast(
+          "Error Fetching Market Data",
+          "Please try refreshing the page",
+          "error"
+        );
+      }
+    };
+    getMarketInfo();
+  }, [marketId]);
+
+  
   const handleBack = () => {
     router.push("/");
   };
-  const pathname = usePathname();
-
-  const { contract } = useContract({
-    address: FPMM_CONTRACT_ADDRESS,
-    abi: abi,
-  });
-
-  useEffect(() => {
-    const getMarket = async () => {
-      if (!contract) {
-        return;
-      }
-      const encoded = pathname.split("/")[3];
-      const hexPart = encoded.slice(0, -4);
-      const marketId = parseInt(hexPart, 16);
-
-      await axios
-        .get(`${process.env.SERVER_URL}/get-current-market/${marketId}`)
-        .then((res) => {
-          setMarketInfo(res.data[0]);
-        })
-        .catch((err) => {
-          handleToast(
-            "Error Fetching Market Data",
-            "Please try refreshing the page",
-            "error"
-          );
-        });
-
-      await contract.get_market(marketId).then(async (res: any) => {
-        setMarket(res);
-        let tempOutcomes: FPMMOutcome[] = [];
-        for (let i = 0; i < res.num_outcomes; i++) {
-          await contract
-            .get_outcome(marketId, i)
-            .then((outcome: FPMMOutcome) => {
-              tempOutcomes.push(outcome);
-            });
-        }
-        setOutcomes(tempOutcomes);
-      });
-    };
-    getMarket();
-  }, [contract, address, pathname]);
-
-  useEffect(() => {
-    if (market) {
-      const checkDeadline = () => {
-        const currentTime = new Date().getTime();
-        const deadline = new Date(parseInt(market?.deadline) * 1000).getTime(); // * 1000 to convert seconds to ms
-        setPassedDeadline(currentTime > deadline);
-      };
-      checkDeadline();
-    }
-  }, [market]);
 
   return (
     <div className='BetDetailView'>
@@ -97,20 +103,20 @@ const BetDetailView: NextPage = () => {
         <CustomLogo width={"30px"} height={"20px"} src={BACK_LOGO} />
         <div>Back</div>
       </div>
-      {marketInfo && (
+
+      {market && (
         <div className='DetailsAndActions'>
           <BetDetails
-            heading={marketInfo.question}
-            logo={marketInfo.icon}
-            fightImage={marketInfo.fight_image}
-            subHeading={marketInfo.description}
+            heading={market.question}
+            logo={market.icon}
+            fightImage={market.fightimage}
+            subHeading={market.description}
           />
           {market ? (
-            <BetActions
+           <BetActions
               duration={market?.deadline || ""}
-              outcomes={outcomes!}
-              // settled={true}
-              settled={market?.is_settled}
+              outcomes={outcomes}  
+               settled={market?.settled}
             />
           ) : (
             <Skeleton />

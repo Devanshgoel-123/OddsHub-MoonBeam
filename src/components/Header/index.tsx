@@ -3,7 +3,7 @@ import "./styles.scss";
 import { motion } from "framer-motion";
 import CustomLogo from "../common/CustomIcons";
 import HeaderLink from "./HeaderLink";
-import WalletButtons from "./WalletButtons";
+import WalletButton from "./WalletButtons/index";
 
 interface Props {}
 
@@ -34,7 +34,7 @@ const Header: NextPage<Props> = ({}) => {
         />
       </div>
       <div className="Header-ButtonsContainer">
-        <WalletButtons />
+        <WalletButton />
       </div>
     </motion.div>
   );

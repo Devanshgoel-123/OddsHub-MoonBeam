@@ -53,114 +53,18 @@ export default function AdminPortal() {
   const [condition, setCondition] = useState("");
   const [canCreate, setCanCreate] = useState(false);
   const [action, setAction] = useState(0);
-  
-  const firebaseConfig = {
-    apiKey: "AIzaSyAIowr5sia66ujQ8MHEAGdaytEhV3z5SAs",
-    authDomain: "raizeicons.firebaseapp.com",
-    projectId: "raizeicons",
-    storageBucket: "raizeicons.appspot.com",
-    messagingSenderId: "145845814420",
-    appId: "1:145845814420:web:6266360ba7c20dacafe081",
-    measurementId: "G-9L9PWBPWMT",
-  };
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBBOnIaqM2JbY2Ddjnx4cCHOn-unlhwUCM",
+  authDomain: "baseforesight.firebaseapp.com",
+  projectId: "baseforesight",
+  storageBucket: "baseforesight.appspot.com",
+  messagingSenderId: "208805678834",
+  appId: "1:208805678834:web:ebd18499dd40958c640a6b"
+};
 
   const app = initializeApp(firebaseConfig);
-
-  const cryptoSelection = () => {
-    return (
-      <div>
-        <Box className='InputContainer'>
-          <span className='Label'>Amount</span>
-          <Box className='Input'>
-            <input
-              className='InputField'
-              type='string'
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder='Amount in Heading in numbers'
-              required
-            />
-          </Box>
-        </Box>
-        <Box className='InputContainer'>
-          <span className='Label'>Price Key</span>
-          <Box className='Input'>
-            <input
-              className='InputField'
-              type='string'
-              value={priceKey}
-              onChange={(e) => setPriceKey(e.target.value)}
-              placeholder='Price Key of Pragma (e.g. BTC/USD)'
-              required
-            />
-          </Box>
-        </Box>
-        <Box className='InputContainer'>
-          <span className='Label'>Conditions</span>
-          <Box className='Input'>
-            <input
-              className='InputField'
-              type='string'
-              value={condition}
-              onChange={(e) => setCondition(e.target.value)}
-              placeholder='Condition to check in Pragma (e.g. > 1000), 0 for greater than, 1 for less than'
-              required
-            />
-          </Box>
-        </Box>
-      </div>
-    );
-  };
-
-  const sportsSelection = () => {
-    return (
-      <div>
-        <Box className='InputContainer'>
-          <span className='Label'>Event ID on Pinaccle Odds</span>
-          <Box className='Input'>
-            <input
-              className='InputField'
-              type='string'
-              value={eventId}
-              onChange={(e) => setEventId(e.target.value)}
-              placeholder='Price Key of Pragma (e.g. BTC/USD)'
-              required
-            />
-          </Box>
-        </Box>
-        <Box className='InputContainer'>
-          <Box className='Input Check'>
-            <label>
-              Is the country in question the home team?
-              <input
-                className='InputField'
-                type='checkbox'
-                checked={isHome}
-                onChange={() => setIsHome(!isHome)}
-              />
-            </label>
-          </Box>
-        </Box>
-      </div>
-    );
-  };
-
-  const { createMarket, data, isSuccess, isError, isPending, error } =
-    useCreateMarket({
-      heading,
-      category,
-      description,
-      outcome1,
-      outcome2,
-      deadline,
-      image,
-      amount,
-      priceKey,
-      condition,
-      eventId,
-      isHome,
-    });
-
+  
   const { createFPMMMarket } = useCreateFPMMMarket({
     heading,
     category,
@@ -227,164 +131,13 @@ export default function AdminPortal() {
       </div>
       <div className='Action-Choice'>
         <button className='Action-Button' onClick={() => setAction(0)}>
-          Settle Markets
+          Create Market
         </button>
         <button className='Action-Button' onClick={() => setAction(1)}>
-          Create Markets
-        </button>
-        <button className='Action-Button' onClick={() => setAction(2)}>
-          Toggle Markets
-        </button>
-        <button className='Action-Button' onClick={() => setAction(3)}>
-          Create FPMM Market
-        </button>
-        <button className='Action-Button' onClick={() => setAction(4)}>
-          Settle FPMM Market
+          Settle Market
         </button>
       </div>
       {action == 0 && (
-        <>
-          <div className='Heading-Section'>
-            <div>Settle Markets</div>
-          </div>
-          <div className='Content-Section'>
-            <SettleMarkets />
-          </div>
-        </>
-      )}
-      {action == 1 && (
-        <>
-          <div className='Content-Section'>
-            <Box className='InputContainer'>
-              <span className='Label'>Heading</span>
-              <Box className='Input'>
-                <input
-                  className='InputField'
-                  type='string'
-                  value={heading}
-                  onChange={(e) => setHeading(e.target.value)}
-                  placeholder='Trump vs Biden'
-                  required
-                />
-              </Box>
-            </Box>
-            <Box className='InputContainer'>
-              <span className='Label'>Description</span>
-              <Box className='Input'>
-                <input
-                  className='InputField'
-                  type='string'
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder='Will Trump win the 2024 election?'
-                  required
-                />
-              </Box>
-            </Box>
-            <Box className='InputContainer Outcome'>
-              <Box className='InputContainer'>
-                <span className='Label'>Outcome 1</span>
-                <Box className='Input'>
-                  <input
-                    className='InputField'
-                    type='string'
-                    id='numberInput'
-                    name='numberInput'
-                    value={outcome1}
-                    onChange={(e) => setOutcome1(e.target.value)}
-                    placeholder='Yes!'
-                    required
-                  />
-                </Box>
-              </Box>
-              <Box className='InputContainer'>
-                <span className='Label'>Outcome 2</span>
-                <Box className='Input'>
-                  <input
-                    className='InputField'
-                    type='string'
-                    id='numberInput'
-                    name='numberInput'
-                    value={outcome2}
-                    onChange={(e) => setOutcome2(e.target.value)}
-                    placeholder='No'
-                    required
-                  />
-                </Box>
-              </Box>
-            </Box>
-            <Box className='InputContainer Outcome'>
-              <Box className='InputContainer'>
-                <span className='Label'>Category</span>
-                <Box className='Input'>
-                  <Select
-                    className='SelectBox'
-                    styles={colorStyles}
-                    options={categories}
-                    onChange={(category) => setCategory(category?.value!)}
-                  />
-                </Box>
-              </Box>
-              <Box className='InputContainer'>
-                <span className='Label'>Deadline</span>
-                <Box className='Input'>
-                  <DatePicker
-                    placeholder='Select Deadline'
-                    format='MM/dd/yyyy HH:mm'
-                    onChange={(value) => setDeadline(value!)}
-                    value={deadline}
-                  />
-                </Box>
-              </Box>
-            </Box>
-            <Box className='InputContainer'>
-              <span className='Label'>Image</span>
-              <Box className='Input'>
-                {image == "" ? (
-                  <input
-                    className='InputField'
-                    type='file'
-                    value={image}
-                    onChange={(e) => handleImageUpload(e, true)}
-                    required
-                  />
-                ) : (
-                  <input
-                    className='InputField'
-                    type='string'
-                    id='numberInput'
-                    name='numberInput'
-                    value={image}
-                    disabled
-                  />
-                )}
-              </Box>
-            </Box>
-            {category == "Crypto Market" && cryptoSelection()}
-            {category == "Sports" && sportsSelection()}
-            <Box className='Submit'>
-              <button
-                disabled={!canCreate || isPending}
-                onClick={createMarket}
-                className={`SubmitButton ${canCreate ? "" : "Disabled"}`}
-              >
-                Create Market
-              </button>
-            </Box>
-          </div>
-        </>
-      )}
-      {action == 2 && (
-        <>
-          <div className='Heading-Section'>
-            <div>Toggle Markets</div>
-          </div>
-          <div className='Content-Section'>
-            <ToggleMarkets />
-          </div>
-        </>
-      )}
-      {action == 3 && (
         <>
           <div className='Content-Section'>
             <Box className='InputContainer'>
@@ -519,7 +272,7 @@ export default function AdminPortal() {
             {category == "Sports"}
             <Box className='Submit'>
               <button
-                disabled={!canCreate || isPending}
+                disabled={!canCreate}
                 onClick={createFPMMMarket}
                 className={`SubmitButton ${canCreate ? "" : "Disabled"}`}
               >
@@ -529,7 +282,7 @@ export default function AdminPortal() {
           </div>
         </>
       )}
-      {action == 4 && (
+      {action == 1 && (
         <>
           <div className='Heading-Section'>
             <div>Settle FPMM Markets</div>

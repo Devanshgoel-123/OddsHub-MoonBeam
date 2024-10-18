@@ -1,9 +1,8 @@
 "use client";
 import { NextPage } from "next";
 import "./styles.scss";
-
 import { useState } from "react";
-import { useConnect } from "@starknet-react/core";
+import { MetaMaskButton,useAccount,useSDK,useSignMessage } from "@metamask/sdk-react-ui";
 
 import WalletModal from "./WalletModal";
 
@@ -17,10 +16,8 @@ const ConnectWallet: NextPage<Props> = ({}) => {
   };
   return (
     <>
-      <div className='ConnectBtn' onClick={handleOpen}>
-        Connect Wallet
-      </div>
-      <WalletModal open={openWalletModal} handleClose={handleClose} />
+      <MetaMaskButton theme={"light"} color="white"></MetaMaskButton>
+     
     </>
   );
 };

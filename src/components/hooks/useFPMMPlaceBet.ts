@@ -1,215 +1,130 @@
 import { enqueueSnackbar } from "notistack";
-import {
-  CONTRACT_ADDRESS,
-  FPMM_CONTRACT_ADDRESS,
-  STARK_ADDRESS,
-  USDC_ADDRESS,
-} from "../helpers/constants";
-import {
-  useAccount,
-  useConnect,
-  useContract,
-  useContractWrite,
-  useWaitForTransaction,
-} from "@starknet-react/core";
-import abi from "../../abi/AMMMarketABI.json";
-import tokenABI from "../../abi/ERC20ABI.json";
-import { useEffect, useMemo, useState } from "react";
-import useSwapTrade from "./useSwapTrade";
+import { contractAddress } from "../helpers/constants";
+import { abi } from "../../abi/FPMMMarket.json";
+import { useEffect, useState, useMemo } from "react";
+import { useAccount, useWriteContract, useWaitForTransaction } from "wagmi";
 import useGetMinShares from "./useGetMinShares";
 import axios from "axios";
+import { getBalance as fetchBalance } from "@wagmi/core";
 
-const useFPMMPlaceBet = (
-  marketId: number,
-  betAmount: string,
-  choice: number,
-  currentToken: string,
-  amountUSDC?: any
-) => {
-  const { address } = useAccount();
-  const { contract } = useContract({
-    address: FPMM_CONTRACT_ADDRESS,
-    abi: abi,
-  });
-
-  const { contract: tokenContract } = useContract({
-    address: currentToken,
-    abi: tokenABI,
-  });
-
-  const { contract: usdcContract } = useContract({
-    address: USDC_ADDRESS,
-    abi: tokenABI,
-  });
-
+const useFPMMPlaceBet = (marketId: number, betAmount: string, choice: number) => {
+  const { address } = useAccount(); // Get user's Ethereum address
   const [balance, setBalance] = useState("");
-  const [decimals, setDecimals] = useState(0);
+  const [decimals, setDecimals] = useState(18); // ETH typically has 18 decimals
   const [updatedShares, setUpdatedShares] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-  const { swapCall } = useSwapTrade(currentToken, betAmount);
+  // Fetch minimum shares required using custom hook
+  const { minAmount } = useGetMinShares(marketId, betAmount, choice, decimals);
 
-  const { minAmount } = useGetMinShares(
-    marketId,
-    betAmount,
-    choice,
-    decimals,
-    currentToken,
-    amountUSDC
-  );
-
-  const calls = useMemo(() => {
+  // Memoized contract write arguments
+  const args = useMemo(() => {
     if (
       !address ||
-      !contract ||
       !(parseFloat(betAmount) > 0) ||
-      !usdcContract ||
       !marketId ||
-      decimals == 0 ||
+      decimals === 0 ||
       !(parseFloat(minAmount) > 0)
-    )
+    ) {
       return [];
-
+    }
     return [
-      usdcContract.populateTransaction["approve"]!(
-        FPMM_CONTRACT_ADDRESS,
-        BigInt(parseFloat(betAmount) * 10 ** decimals)
-      ),
-      contract.populateTransaction["buy"]!(
-        marketId,
-        BigInt(parseFloat(betAmount) * 10 ** decimals),
-        choice,
-        minAmount
-      ),
+      marketId,
+      BigInt(parseFloat(betAmount) * 10 ** decimals), // Convert bet amount to wei
+      choice,
+      BigInt(minAmount), // Minimum amount to buy
     ];
-  }, [
-    contract,
-    address,
-    choice,
-    betAmount,
-    usdcContract,
-    marketId,
-    decimals,
-    minAmount,
-  ]);
+  }, [address, betAmount, marketId, decimals, minAmount]);
 
-  const swapCalls = useMemo(() => {
-    if (
-      !address ||
-      !contract ||
-      !amountUSDC ||
-      !usdcContract ||
-      !marketId ||
-      !minAmount
-    )
-      return [];
-    const calls = swapCall?.concat([
-      usdcContract.populateTransaction["approve"]!(
-        FPMM_CONTRACT_ADDRESS,
-        amountUSDC
-      ),
-      contract.populateTransaction["buy"]!(
-        marketId,
-        BigInt(parseFloat(amountUSDC)), //USDC has 6 decimals
-        choice,
-        minAmount
-      ),
-    ]);
-
-    return calls;
-  }, [
-    address,
-    contract,
-    choice,
-    amountUSDC,
-    minAmount,
-    usdcContract,
-    swapCall,
-    marketId,
-  ]);
-
-  const { writeAsync, data, isError } = useContractWrite({
-    calls: currentToken === USDC_ADDRESS ? calls : swapCalls,
+  // Write the contract call
+  const { writeAsync, data, isError: writeError } = useWriteContract({
+    abi,
+    address: contractAddress,
+    functionName: "buy",
+    args,
+    enabled: args.length > 0, // Enable only when args are valid
   });
 
+  // Monitor transaction status
+  const { isPending, isSuccess, data: txData } = useWaitForTransaction({
+    hash: data?.hash,
+  });
+
+  // Fetch ETH balance from user's wallet
   const getBalance = async () => {
-    if (!tokenContract || !address) return;
-    tokenContract.balance_of(address).then((res: any) => {
-      tokenContract.decimals().then((resp: any) => {
-        const balance = Number(res) / 10 ** Number(resp);
-        setBalance(balance.toString());
-        setDecimals(Number(resp));
-      });
-    });
+    if (!address) return;
+    const balanceWei = await fetchBalance({ address });
+    const balanceEther = Number(balanceWei.value) / 10 ** decimals;
+    setBalance(balanceEther.toString());
   };
 
   useEffect(() => {
     getBalance();
-  }, [tokenContract, address]);
+  }, [address]);
 
-  const { isPending: pending, isSuccess: success } = useWaitForTransaction({
-    hash: data?.transaction_hash,
-  });
-
+  // Update the shares for the market once the transaction is successful
   const updateShares = async () => {
     if (!marketId || !betAmount || !minAmount || updatedShares) return;
     await axios
       .post(`${process.env.SERVER_URL}/update-market`, {
-        marketId: marketId,
+        marketId,
         outcomeIndex: choice,
-        amount:
-          currentToken === USDC_ADDRESS
-            ? (parseFloat(betAmount) * 10 ** 6).toString()
-            : parseInt(amountUSDC),
+        amount: (parseFloat(betAmount) * 10 ** 18).toString(), // Convert ETH to wei
         isBuy: true,
         sharesUpdated: parseInt(minAmount),
       })
-      .then((res) => {})
+      .then(() => {
+        console.log("Shares updated successfully");
+      })
       .catch((error) => {
-        console.error("Error creating market:", error);
+        console.error("Error updating market:", error);
       });
     setUpdatedShares(true);
   };
 
+  // Transaction handling
   useEffect(() => {
-    if (data && pending) {
+    if (isPending) {
       handleToast(
         "Transaction Pending",
         "Your transaction is being processed, please wait for a few seconds.",
         "info",
-        data!.transaction_hash
+        txData?.hash
       );
+      setPending(true);
     }
-    if (isError) {
+
+    if (isError || writeError) {
       handleToast(
         "Oh shoot!",
         "Something unexpected happened, check everything from your side while we check what happened on our end and try again.",
-        "info"
+        "error"
       );
+      setIsError(true);
     }
-    if ((data && success) || (data && !pending)) {
+
+    if (isSuccess) {
       handleToast(
         "Prediction Placed Successfully!",
-        "Watch out for the results in “My bets” section. PS - All the best for this and your next prediction.",
+        "Watch out for the results in 'My bets' section. PS - Good luck with your prediction.",
         "success",
-        data!.transaction_hash
+        txData?.hash
       );
       updateShares();
-      getBalance();
+      getBalance(); // Refresh the balance after placing the bet
+      setSuccess(true);
     }
-  }, [data, isError, pending, success]);
+  }, [isPending, isSuccess, isError, writeError]);
 
-  const handleToast = (
-    message: string,
-    subHeading: string,
-    type: string,
-    hash?: string
-  ) => {
+  // Helper function to handle snackbars
+  const handleToast = (message: string, subHeading: string, type: string, hash?: string) => {
     enqueueSnackbar(message, {
-      //@ts-ignore
       variant: "custom",
-      subHeading: subHeading,
-      hash: hash,
-      type: type,
+      subHeading,
+      hash,
+      type,
       anchorOrigin: {
         vertical: "top",
         horizontal: "right",
@@ -217,7 +132,7 @@ const useFPMMPlaceBet = (
     });
   };
 
-  return { balance, minAmount, writeAsync, decimals };
+  return { balance, minAmount, writeAsync, decimals, pending, success, isError };
 };
 
 export default useFPMMPlaceBet;

@@ -1,5 +1,6 @@
 "use client";
-import { StarknetProvider } from "@/components/starknet-provider";
+
+import { MetaMaskUIProvider } from "@metamask/sdk-react-ui";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import Header from "@/components/Header";
@@ -7,7 +8,7 @@ import { MarketProvider } from "./context/MarketProvider";
 import { SnackbarProvider } from "notistack";
 import CustomToastWrapper from "@/components/Toast/Wrapper";
 import HeaderMobile from "@/components/Header/HeaderMobile";
-
+import { Web3Provider } from "@/components/Web3provider";
 export default function RootLayout({
   children,
 }: {
@@ -24,7 +25,7 @@ export default function RootLayout({
       </head>
       <body>
         <NextTopLoader showSpinner={false} color='#F5841F' />
-        <StarknetProvider>
+        <Web3Provider>
           <Header />
           <HeaderMobile />
           <MarketProvider>
@@ -47,7 +48,7 @@ export default function RootLayout({
               </main>
             </SnackbarProvider>
           </MarketProvider>
-        </StarknetProvider>
+          </Web3Provider>
       </body>
     </html>
   );

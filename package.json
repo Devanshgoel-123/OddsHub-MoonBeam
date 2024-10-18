@@ -12,11 +12,17 @@
     "@avnu/avnu-sdk": "^2.1.1",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@metamask/sdk-react": "^0.29.2",
+    "@metamask/sdk-react-ui": "^0.29.2",
     "@mui/material": "^5.15.21",
     "@mui/styles": "^5.15.21",
     "@starknet-react/chains": "^0.1.0",
     "@starknet-react/core": "^2.8.3",
+    "@tanstack/react-query": "^5.59.15",
+    "@wagmi/core": "^2.13.8",
     "axios": "^1.7.4",
+    "connectkit": "^1.8.2",
+    "ethers": "^6.13.4",
     "firebase": "^10.12.3",
     "framer-motion": "^11.2.13",
     "get-starknet-core": "^3.2.0",
@@ -32,7 +38,9 @@
     "react-select": "^5.8.0",
     "rsuite": "^5.65.0",
     "starknet": "^6.11.0",
-    "starknetkit": "^1.1.9"
+    "starknetkit": "^1.1.9",
+    "viem": "^2.21.28",
+    "wagmi": "^2.12.19"
   },
   "devDependencies": {
     "@types/node": "^20",
