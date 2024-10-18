@@ -25,12 +25,6 @@ const WalletButton: NextPage<Props> = ({ connector }) => {
     switch (connector.id) {
       case "argentX":
         return ARGENT_LOGO;
-      case "argentWebWallet":
-        return ARGENT_MOBILE_LOGO;
-      case "argentMobile":
-        return ARGENT_MOBILE_LOGO;
-      case "braavos":
-        return BRAAVOS_LOGO;
       default:
         return "";
     }
@@ -40,12 +34,6 @@ const WalletButton: NextPage<Props> = ({ connector }) => {
     switch (connector.id) {
       case "argentX":
         return "Argent X";
-      case "argentWebWallet":
-        return "Argent Web";
-      case "argentMobile":
-        return "Argent Mobile";
-      case "braavos":
-        return "Braavos";
       default:
         return "";
     }

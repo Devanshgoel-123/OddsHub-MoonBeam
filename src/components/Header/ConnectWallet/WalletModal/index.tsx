@@ -31,7 +31,7 @@ const WalletModal: NextPage<Props> = ({ open, handleClose }) => {
               </Box>
               <Box className="WalletModal-DetailsContainer">
                 <Box className="WalletModal-Logo">
-                  <CustomLogo src={RAIZE_LOGO} />
+                  <CustomLogo src= "/assets/logos/fClonglogo.svg" />
                 </Box>
                 <Box className="WalletModal-Details">
                   <span className="Heading">Connect Wallet</span>
@@ -59,7 +59,7 @@ const WalletModal: NextPage<Props> = ({ open, handleClose }) => {
             <Box className="WalletModal-Wrapper">
               <Box className="LogoContainer">
                 <Box className="Logo">
-                  <CustomLogo src={RAIZE_LOGO} />
+                  <CustomLogo src= "/assets/logos/fClonglogo.svg" />
                 </Box>
                 <span className="Heading">Connect Wallet</span>
               </Box>

@@ -1,11 +1,12 @@
 @import "../../app/mixin.scss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 
 .MyBets {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   padding-top: 30px;
-  font-family: 'GilmerRegular';
+  font-family: 'Manrope';
   overflow: auto;
 
   @include md {}

@@ -1,4 +1,5 @@
 @import "../../../app/mixin.scss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 
 .BuySellSwitches {
   display: flex;
@@ -14,14 +15,14 @@
     cursor: pointer;
     padding-block: 10px;
     .BuySellLabel {
-      font-family: "GilmerRegular";
+      font-family: "Manrope";
       font-style: normal;
       font-weight: 600;
       font-size: 16px;
       color: #f2f2f2;
     }
     .BuySellLabel.active {
-      color: #f5841f;
+      color: #B2C2FF;
     }
   }
   .BuySellSwitch.active {
@@ -30,7 +31,7 @@
   }
 
   .BetDuration {
-    font-family: "GilmerRegular";
+    font-family: "Manrope";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
@@ -85,7 +86,7 @@
   }
 
   .BetActions-Label {
-    font-family: "GilmerRegular";
+    font-family: "Manrope";
     font-style: normal;
     font-weight: 600;
     font-size: 11px;
@@ -113,11 +114,11 @@
     gap: 10px;
 
     .BetOptionsLabel {
-      font-family: "GilmerRegular";
+      font-family: "Manrope";
       font-style: normal;
       font-weight: 600;
       font-size: 10px;
-      color: #818181;
+      color: #848484;
 
       @include md {
         font-size: 11px;
@@ -165,11 +166,11 @@
       }
 
       .Green {
-        font-family: "GilmerRegular";
+        font-family: "Manrope";
         font-style: normal;
         font-weight: 700;
         font-size: 12px;
-        color: #3dd179;
+        color: #6FB0D3;
 
         @include md {
           font-size: 13px;
@@ -188,11 +189,11 @@
       }
 
       .Red {
-        font-family: "GilmerRegular";
+        font-family: "Manrope";
         font-style: normal;
         font-weight: 700;
         font-size: 12px;
-        color: #dd7168;
+        color: #A0A0A0;
 
         @include md {
           font-size: 13px;
@@ -215,7 +216,7 @@
         gap: 8px;
 
         .RadioLabel {
-          font-family: "GilmerRegular";
+          font-family: "Manrope";
           font-style: normal;
           font-weight: 700;
           font-size: 12px;
@@ -278,7 +279,7 @@
       align-items: center;
       justify-content: space-between;
       background-color: #1f1f24;
-      border: 1px solid #f5841f;
+      border: 1px solid #C2CDF9;
       cursor: pointer;
 
       @include md {
@@ -300,11 +301,11 @@
       }
 
       .Green {
-        font-family: "GilmerRegular";
+        font-family: "Manrope";
         font-style: normal;
         font-weight: 700;
         font-size: 12px;
-        color: #3dd179;
+        color: #6FB0D3;
 
         @include md {
           font-size: 13px;
@@ -322,11 +323,11 @@
       }
 
       .Red {
-        font-family: "GilmerRegular";
+        font-family: "Manrope";
         font-style: normal;
         font-weight: 700;
         font-size: 12px;
-        color: #dd7168;
+        color: #A0A0A0;
 
         @include md {
           font-size: 13px;
@@ -349,7 +350,7 @@
         gap: 8px;
 
         .RadioLabel {
-          font-family: "GilmerRegular";
+          font-family: "Manrope";
           font-style: normal;
           font-weight: 700;
           font-size: 12px;
@@ -375,7 +376,7 @@
           width: 10px;
           height: 10px;
           border-radius: 50%;
-          border: 1px solid #f5841f;
+          border: 1px solid #6FB0D3;
           padding: 1px;
           box-sizing: border-box;
 
@@ -396,7 +397,7 @@
           .RadioButtonInner {
             width: 100%;
             height: 100%;
-            background-color: #f5841f;
+            background-color: #1030AB;
             border-radius: 50%;
           }
         }
@@ -410,7 +411,7 @@
     gap: 10px;
 
     .Label {
-      font-family: "GilmerRegular";
+      font-family: "Manrope";
       font-style: normal;
       font-weight: 600;
       font-size: 10px;
@@ -475,7 +476,7 @@
       }
 
       .InputField {
-        font-family: "GilmerMedium";
+        font-family: "Manrope";
         background-color: transparent;
         outline: none;
         border: none;
@@ -499,7 +500,7 @@
       }
     }
     .BalanceField {
-      font-family: "GilmerMedium";
+      font-family: "Manrope";
       font-style: normal;
       font-weight: 700;
       font-size: 10px;
@@ -530,14 +531,14 @@
     box-sizing: border-box;
     background: linear-gradient(
       90deg,
-      #f5841f 0%,
-      #ed801e 25%,
-      #e57b1d 50%,
-      #d5731b 75%,
-      #c66b19 100%
+      #143CD9 0%,
+      #1337C8 25%,
+      #1133B7 50%,
+      #0D2994 75%,
+      #0D278C 100%
     );
     border-radius: 8px;
-    font-family: "GilmerMedium";
+    font-family: "Manrope";
     font-style: normal;
     font-weight: 800;
     font-size: 14px;
@@ -598,7 +599,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: #1f1f24;
-  border: 1px solid #f5841f;
+  border: 1px solid #C2CDF9;
   cursor: pointer;
 
   &:hover {
@@ -606,19 +607,19 @@
   }
 
   .Green {
-    font-family: "GilmerRegular";
+    font-family: "Manrope";
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
-    color: #3dd179;
+    color: #6FB0D3;
   }
 
   .Red {
-    font-family: "GilmerRegular";
+    font-family: "Manrope";
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
-    color: #dd7168;
+    color: #A0A0A0;
   }
 
   .RadioButtonContainer {
@@ -627,7 +628,7 @@
     gap: 8px;
 
     .RadioLabel {
-      font-family: "GilmerRegular";
+      font-family: "Manrope";
       font-style: normal;
       font-weight: 700;
       font-size: 14px;
@@ -639,14 +640,14 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      border: 1px solid #f5841f;
+      border: 1px solid #6FB0D3;
       padding: 1px;
       box-sizing: border-box;
 
       .RadioButtonInner {
         width: 100%;
         height: 100%;
-        background-color: #f5841f;
+        background-color: 1030AB;
         border-radius: 50%;
       }
     }
@@ -659,7 +660,7 @@
   gap: 10px;
 
   .Label {
-    font-family: "GilmerRegular";
+    font-family: "Manrope";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
@@ -710,7 +711,7 @@
     }
 
     .InputField {
-      font-family: "GilmerMedium";
+      font-family: "Manrope";
       background-color: transparent;
       outline: none;
       border: none;
@@ -734,7 +735,7 @@
   }
 
   .ReturnLabel {
-    font-family: "GilmerMedium";
+    font-family: "Manrope";
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
@@ -762,7 +763,7 @@
     gap: 10px;
 
     .Green {
-      font-family: "GilmerMedium";
+      font-family: "Manrope";
       font-style: normal;
       font-weight: 700;
       font-size: 15px;
@@ -786,7 +787,7 @@
     }
 
     .Gray {
-      font-family: "GilmerMedium";
+      font-family: "Manrope";
       font-style: normal;
       font-weight: 700;
       font-size: 17px;
@@ -839,16 +840,16 @@
   box-sizing: border-box;
   background: linear-gradient(
     90deg,
-    #f5841f 0%,
-    #ed801e 25%,
-    #e57b1d 50%,
-    #d5731b 75%,
-    #c66b19 100%
+    #143CD9 0%,
+    #1337C8 25%,
+    #1133B7 50%,
+    #0D2994 75%,
+    #0D278C 100%
   );
   border-radius: 8px;
-  font-family: "GilmerMedium";
+  font-family: "Manrope";
   font-style: normal;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 16px;
   margin-bottom: 20px;
   line-height: 24px;

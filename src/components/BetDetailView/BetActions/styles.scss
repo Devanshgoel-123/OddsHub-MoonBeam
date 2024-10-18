@@ -1,4 +1,5 @@
 @import "../../../app/mixin.scss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 
 .BetActions {
   width: 80%;
@@ -553,11 +554,11 @@
     box-sizing: border-box;
     background: linear-gradient(
       90deg,
-      #f5841f 0%,
-      #ed801e 25%,
-      #e57b1d 50%,
-      #d5731b 75%,
-      #c66b19 100%
+      #143CD9 0%,
+      #1337C8 25%,
+      #1133B7 50%,
+      #0D2994 75%,
+      #0D278C 100%
     );
     border-radius: 8px;
     font-family: "GilmerMedium";
