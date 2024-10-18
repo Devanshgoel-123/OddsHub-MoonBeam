@@ -1,13 +1,3 @@
-import {
-  useAccount,
-  useContract,
-  useContractWrite,
-  useWaitForTransaction,
-} from "@starknet-react/core";
-import { useEffect, useMemo } from "react";
-import { cairo } from "starknet";
-import { CONTRACT_ADDRESS } from "../helpers/constants";
-import abi from "../../abi/ContractABI.json";
 import { enqueueSnackbar } from "notistack";
 import axios from "axios";
 
@@ -52,6 +42,10 @@ function useCreateFPMMMarket({
   };
 
   const createFPMMMarket = async () => {
+    // await axios.get(`${process.env.SERVER_URL}/add-liquidity`)
+    // .then((res)=>{
+    //   console.log(res.data)
+    // })
     await axios
       .post(`${process.env.SERVER_URL}/create-market`, {
         question: heading,

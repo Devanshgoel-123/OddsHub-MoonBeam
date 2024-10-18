@@ -41,7 +41,6 @@ const BetSection: NextPage<Props> = ({}) => {
         .then((res) => {
           console.log(res);
           setContMarkets(res.data);
-          
         });
       setLoading(false);
     };

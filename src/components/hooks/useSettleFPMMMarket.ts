@@ -1,11 +1,9 @@
-import {
-  useAccount,
-  useContract,
-  useContractWrite,
-} from "@starknet-react/core";
+import { useAccount } from "wagmi";
 import { useMemo } from "react";
-import { CONTRACT_ADDRESS, FPMM_CONTRACT_ADDRESS } from "../helpers/constants";
-import abi from "../../abi/AMMMarketABI.json";
+import { getConnections,sendTransaction, waitForTransactionReceipt, writeContract } from "@wagmi/core";
+import { contractAddress } from "../helpers/constants";
+import {abi} from "../../abi/FPMMMarket.json";
+import { config } from "../Web3provider";
 
 interface Data {
   marketId: BigInt;
@@ -14,32 +12,30 @@ interface Data {
 
 function useSettleFPMMMarket(marketData: Data) {
   const { address } = useAccount();
-  const { contract } = useContract({
-    address: FPMM_CONTRACT_ADDRESS,
-    abi: abi,
-  });
-  const settleNormalMarketCalls = useMemo(() => {
-    if (!contract || !address || !marketData.marketId) return [];
-    return [
-      contract.populateTransaction["set_market_winner"]!(
-        marketData.marketId,
-        BigInt(marketData.outcome)
-      ),
-    ];
-  }, [contract, address, marketData.marketId, marketData.outcome]);
-
-  const { writeAsync, data, error, isError, isSuccess, isPending } =
-    useContractWrite({
-      calls: settleNormalMarketCalls,
-    });
-
-  const settleMarket = async () => {
-    await writeAsync();
-  };
-
-  console.log(settleNormalMarketCalls);
-
-  return { settleMarket, data, isError, isSuccess, isPending, error };
+  if (!address || !marketData.marketId || marketData.outcome === undefined) {
+    return {
+      settleMarket: async () => {
+        throw new Error("Invalid data or user not connected");
+      },
+    };
+  } 
+  async function settleMarket(){
+    const data=await writeContract(config,{
+      abi:abi,
+      address:`${contractAddress}`,
+      functionName:'setMarketWinner',
+      args:[marketData.marketId,marketData.outcome],
+     })
+      const transactionHash=data;
+      const transactionReceipt=await waitForTransactionReceipt(config,{
+      confirmations:2,
+      hash:transactionHash
+    }
+    
+)
+return transactionHash;
+  }
+  return {settleMarket};
 }
 
 export default useSettleFPMMMarket;

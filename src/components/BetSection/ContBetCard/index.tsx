@@ -116,7 +116,7 @@ const ContBetCard: NextPage<Props> = ({
             <div className='DurationIcon'>
               <CustomLogo src={CLOCK_ICON} />
             </div>
-            {daysRemaining > 0 ? `${daysRemaining}d : ${hoursRemaining}h : ${minutes}m` : "Claimable"}
+            {daysRemaining > 0  ? `${daysRemaining}d : ${hoursRemaining}h : ${minutes}m` : "Claimable"}
           </div>
         </div>
         <div className='BetCard-DetailsWrapper'>
@@ -131,7 +131,7 @@ const ContBetCard: NextPage<Props> = ({
             className='BetCard-Option'
           >
             <span className='Green-Text'>{outcomes[0].name}</span>
-            <span className='Bet-Stat'>${price1.toFixed(2)}</span>
+            <span className='Bet-Stat'>${price1}</span>
           </div>
           <div
             onClick={() => {
@@ -140,7 +140,7 @@ const ContBetCard: NextPage<Props> = ({
             className='BetCard-Option'
           >
             <span className='Red-Text'>{outcomes[1].name}</span>
-            <span className='Bet-Stat'>${price2.toFixed(2)}</span>
+            <span className='Bet-Stat'>${price2}</span>
           </div>
         </div>
       </div>

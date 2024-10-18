@@ -1,6 +1,5 @@
 import { useEffect, useState,useMemo } from "react";
-import { useAccount, useReadContract } from "wagmi";
-import { enqueueSnackbar } from "notistack";
+import {  useReadContract } from "wagmi";
 import { contractAddress } from "../helpers/constants";
 import { abi } from "../../abi/FPMMMarket.json";
 
@@ -10,28 +9,36 @@ const useGetMinShares = (
   choice: number,
   decimals: number,
 ) => {
-  const { address } = useAccount(); // Get user's account address
   const [minAmount, setMinAmount] = useState<string>("");
 
   const parsedBetAmount = useMemo(() => {
     if (!betAmount || parseFloat(betAmount) <= 0) return null;
-    return parseFloat(betAmount) * 10 ** 17; // Adjust bet amount
+    const betAmountInDollars = parseFloat(betAmount) * 2569; // Convert to dollars
+    const betAmountInSmallestUnit = Math.floor(betAmountInDollars * 10 ** 6); // Convert to smallest unit
+    return betAmountInSmallestUnit;
   }, [betAmount]);
 
-  
-  const { data: minAmountData } = useReadContract({
+  const { data: minAmountData,isError,error } = useReadContract({
     abi: abi,
     address: contractAddress,
     functionName: "calcBuyAmount",
     args: [marketId, parsedBetAmount, choice],
   });
 
+  if(isError){
+    console.log(error);
+  }else{
+    console.log(minAmountData);
+  }
   
   useEffect(() => {
+    if(!marketId || betAmount==="" ){
+      return ;
+    }
     if (minAmountData) {
       setMinAmount(String(minAmountData));
     }
-  }, [minAmountData]);
+  }, [minAmountData,marketId,betAmount]);
 
   return { minAmount };
 };

@@ -54,3 +54,18 @@ export interface UserBet {
   outcome: Outcome;
   position: UserPosition;
 }
+
+export interface ContractData{
+  numOutcomes:number,
+  deadline:number,
+  isActive:boolean,
+  isSettled:boolean
+}
+export interface ContractReadResult {
+  data: ContractData | undefined;
+  error: Error | null;
+  isError: boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
+  status: string;
+}
