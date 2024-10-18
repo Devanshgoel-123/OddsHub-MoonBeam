@@ -1,4 +1,5 @@
 @import "../../../app/mixin.scss";
+@import url('https://use.typekit.net/your-kit-id.css');
 
 .BetBorder {
   border-radius: 10px;
@@ -6,7 +7,7 @@
   width: 100%;
   height: 320px;
   padding: 1px;
-  background: linear-gradient(135deg, #17171b 0%, #f6851b 150%);
+  background: linear-gradient(135deg, #0095E2 0%, #111111 40%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -73,7 +74,7 @@
   max-width: 500px;
   width: 100%;
   height: 100%;
-  background-color: #161617;
+  background-color: #111111;
   border-radius: 10px;
   box-sizing: border-box;
   padding: 25px;
@@ -128,12 +129,12 @@
       }
 
       .CategoryName {
-        font-family: "GilmerRegular";
+        font-family: "Manrope";
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
         line-height: 16px;
-        color: #909090;
+        color: #ffffff;
 
         @include md {
         }
@@ -151,18 +152,7 @@
         }
       }
 
-      .Flair {
-        font-family: "GilmerRegular";
-        color: #fff;
-        letter-spacing: 0.8px;
-        border-radius: 14px;
-        padding: 5px 10px;
-        font-size: 10px;
-        border: 1px solid #f5841f;
-        @media screen and (max-width: 600px) {
-          display: none;
-        }
-      }
+      
     }
 
     .Bet-Duration {
@@ -209,7 +199,7 @@
     align-items: center;
 
     .Heading {
-      font-family: "GilmerBold";
+      font-family: "Proxima Nova";
       font-style: normal;
       font-weight: 700;
       background: linear-gradient(90deg, #fcfcfb 0%, #e6e5e5 100%);
@@ -238,13 +228,13 @@
     }
 
     .Sub-Heading {
-      font-family: "GilmerRegular";
+      font-family: "Manrope";
       font-style: normal;
       text-align: center;
       font-weight: 600;
       margin-top: 6px;
       font-size: 14px;
-      background: linear-gradient(90deg, #fcfcfb 0%, #e6e5e5 100%);
+      background: #D5D5D5;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -314,7 +304,7 @@
         font-weight: 600;
         font-size: 14px;
         line-height: 24px;
-        color: #3dd179;
+        color: #83D5FF;
 
         @include md {
         }
@@ -360,7 +350,7 @@
         font-weight: 600;
         font-size: 14px;
         line-height: 24px;
-        color: #dd7168;
+        color: #A0A0A0;
 
         @include md {
         }

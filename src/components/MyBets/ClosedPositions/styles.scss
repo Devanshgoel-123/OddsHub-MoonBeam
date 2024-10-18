@@ -260,7 +260,7 @@
         }
 
         .Claim {
-          background-color: #d5741c;
+          background-color: #1336C0;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -272,7 +272,7 @@
 
           &:hover {
             background-color: white;
-            color: #d5741c;
+            color: #1336C0;
           }
 
           @include md {
@@ -288,10 +288,10 @@
           }
         }
         .Won {
-          color: #3dd179;
+          color: #B2C2FF;
         }
         .Lost {
-          color: #dd7168;
+          color: #858585;
         }
       }
 

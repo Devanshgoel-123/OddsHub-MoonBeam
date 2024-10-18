@@ -1,10 +1,11 @@
 @import "../../app/mixin.scss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 
 .BetSection {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 50px;
 
   .BetSection-Hero {
     width: 100%;
@@ -50,7 +51,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 50px;
     flex: 1;
     transition: all 0.2s ease-in-out;
 

@@ -110,7 +110,7 @@ const ContBetCard: NextPage<Props> = ({
               <Image src={logo} alt='Logo' width={30} height={30} />
             </div>
             <div className='CategoryName'>{category}</div>
-            <div className='Flair'>Continuous</div>
+            
           </div>
           <div className='Bet-Duration'>
             <div className='DurationIcon'>

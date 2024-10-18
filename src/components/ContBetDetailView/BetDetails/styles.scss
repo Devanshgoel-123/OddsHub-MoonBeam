@@ -1,4 +1,5 @@
 @import "../../../app/mixin.scss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 
 .BetModal-DetailsContainer {
   width: 500px;
@@ -41,7 +42,7 @@
     justify-content: space-between;
 
     .BetName {
-      font-family: "GilmerBold";
+      font-family: "Proxima Nova";
       font-style: normal;
       font-weight: 600;
       font-size: 14px;
@@ -72,7 +73,7 @@
     gap: 5px;
 
     .Heading {
-      font-family: "GilmerBold";
+      font-family: "Proxima Nova";
       font-style: normal;
       font-weight: 700;
       font-size: 18px;
@@ -95,7 +96,7 @@
     }
 
     .Sub-Heading {
-      font-family: "GilmerRegular";
+      font-family: "Manrope";
       font-style: normal;
       font-weight: 600;
       font-size: 12px;

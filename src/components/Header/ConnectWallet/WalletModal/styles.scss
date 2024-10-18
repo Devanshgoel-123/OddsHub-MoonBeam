@@ -1,4 +1,5 @@
 @import "../../../../app/mixin.scss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 
 .WalletModal-Container {
     position: absolute;
@@ -48,8 +49,8 @@
 
 
             .WalletModal-Logo {
-                width: 50px;
-                height: 50px;
+                width: 135px;
+                height: 25px;
             }
 
             .WalletModal-Details {
@@ -58,7 +59,7 @@
                 gap: 10px;
 
                 .Heading {
-                    font-family: 'GilmerMedium';
+                    font-family: 'Manrope';
                     font-weight: 700;
                     font-size: 18px;
                     color: #FFFFFF;
@@ -66,7 +67,7 @@
 
                 .Sub-Heading {
                     width: 80%;
-                    font-family: 'GilmerRegular';
+                    font-family: 'Manrope';
                     font-weight: 400;
                     font-size: 14px;
                     color: #787878;
@@ -120,7 +121,7 @@
             gap: 15px;
             padding-bottom: 20px;
             border-bottom: 1px solid #292929;
-            font-family: 'GilmerMedium';
+            font-family: 'Manrope';
             font-weight: 700;
             font-size: 18px;
             color: #FFFFFF;

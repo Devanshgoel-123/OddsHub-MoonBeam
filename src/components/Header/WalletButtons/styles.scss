@@ -1,4 +1,5 @@
 @import "../../../app/mixin.scss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 
 .WalletButtons {
   display: flex;
@@ -22,7 +23,7 @@
       justify-content: space-around;
       align-items: center;
       gap: 5px;
-      color: #fe993f;
+      color: #7B8ED8;
       position: relative;
       transition: all 0.2s ease-in-out;
 

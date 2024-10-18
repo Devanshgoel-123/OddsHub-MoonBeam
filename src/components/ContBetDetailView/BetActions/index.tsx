@@ -379,7 +379,7 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
               ? "Claim Winnings!"
               : "No Winnings"
             : betAmount == ""
-            ? "Enter Amount"
+            ? "Place Order"
             : isBuying
             ? parseFloat(balance) > parseFloat(betAmount)
             : parseFloat(userMarketShare) > parseFloat(betAmount)

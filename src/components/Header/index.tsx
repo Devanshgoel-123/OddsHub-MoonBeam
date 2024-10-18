@@ -30,7 +30,7 @@ const Header: NextPage<Props> = ({}) => {
           link="/my-bets"
           whiteIcon="/assets/icons/bets-white.svg"
           coloredIcon="/assets/icons/bets.svg"
-          linkCTA="My Bets"
+          linkCTA="Trades"
         />
       </div>
       <div className="Header-ButtonsContainer">
