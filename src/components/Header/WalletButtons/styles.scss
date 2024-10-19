@@ -12,7 +12,7 @@
     gap: 20px;
 
     .ClaimButton {
-      font-family: "GilmerRegular";
+      font-family: "Manrope";
       box-sizing: border-box;
       font-style: normal;
       font-weight: 300;
@@ -89,7 +89,7 @@
         }
 
         .Bold {
-          font-family: "GilmerMedium";
+          font-family: "Manrope";
         }
       }
 
@@ -111,7 +111,7 @@
       border-radius: 8px;
       padding: 8px 10px;
       cursor: pointer;
-      font-family: "GilmerMedium";
+      font-family: "";
       color: white;
       font-size: 11px;
       letter-spacing: 1px;
@@ -189,4 +189,42 @@
       }
     }
   }
+}
+
+.wallet-connect-btn {
+  border-radius: 8px;                    
+  padding: 5px 20px;                     
+  font-family: 'Manrope-Regular';    
+  background: linear-gradient(90deg, #143CD9 0%, #1337C8 25%, #1133B7 50%, #0D2994 75%, #0D278C 100%);
+  color: #fff;                           
+  border: none;                           
+  cursor: pointer;                       
+  transition: all 0.3s ease;             
+}
+
+.wallet-connect-btn:hover {
+  background: #ffffff;                      
+  color: #0E288E;                            
+}
+
+.wallet-connected-btn {
+      border-radius: 8px;
+      font-family: 'Manrope-Light'; 
+      padding: 8px 10px;
+      cursor: pointer;
+      color: #D4D3D3;
+      font-size: 11px;
+      letter-spacing: 1px;
+      background-color: #202020;
+      border: 0.5px solid #0095E2;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.1s ease-in-out;
+
+      &:hover {
+        background-color: #101010;
+      }
 }

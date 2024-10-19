@@ -58,9 +58,10 @@
     .Tabs-Section {
       display: flex;
       align-items: center;
+      justify-content: center; // This will center the tabs
       flex-wrap: nowrap;
       gap: 20px;
-      overflow-x: scroll;
+      overflow-x: auto;
 
       @include md {}
 
@@ -75,10 +76,10 @@
       .Tab {
         flex: 0 0 auto;
         padding: 5px 10px;
-        font-family: "GilmerMedium";
+        font-family: "Manrope-Medium";
         font-style: normal;
-        font-weight: 700;
-        font-size: 11px;
+        font-weight: 600;
+        font-size: 25px;
         line-height: 24px;
         background: linear-gradient(270deg, #faf9f9 0%, #d7d7d7 100%);
         -webkit-background-clip: text;
@@ -97,14 +98,14 @@
 
         @include lg {
           padding: 5px 20px;
-          font-size: 12px;
+          font-size: 25px;
         }
 
         @include xl {}
 
         @include xxl {
           padding: 8px 20px;
-          font-size: 14px;
+          font-size: 30px;
         }
 
         &:hover {
@@ -112,9 +113,9 @@
         }
       }
 
-      .Tab-Active {
+      .Tab-Section {
         flex: 0 0 auto;
-        padding: 5px 10px;
+        padding: 10px 20px;
         box-sizing: border-box;
         background: linear-gradient(90deg,
             #f5841f 0%,
@@ -122,11 +123,11 @@
             #e57b1d 50%,
             #d5731b 75%,
             #c66b19 100%);
-        border-radius: 8px;
-        font-family: "GilmerMedium";
+        border-radius: 4px;
+        font-family: "Manrope-Medium";
         font-style: normal;
-        font-weight: 700;
-        font-size: 11px;
+        font-weight: 400;
+        font-size: 25px;
         display: flex;
         justify-content: center;
         line-height: 24px;
@@ -141,21 +142,21 @@
         }
 
         @include lg {
-          padding: 5px 20px;
-          font-size: 12px;
-          border-radius: 8px;
+          padding: 10px 20px;
+          font-size: 25px;
+          border-radius: 4px;
         }
 
         @include xl {
-          padding: 6px 18px;
-          font-size: 13px;
-          border-radius: 8px;
+          padding: 8px 18px;
+          font-size: 25px;
+          border-radius: 4px;
         }
 
         @include xxl {
-          padding: 8px 20px;
-          font-size: 14px;
-          border-radius: 10px;
+          padding: 10px 20px;
+          font-size: 30px;
+          border-radius: 6px;
         }
       }
     }
@@ -190,7 +191,7 @@
         width: 100%;
         padding-top: 100px;
         text-align: center;
-        font-family: 'GilmerMedium';
+        font-family: 'Manrope-Medium';
         font-style: normal;
         font-weight: 600;
         font-size: 16px;

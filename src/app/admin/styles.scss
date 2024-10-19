@@ -1,15 +1,15 @@
 .Admin {
   min-height: calc(100vh - 130px);
   color: #e8e8e8;
-  font-family: "GilmerRegular";
+  font-family: "Manrope-Regular";
   .Action-Choice {
     display: flex;
     justify-content: center;
     margin: 50px auto;
     .Action-Button {
-      background-color: #f5a623;
+      background-color: #1336C0;
       color: #fff;
-      font-family: "GilmerMedium";
+      font-family: "Manrope-Regular";
       font-size: 14px;
       padding: 12px 24px;
       border: none;
@@ -22,7 +22,7 @@
   .Heading-Section {
     display: flex;
     justify-content: center;
-    font-family: "GilmerMedium";
+    font-family: "Manrope-Regular";
     margin: 50px auto;
     font-size: 32px;
   }
@@ -56,9 +56,9 @@
       }
     }
     input::-webkit-file-upload-button {
-      background-color: #f5a623;
+      background-color: #1336C0;
       color: #fff;
-      font-family: "GilmerMedium";
+      font-family: "Manrope-Regular";
       outline: none;
       border: none;
       padding: 8px 12px;
@@ -69,7 +69,7 @@
       margin-top: 8px;
       margin-bottom: 16px;
       background-color: #292929;
-      font-family: "GilmerMedium";
+      font-family: "Manrope-Regular";
       border-radius: 4px;
       width: 95%;
       padding: 12px;
@@ -82,7 +82,7 @@
       margin-top: 8px;
       margin-bottom: 16px;
       background-color: #292929;
-      font-family: "GilmerMedium";
+      font-family: "Manrope-Regular";
       border-radius: 4px;
       width: 100%;
       outline: none;
@@ -109,9 +109,9 @@
       width: 95%;
       margin-top: 20px;
       .SubmitButton {
-        background-color: #f5a623;
+        background-color: #1336C0;
         color: #fff;
-        font-family: "GilmerMedium";
+        font-family: "Manrope-Regular";
         font-size: 14px;
         padding: 12px 24px;
         border: none;

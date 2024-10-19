@@ -51,7 +51,7 @@
 
     span {
       font-size: 20px;
-      font-family: "GilmerRegular";
+      font-family: "Manrope-Regular";
 
       @include md {
       }
@@ -129,7 +129,7 @@
       }
 
       .CategoryName {
-        font-family: "Manrope";
+        font-family: "Manrope-SemiBold";
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
@@ -159,7 +159,7 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      font-family: "GilmerRegular";
+      font-family: "Manrope-Regular";
       font-style: normal;
       font-weight: 600;
       font-size: 12px;
@@ -199,7 +199,7 @@
     align-items: center;
 
     .Heading {
-      font-family: "Proxima Nova";
+      font-family: "Manrope-Bold";
       font-style: normal;
       font-weight: 700;
       background: linear-gradient(90deg, #fcfcfb 0%, #e6e5e5 100%);
@@ -228,7 +228,7 @@
     }
 
     .Sub-Heading {
-      font-family: "Manrope";
+      font-family: "Manrope-Medium";
       font-style: normal;
       text-align: center;
       font-weight: 600;
@@ -299,7 +299,7 @@
       }
 
       .Green-Text {
-        font-family: "GilmerMedium";
+        font-family: "Manrope-Medium";
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
@@ -322,7 +322,7 @@
       }
 
       .Bet-Stat {
-        font-family: "GilmerRegular";
+        font-family: "Manrope-Regular";
         font-style: normal;
         font-weight: 700;
         font-size: 14px;
@@ -345,7 +345,7 @@
       }
 
       .Red-Text {
-        font-family: "GilmerMedium";
+        font-family: "Manrope-Medium";
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
@@ -373,7 +373,7 @@
     display: flex;
     justify-content: center;
     gap: 10px;
-    font-family: "GilmerRegular";
+    font-family: "Manrope-Regular";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -399,7 +399,7 @@
     }
 
     .Pool-Value {
-      font-family: "GilmerMedium";
+      font-family: "Manrope-Medium";
     }
 
     .Starknet-logo {
