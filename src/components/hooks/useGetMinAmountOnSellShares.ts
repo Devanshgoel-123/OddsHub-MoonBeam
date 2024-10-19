@@ -1,10 +1,6 @@
 import { enqueueSnackbar } from "notistack";
-import {contractAddress, ConversionToUsd} from "../helpers/constants";
-import { useReadContract } from "wagmi";
 import { useEffect,useMemo, useState } from "react";
-import {abi} from "../../abi/FPMMMarket.json"
-import { parseEther } from "viem";
-
+import axios from "axios";
 const useGetMinAmountOnSellShares = (
   marketId: number,
   betAmount: string,
@@ -12,30 +8,24 @@ const useGetMinAmountOnSellShares = (
   decimals: number,
   isBuying: boolean
 ) => {
-  
   const [minAmountSell, setMinAmountSell] = useState<string>("0");
- 
-  const {data,error}=useReadContract({
-        abi:abi,
-        address:`${contractAddress}`,
-        functionName:"calcSellAmount",
-        args:[marketId,parseEther(betAmount),choice],
-        query:{
-          enabled:!isBuying
-        },
-      });
-if(data!==undefined){
-  console.log(data);
-}
-
     useEffect(() => {
       if(betAmount==="" || Number(betAmount)===0) {
         return ;
       }
-      if (minAmountSell) {
-        setMinAmountSell(String(data));
-      }
-    }, [minAmountSell,betAmount,data]);
+      const fetchMinAmountOnSell = async () => {
+        try {
+          const response = await axios.get(`${process.env.SERVER_URL}/min-amount-sell/${marketId}/${choice}/${betAmount}`);
+          console.log(response.data);
+          const minSharesToSell = parseInt(response.data.toString(), 16);
+          setMinAmountSell(minSharesToSell.toString())
+        } catch (error) {
+          console.error("Error fetching minimum shares to buy:", error);
+        }
+      };
+  
+      fetchMinAmountOnSell(); 
+    }, [minAmountSell,betAmount]);
 
   return { minAmountSell };
 };

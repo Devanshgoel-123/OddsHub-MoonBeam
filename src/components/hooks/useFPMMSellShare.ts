@@ -20,7 +20,7 @@ const useFPMMSellShare = (
   const [pending, setPending] = useState<boolean>(false);
   const [data, setData] = useState("");
   const [isError, setIsError] = useState<boolean>(false);
-  const [minAmountSellState, setMinAmountSellState] = useState("0");
+  
   const { minAmountSell } = useGetMinAmountOnSellShares(
     marketId,
     betAmount,
@@ -32,7 +32,6 @@ const useFPMMSellShare = (
     if(betAmount==="" || !isBuying || !marketId){
       return ;
     }
-    setMinAmountSellState(minAmountSell);
   }, [minAmountSell,betAmount,marketId,isBuying]);
 
   
@@ -57,8 +56,7 @@ const useFPMMSellShare = (
   
   useEffect(() => {
     const fetchUserMarketShare = async () => {
-      if (!marketId || !address || isBuying) return;
-      
+      if (!marketId || !address || isBuying ) return;
       try {
         const response = await readContract(config, {
           abi,
