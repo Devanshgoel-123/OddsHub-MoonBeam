@@ -51,7 +51,7 @@ const CustomToastWrapper = forwardRef<HTMLDivElement, CustomToastWrapperProps>(
         >
           <Image
             src="/assets/icons/cross.svg"
-            alt="Raize-Club"
+            alt="BaseForeCast"
             width={0}
             height={0}
             style={{

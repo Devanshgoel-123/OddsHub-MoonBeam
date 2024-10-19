@@ -4,56 +4,57 @@ import OpenPositions from "./OpenPositions";
 import ClosedPositions from "./ClosedPositions";
 import "./styles.scss";
 import { Market, UserBet } from "../helpers/types";
-import { useAccount, useContract } from "@starknet-react/core";
-import { CONTRACT_ADDRESS } from "../helpers/constants";
-import abi from "../../abi/ContractABI.json";
+import { useAccount, useReadContract } from "wagmi";
+import axios from "axios";
 
 function MyBets() {
-  const { address } = useAccount();
-
+  const { address, isConnected } = useAccount();
   const [openMarkets, setOpenMarkets] = useState<Market[]>([]);
   const [openBets, setOpenBets] = useState<any>([]);
   const [closedMarkets, setClosedMarkets] = useState<Market[]>([]);
   const [closedBets, setClosedBets] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
-
-  const { contract } = useContract({
-    address: CONTRACT_ADDRESS,
-    abi: abi,
-  });
+  const [userMarkets, setUserMarkets] = useState();
 
   useEffect(() => {
     const getAllMarkets = async () => {
       setLoading(true);
-      if (!contract || !address) {
+      if (!address || !isConnected) {
         setLoading(false);
         return;
       }
-      if (openMarkets.length > 0 || closedMarkets.length > 0) return;
-      const normal_res = await contract.get_user_markets(address);
+      const response = await axios.get(
+        `${process.env.SERVER_URL}/getmarketsforUser/${address}`
+      );
+      setUserMarkets(response.data);
+
+      if (!response || response.data.length === 0) {
+        setLoading(false);
+        return;
+      }
+
       const openMarketsRes: Market[] = [];
       const closedMarketsRes: Market[] = [];
       const openBets: any[] = [];
       const closedBets: any[] = [];
-      for (const market of normal_res) {
-        const getBetCount = await contract.get_num_bets_in_market(
-          address,
-          market.market_id
+
+     
+      for (const market of response.data) {
+        console.log(market[0].hex)
+        const marketId = parseInt(market[0].hex,16); 
+        const isActive = market[2];
+        const NumberOfBets=market[1].length;
+        console.log(market,isActive,NumberOfBets);
+        const marketDetails = await axios.get(
+          `${process.env.SERVER_URL}/get-current-market/${marketId}`
         );
-        for (let i = 0; i < getBetCount; i++) {
-          let betNumber = i + 1;
-          const outcomeAndBet: UserBet = await contract.get_outcome_and_bet(
-            address,
-            market.market_id,
-            i + 1
-          );
-          if (market.is_active) {
-            openMarketsRes.push(market);
-            openBets.push(outcomeAndBet);
-          } else {
-            closedBets.push({ outcomeAndBet, betNumber });
-            closedMarketsRes.push(market);
-          }
+        console.log(marketDetails.data);
+        if (isActive) {
+          openMarketsRes.push(marketDetails.data);
+          openBets.push({Yes:parseInt(market[1][0].hex,16),No:parseInt(market[1][1].hex,16)});
+        } else {
+          closedMarketsRes.push(marketDetails.data);
+          closedBets.push({Yes:parseInt(market[1][0].hex,16),No:parseInt(market[1][1].hex,16)});
         }
       }
       setOpenMarkets(openMarketsRes);
@@ -62,11 +63,12 @@ function MyBets() {
       setClosedBets(closedBets);
       setLoading(false);
     };
+
     getAllMarkets();
   }, [address]);
-
+   
   return (
-    <div className='MyBets'>
+    <div className="MyBets">
       <OpenPositions
         loading={loading}
         openMarkets={openMarkets}

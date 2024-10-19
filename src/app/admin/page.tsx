@@ -1,16 +1,13 @@
 "use client";
 import { Box } from "@mui/material";
 import "./styles.scss";
-import { act, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import "rsuite/dist/rsuite-no-reset.min.css";
 import Select from "react-select";
 import { DatePicker } from "rsuite";
 import { colorStyles } from "@/components/helpers/menuStyles";
-import useCreateMarket from "@/components/hooks/useCreateMarket";
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import SettleMarkets from "@/components/SettleMarkets";
-import ToggleMarkets from "@/components/ToggleMarkets";
 import useCreateFPMMMarket from "@/components/hooks/useCreateFPMMMarket";
 import SettleFPMMMarkets from "@/components/SettleFPMMMarkets";
 
@@ -46,11 +43,6 @@ export default function AdminPortal() {
   const [deadline, setDeadline] = useState(new Date());
   const [image, setImage] = useState("");
   const [fightImage, setFightImage] = useState("");
-  const [eventId, setEventId] = useState("");
-  const [isHome, setIsHome] = useState(true);
-  const [amount, setAmount] = useState("");
-  const [priceKey, setPriceKey] = useState("");
-  const [condition, setCondition] = useState("");
   const [canCreate, setCanCreate] = useState(false);
   const [action, setAction] = useState(0);
 
@@ -96,16 +88,12 @@ const firebaseConfig = {
     };
     validateMarket();
   }, [
-    amount,
     category,
-    condition,
     description,
-    eventId,
     heading,
     image,
     outcome1,
     outcome2,
-    priceKey,
     fightImage,
   ]);
 
