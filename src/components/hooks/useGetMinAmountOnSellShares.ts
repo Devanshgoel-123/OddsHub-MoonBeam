@@ -1,8 +1,9 @@
 import { enqueueSnackbar } from "notistack";
-import {contractAddress} from "../helpers/constants";
+import {contractAddress, ConversionToUsd} from "../helpers/constants";
 import { useReadContract } from "wagmi";
 import { useEffect,useMemo, useState } from "react";
 import {abi} from "../../abi/FPMMMarket.json"
+import { parseEther } from "viem";
 
 const useGetMinAmountOnSellShares = (
   marketId: number,
@@ -12,17 +13,23 @@ const useGetMinAmountOnSellShares = (
   isBuying: boolean
 ) => {
   
-  const [minAmountSell, setMinAmountSell] = useState<string>("");
-
-  const {data,isError,error}=useReadContract({
+  const [minAmountSell, setMinAmountSell] = useState<string>("0");
+ 
+  const {data,error}=useReadContract({
         abi:abi,
         address:`${contractAddress}`,
         functionName:"calcSellAmount",
-        args:[marketId,(Number(betAmount)*10**6),choice]
+        args:[marketId,parseEther(betAmount),choice],
+        query:{
+          enabled:!isBuying
+        },
       });
-      console.log(data,error)
+if(data!==undefined){
+  console.log(data);
+}
+
     useEffect(() => {
-      if(betAmount==="") {
+      if(betAmount==="" || Number(betAmount)===0) {
         return ;
       }
       if (minAmountSell) {

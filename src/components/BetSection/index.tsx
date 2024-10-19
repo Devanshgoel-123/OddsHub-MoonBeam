@@ -108,7 +108,7 @@ const BetSection: NextPage<Props> = ({}) => {
                     <ContBetCard
                       marketId={item.market_id}
                       category={item.category}
-                      logo={AMMA_LOGO}
+                      logo={item.icon}
                       deadline={item.deadline}
                       heading={item.question}
                       subHeading={item.description}

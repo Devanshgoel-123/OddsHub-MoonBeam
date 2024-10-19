@@ -13,6 +13,7 @@ import useFPMMPlaceBet from "@/components/hooks/useFPMMPlaceBet";
 import useFPMMSellShare from "@/components/hooks/useFPMMSellShare";
 import useFPMMClaimWinnings from "@/components/hooks/useFPMMClaimWinnings";
 import { CLOCK_ICON,ETH_LOGO, STARKNET_LOGO, USDC_LOGO} from "@/components/helpers/icons";
+import { ConversionToUsd } from "@/components/helpers/constants";
 interface Props {
   outcomes: FPMMOutcome[];
   duration: string;
@@ -40,6 +41,7 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
       outcomes[0].numSharesInPool.toString(),
       outcomes[1].numSharesInPool.toString(),
     ]);
+    // console.log(percentages)
     setPrice1(percentages[0]);
     setPrice2(percentages[1]);
   }, [outcomes]);
@@ -57,7 +59,6 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
 
   const { balance, PlaceFPMMBet,minAmount }=useFPMMPlaceBet(marketId, betAmount, choice); 
   const {  minAmountSell,userMarketShare,SellMarketShares} = useFPMMSellShare(marketId, betAmount, choice, isBuying);
-  console.log(minAmountSell);
   const { claimWinnings } = useFPMMClaimWinnings(marketId, choice);
   function handleBetAmount(value: string) {
     if (value == "") {
@@ -66,16 +67,6 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
       setBetAmount(value);
     }
   }
-  useEffect(() => {
-    const currentTime = new Date().getTime();
-    const deadline = new Date(parseInt(duration) * 1000).getTime();
-    const timeBetween = getTimeBetween(deadline, currentTime);
-    setDaysRemaining(timeBetween[0]);
-    setHoursRemaining(timeBetween[1]);
-    setMinutesRemaining(timeBetween[2]);
-  }, [duration]);
-
-
   const renderBuy = () => {
     return (
       <Box className='InputContainer'>
@@ -113,7 +104,7 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
         <Box className='InputWrapper'>
           <Box className='Input-Left'>
             <Box className='Starknet-logo'>
-              <CustomLogo width='20px' height='20px' src={STARKNET_LOGO} />
+              <CustomLogo width='20px' height='20px' src={ETH_LOGO} />
             </Box>
             <input
               className='InputField'
@@ -130,7 +121,7 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
         </Box>
         <span className='BalanceField'>
           {address
-            ? "Shares: " + (parseFloat(userMarketShare) / 1e6)
+            ? "User holded Shares: " + (userMarketShare)
             : "Please connect your wallet."}{" "}
         </span>
       </Box>
@@ -158,6 +149,7 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
           
         </Box>
         <span className='BalanceField'>
+          <p>{userMarketShare}</p>
           {address
             ? "Shares: " + (parseFloat(userMarketShare)).toFixed(6)
             : "Please connect your wallet."}{" "}
@@ -199,7 +191,7 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
             <CustomLogo src={CLOCK_ICON} />
           </Box>
           <div>
-            {daysRemaining}d: {hoursRemaining}h : {minutesRemaining}m
+            {daysRemaining.toString().slice(-2)}d: {hoursRemaining}h : {minutesRemaining}m
           </div>
         </Box>
       </Box>
@@ -254,8 +246,8 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
           <Box className='ReturnValue'>
             <span className={betAmount == "" ? "Gray" : "Green"}>
               {minAmount?(
-                      (parseFloat(betAmount) / parseFloat(minAmount)) *
-                      1e6*2569
+                      (parseFloat(betAmount)*ConversionToUsd / parseFloat(minAmount)) *
+                      1e6
                     ).toFixed(2)
                 : 0}
             </span>
@@ -279,7 +271,7 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
                   ? (parseFloat(minAmount) / 1e6).toFixed(2)
                   : 0
                 : minAmountSell
-                ? (parseFloat(minAmountSell) ).toFixed(2)
+                ? (parseFloat(minAmountSell)/1e6 ).toFixed(2)
                 : 0.00}
             </span>
           </Box>

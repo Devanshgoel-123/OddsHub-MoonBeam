@@ -29,10 +29,9 @@ const useFPMMSellShare = (
     isBuying
   );
   useEffect(() => {
-    if(betAmount==="" || isBuying || !marketId){
+    if(betAmount==="" || !isBuying || !marketId){
       return ;
     }
-    console.log(minAmountSell)
     setMinAmountSellState(minAmountSell);
   }, [minAmountSell,betAmount,marketId,isBuying]);
 
@@ -58,17 +57,17 @@ const useFPMMSellShare = (
   
   useEffect(() => {
     const fetchUserMarketShare = async () => {
-      if (!marketId || !address) return;
+      if (!marketId || !address || isBuying) return;
       
       try {
         const response = await readContract(config, {
           abi,
           address: contractAddress,
           functionName: 'getUserMarketShare',
-          args: [address, marketId, choice]
+          args: [address, marketId, choice],
         });
-        
-        if (response) {
+        console.log(response)
+        if (response!==undefined) {
           setUserMarketShare(String(response));
         }
       } catch (error) {
@@ -77,9 +76,8 @@ const useFPMMSellShare = (
     };
 
     fetchUserMarketShare();
-  }, [marketId, address, choice]);
+  }, [marketId, address, choice,isBuying]);
 
-  // Memoize updateShares to prevent recreation on each render
   const updateShares = useCallback(async () => {
     if (updatedShares || !marketId || !betAmount) return;
     

@@ -1,5 +1,5 @@
 import { enqueueSnackbar } from "notistack";
-import {contractAddress} from "../helpers/constants";
+import {contractAddress, ConversionToUsd} from "../helpers/constants";
 import { useAccount,useBalance } from "wagmi";
 import { getTransactionConfirmations, writeContract,getBalance} from '@wagmi/core'
 import {abi} from "../../abi/FPMMMarket.json"
@@ -8,7 +8,6 @@ import useGetMinShares from "./useGetMinShares";
 import axios from "axios";
 import { config } from "../Web3provider";
 import { parseEther } from "viem";
-import { da } from "date-fns/locale";
 
 const useFPMMPlaceBet = (
   marketId: number,
@@ -22,12 +21,15 @@ const useFPMMPlaceBet = (
   const [pending,setPending]=useState<boolean>(false);
   const [data,setData]=useState("");
   const [isError, setIsError] = useState<boolean>(false);
-  const { minAmount } = useGetMinShares(
+  const { minAmount } =useGetMinShares(
     marketId,
     betAmount,
     outcomeIndex,
     decimals,
   );
+  // console.log(minAmount);
+  const amountInUsd=(Number(betAmount)*ConversionToUsd).toString();
+  // console.log(amountInUsd);
   const PlaceFPMMBet=async()=>{
     try{
     const data=await writeContract(config,{
@@ -75,7 +77,7 @@ const useFPMMPlaceBet = (
       .post(`${process.env.SERVER_URL}/update-market`, {
         marketId: marketId,
         outcomeIndex: outcomeIndex,
-        amount:(parseFloat(betAmount) * 10 ** decimals).toString(),
+        amount:(amountInUsd).toString(),
         isBuy: true,
         sharesUpdated: parseInt(minAmount),
       })

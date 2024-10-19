@@ -1,7 +1,6 @@
-import { useEffect, useState,useMemo } from "react";
-import {  useReadContract } from "wagmi";
-import { contractAddress } from "../helpers/constants";
-import { abi } from "../../abi/FPMMMarket.json";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { contractAddress, ConversionToUsd } from "../helpers/constants";
 
 const useGetMinShares = (
   marketId: number,
@@ -11,34 +10,24 @@ const useGetMinShares = (
 ) => {
   const [minAmount, setMinAmount] = useState<string>("");
 
-  const parsedBetAmount = useMemo(() => {
-    if (!betAmount || parseFloat(betAmount) <= 0) return null;
-    const betAmountInDollars = parseFloat(betAmount) * 2569; // Convert to dollars
-    const betAmountInSmallestUnit = Math.floor(betAmountInDollars * 10 ** 6); // Convert to smallest unit
-    return betAmountInSmallestUnit;
-  }, [betAmount]);
-
-  const { data: minAmountData,isError,error } = useReadContract({
-    abi: abi,
-    address: contractAddress,
-    functionName: "calcBuyAmount",
-    args: [marketId, parsedBetAmount, choice],
-  });
-
-  if(isError){
-    console.log(error);
-  }else{
-    console.log(minAmountData);
-  }
-  
   useEffect(() => {
-    if(!marketId || betAmount==="" ){
-      return ;
+    if (marketId === undefined || betAmount === "" || Number(betAmount)==0) {
+      setMinAmount(""); 
+      return;
     }
-    if (minAmountData) {
-      setMinAmount(String(minAmountData));
-    }
-  }, [minAmountData,marketId,betAmount]);
+
+    const fetchMinShares = async () => {
+      try {
+        const response = await axios.get(`${process.env.SERVER_URL}/min-shares-buy/${marketId}/${choice}/${betAmount}`);
+        const minSharesToBuy = parseInt(response.data.toString(), 16);
+        setMinAmount(minSharesToBuy.toString());
+      } catch (error) {
+        console.error("Error fetching minimum shares to buy:", error);
+      }
+    };
+
+    fetchMinShares(); 
+  }, [betAmount, choice, marketId]);
 
   return { minAmount };
 };

@@ -131,7 +131,7 @@ const ContBetCard: NextPage<Props> = ({
             className='BetCard-Option'
           >
             <span className='Green-Text'>{outcomes[0].name}</span>
-            <span className='Bet-Stat'>${price1}</span>
+            <span className='Bet-Stat'>${price1.toString().slice(0,4)}</span>
           </div>
           <div
             onClick={() => {
@@ -140,7 +140,7 @@ const ContBetCard: NextPage<Props> = ({
             className='BetCard-Option'
           >
             <span className='Red-Text'>{outcomes[1].name}</span>
-            <span className='Bet-Stat'>${price2}</span>
+            <span className='Bet-Stat'>${price2.toString().slice(0,4)}</span>
           </div>
         </div>
       </div>
