@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import { useRouter } from "next/navigation";
-
 import "./styles.scss";
 import CustomLogo from "@/components/common/CustomIcons";
 import { CLOCK_ICON, USDC_LOGO } from "@/components/helpers/icons";
@@ -10,12 +9,10 @@ import { MarketContext } from "@/app/context/MarketProvider";
 import { FPMMOutcome, Outcome } from "@/components/helpers/types";
 import {
   calcPrice,
-  getProbabilites,
   getTimeBetween,
 } from "@/components/helpers/functions";
 import Image from "next/image";
-import { Box } from "@mui/material";
-import { HiLockClosed } from "react-icons/hi2";
+
 
 interface Props {
   category: string;
@@ -74,8 +71,8 @@ const ContBetCard: NextPage<Props> = ({
   const { setChoice } = useContext(MarketContext);
 
   const stringToHex = (int: number) => {
-    const hex = int.toString(16); // Convert to hex without padding
-    const randomChars = Math.random().toString(36).substring(2, 6); // Generate 4 random characters
+    const hex = int.toString(16); 
+    const randomChars = Math.random().toString(36).substring(2, 6); 
     return `${hex}${randomChars}`;
   };
 

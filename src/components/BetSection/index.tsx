@@ -1,13 +1,8 @@
 import { NextPage } from "next";
 import { useEffect, useRef, useState } from "react";
-import {ethers} from "ethers"
 import "./styles.scss";
 import BetHeroCard from "./BetHeroCard";
-import { AMMA_LOGO, F1_LOGO, US_LOGO } from "../helpers/icons";
-import ABI from "../../abi/FPMMMarket.json"
-import { contractAddress } from "../helpers/constants";
 import { FPMMMarket, FPMMMarketInfo, Market } from "../helpers/types";
-import { getNumber, getString } from "../helpers/functions";
 import { motion } from "framer-motion";
 import CustomLoader from "../common/CustomLoader";
 import ContBetCard from "./ContBetCard";

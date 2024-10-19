@@ -14,8 +14,7 @@ function MyBets() {
   const [closedMarkets, setClosedMarkets] = useState<Market[]>([]);
   const [closedBets, setClosedBets] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [userMarkets, setUserMarkets] = useState();
-
+  const [userMarkets, setUserMarkets] = useState("");
   useEffect(() => {
     const getAllMarkets = async () => {
       setLoading(true);

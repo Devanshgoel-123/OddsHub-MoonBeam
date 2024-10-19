@@ -7,12 +7,12 @@ import CustomLogo from "@/components/common/CustomIcons";
 import { useContext, useEffect, useState } from "react";
 import { MarketContext } from "@/app/context/MarketProvider";
 import { FPMMOutcome } from "@/components/helpers/types";
-import { calcPrice, getString, getTimeBetween } from "@/components/helpers/functions";
+import { calcPrice, getTimeBetween } from "@/components/helpers/functions";
 import { usePathname } from "next/navigation";
 import useFPMMPlaceBet from "@/components/hooks/useFPMMPlaceBet";
 import useFPMMSellShare from "@/components/hooks/useFPMMSellShare";
 import useFPMMClaimWinnings from "@/components/hooks/useFPMMClaimWinnings";
-import { CLOCK_ICON,ETH_LOGO, STARKNET_LOGO, USDC_LOGO} from "@/components/helpers/icons";
+import { CLOCK_ICON,ETH_LOGO, USDC_LOGO} from "@/components/helpers/icons";
 import { ConversionToUsd } from "@/components/helpers/constants";
 interface Props {
   outcomes: FPMMOutcome[];
@@ -271,7 +271,7 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
                   ? (parseFloat(minAmount) / 1e6).toFixed(2)
                   : 0
                 : minAmountSell
-                ? (parseFloat(minAmountSell)/1e6 ).toFixed(2)
+                ? (parseFloat(minAmountSell)/1e6).toFixed(2)
                 : 0.00}
             </span>
           </Box>
@@ -281,10 +281,10 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
        <Box
        onClick={
          settled
-           ? () => claimWinnings()// Ensure this is a function call
+           ? () => claimWinnings()
            : isBuying
-           ? () => PlaceFPMMBet() // Call function to place the bet
-           : () => SellMarketShares() // Call function to sell shares
+           ? () => PlaceFPMMBet()
+           : () => SellMarketShares() 
        }
        className={`ActionBtn`}
      >
@@ -293,11 +293,11 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
        ) : betAmount === "" ? (
          "Enter Amount"
        ) : isBuying ? (
-         parseFloat(balance) >= parseFloat(betAmount) // Use >= for inclusive check
+         parseFloat(balance) >= parseFloat(betAmount) 
            ? "Place Order"
            : "Insufficient Balance"
        ) : (
-         parseFloat(userMarketShare) >= parseFloat(betAmount) // Use >= for inclusive check
+         parseFloat(userMarketShare) >= parseFloat(betAmount) 
            ? "Place Order"
            : "Insufficient Shares"
        )}
