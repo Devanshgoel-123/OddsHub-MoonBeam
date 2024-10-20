@@ -16,7 +16,7 @@ const Header: NextPage<Props> = ({}) => {
     >
       <div className="Header-LogoContainer">
         <div className="Header-Logo">
-          <CustomLogo src="/assets/logos/fClonglogo.svg" />
+          <CustomLogo src="https://firebasestorage.googleapis.com/v0/b/baseforesight.appspot.com/o/ForeCast.png?alt=media&token=37adfd91-84dc-42a0-b671-af8dc2eefeb9" />
         </div>
       </div>
       <div className="Header-LinksContainer">
