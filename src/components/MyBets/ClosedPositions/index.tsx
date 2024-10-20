@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import { Market, UserBet } from "@/components/helpers/types";
-import { getNumber, getString } from "@/components/helpers/functions";
 import { USDC_LOGO } from "@/components/helpers/icons";
 import LoaderComponent from "../LoaderComponent";
 import EmptyBetComponent from "../EmptyBetComponent";
@@ -9,15 +8,6 @@ import { motion } from "framer-motion";
 import { Box } from "@mui/material";
 import CustomLogo from "@/components/common/CustomIcons";
 
-import {options} from "../../helpers/constants"
-interface Props {
-  closedMarkets: Market[];
-  closedBets: {
-    outcomeAndBet: UserBet;
-    betNumber: number;
-  }[];
-  loading: boolean;
-}
 
 enum WinStatus {
   Won = "Won",
@@ -25,7 +15,7 @@ enum WinStatus {
   Claimable = "Claim",
 }
 
-function ClosedPositions({ closedMarkets, closedBets, loading }: Props) {
+function ClosedPositions({ closedMarkets, closedBets, loading }:any) {
   const [winStatus, setWinStatus] = useState<WinStatus[]>([]);
 
   useEffect(() => {
@@ -66,7 +56,7 @@ function ClosedPositions({ closedMarkets, closedBets, loading }: Props) {
           <Box className="TokenLogo">
             <CustomLogo src={USDC_LOGO} />
           </Box>
-          {getNumber(closedBets[index]?.outcomeAndBet.position.amount || "0")}
+          {(closedBets[index] || "0")}
         </span>
         <span className="Yes Prediction">
           {getString(closedBets[index]?.outcomeAndBet.outcome.name || "0")}

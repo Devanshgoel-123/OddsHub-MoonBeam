@@ -1,9 +1,9 @@
 import { useAccount } from "wagmi";
-import { useMemo } from "react";
-import { getConnections,sendTransaction, waitForTransactionReceipt, writeContract } from "@wagmi/core";
+import {  waitForTransactionReceipt, writeContract } from "@wagmi/core";
 import { contractAddress } from "../helpers/constants";
 import {abi} from "../../abi/FPMMMarket.json"
 import { config } from "../Web3provider";
+import axios from "axios";
 
 interface Data {
   marketId: BigInt;
@@ -27,12 +27,14 @@ function useSettleFPMMMarket(marketData: Data) {
       args:[marketData.marketId,marketData.outcome],
      })
       const transactionHash=data;
-      const transactionReceipt=await waitForTransactionReceipt(config,{
-      confirmations:2,
-      hash:transactionHash
-    }
     
-)
+      await axios.post(`${process.env.SERVER_URL}/settleMarket`,{
+        marketId:marketData.marketId
+      })
+      .then((res)=>{
+        console.log(res);
+      })
+    
 return transactionHash;
   }
   return {settleMarket};

@@ -70,11 +70,11 @@ function MyBets() {
         openMarkets={openMarkets}
         openBets={openBets}
       />
-      <ClosedPositions
+      {/* <ClosedPositions
         loading={loading}
         closedMarkets={closedMarkets}
         closedBets={closedBets}
-      />
+      /> */}
     </div>
   );
 }

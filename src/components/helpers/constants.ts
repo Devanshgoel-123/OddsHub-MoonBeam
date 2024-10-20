@@ -1,4 +1,4 @@
-export const contractAddress="0x267b8Bd953C91E2E38A72dF38CD1Af77D5fFC8B2"; //Contract on testnet
+export const contractAddress="0xd3e4c20E9B4e8e3AE46a30A2eFE9C2cd9006825a"; //Contract on sepolia
 export const ALCHEMY_RPC_URL="https://base-sepolia.g.alchemy.com/v2/cB8d-av2mkW_a4Eftu_eIHsIjzwZOh5S";
 export const ConversionToUsd=2569;
 export const options = {
