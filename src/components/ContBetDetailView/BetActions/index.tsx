@@ -121,7 +121,7 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
         </Box>
         <span className='BalanceField'>
           {address
-            ? "User holded Shares: " + (userMarketShare)
+            ? "User holded Shares: " + (Number(userMarketShare)/10**6).toFixed(2)
             : "Please connect your wallet."}{" "}
         </span>
       </Box>

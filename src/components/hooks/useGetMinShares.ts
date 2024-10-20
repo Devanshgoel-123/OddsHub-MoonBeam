@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { contractAddress, ConversionToUsd } from "../helpers/constants";
 
 const useGetMinShares = (
   marketId: number,

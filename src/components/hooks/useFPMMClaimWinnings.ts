@@ -1,7 +1,7 @@
 import { enqueueSnackbar } from "notistack";
 import {contractAddress} from "../helpers/constants";
 import { getTransactionConfirmations, writeContract } from '@wagmi/core'
-import {abi} from "../../abi/FPMMMarket.json";
+import {abi} from "../../abi/FPMMMarket.json"
 import { useEffect, useState } from "react";
 import { config } from "../Web3provider";
 

@@ -2,7 +2,7 @@ import { useAccount } from "wagmi";
 import { useMemo } from "react";
 import { getConnections,sendTransaction, waitForTransactionReceipt, writeContract } from "@wagmi/core";
 import { contractAddress } from "../helpers/constants";
-import {abi} from "../../abi/FPMMMarket.json";
+import {abi} from "../../abi/FPMMMarket.json"
 import { config } from "../Web3provider";
 
 interface Data {

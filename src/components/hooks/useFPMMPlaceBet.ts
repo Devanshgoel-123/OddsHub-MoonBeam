@@ -3,7 +3,7 @@ import {contractAddress, ConversionToUsd} from "../helpers/constants";
 import { useAccount,useBalance } from "wagmi";
 import { getTransactionConfirmations, writeContract,getBalance} from '@wagmi/core'
 import {abi} from "../../abi/FPMMMarket.json"
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import useGetMinShares from "./useGetMinShares";
 import axios from "axios";
 import { config } from "../Web3provider";
@@ -27,9 +27,9 @@ const useFPMMPlaceBet = (
     outcomeIndex,
     decimals,
   );
-  // console.log(minAmount);
+  
   const amountInUsd=(Number(betAmount)*ConversionToUsd).toString();
-  // console.log(amountInUsd);
+ 
   const PlaceFPMMBet=async()=>{
     try{
     const data=await writeContract(config,{

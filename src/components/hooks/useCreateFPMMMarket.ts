@@ -47,8 +47,7 @@ function useCreateFPMMMarket({
       console.log(res.data)
     })
     setTimeout(()=>{
-
-    },5000)
+    },10000)
     await axios
       .post(`${process.env.SERVER_URL}/create-market`, {
         question: heading,

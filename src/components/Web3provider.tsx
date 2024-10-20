@@ -18,8 +18,6 @@ export const config = createConfig(
 
     },
     walletConnectProjectId: "c0d339ed8343fed3a39dd6795c2244b8",
-
-    // Required App Info
     appName: "BaseForeCast",
   }),
 );

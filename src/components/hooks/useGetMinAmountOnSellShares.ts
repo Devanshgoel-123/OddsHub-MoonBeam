@@ -1,5 +1,5 @@
 import { enqueueSnackbar } from "notistack";
-import { useEffect,useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 const useGetMinAmountOnSellShares = (
   marketId: number,
