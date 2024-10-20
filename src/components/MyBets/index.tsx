@@ -3,15 +3,14 @@ import React, { useEffect, useState } from "react";
 import OpenPositions from "./OpenPositions";
 import ClosedPositions from "./ClosedPositions";
 import "./styles.scss";
-import { Market, UserBet } from "../helpers/types";
 import { useAccount, useReadContract } from "wagmi";
 import axios from "axios";
 
 function MyBets() {
   const { address, isConnected } = useAccount();
-  const [openMarkets, setOpenMarkets] = useState<Market[]>([]);
+  const [openMarkets, setOpenMarkets] = useState<any[]>([]);
   const [openBets, setOpenBets] = useState<any>([]);
-  const [closedMarkets, setClosedMarkets] = useState<Market[]>([]);
+  const [closedMarkets, setClosedMarkets] = useState<any[]>([]);
   const [closedBets, setClosedBets] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [userMarkets, setUserMarkets] = useState("");
@@ -32,8 +31,8 @@ function MyBets() {
         return;
       }
 
-      const openMarketsRes: Market[] = [];
-      const closedMarketsRes: Market[] = [];
+      const openMarketsRes: any[] = [];
+      const closedMarketsRes: any[] = [];
       const openBets: any[] = [];
       const closedBets: any[] = [];
       for (const market of response.data) {

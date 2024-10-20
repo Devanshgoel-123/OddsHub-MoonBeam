@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./styles.scss";
-import { Market, UserBet } from "@/components/helpers/types";
+import { UserBet } from "@/components/helpers/types";
 import { USDC_LOGO } from "@/components/helpers/icons";
 import LoaderComponent from "../LoaderComponent";
 import EmptyBetComponent from "../EmptyBetComponent";
@@ -19,7 +19,7 @@ function ClosedPositions({ closedMarkets, closedBets, loading }:any) {
   const [winStatus, setWinStatus] = useState<WinStatus[]>([]);
 
   useEffect(() => {
-    const newWinStatus = closedMarkets.map((market, index) => {
+    const newWinStatus = closedMarkets.map((market:any, index:number) => {
       const bet = closedBets[index]?.outcomeAndBet;
 
       if (!bet) return WinStatus.Lost;
@@ -35,7 +35,7 @@ function ClosedPositions({ closedMarkets, closedBets, loading }:any) {
     setWinStatus(newWinStatus);
   }, [closedMarkets, closedBets]);
 
-  const renderMarket = (market: Market, index: number) => {
+  const renderMarket = (market: any, index: number) => {
     const statusClass =
       winStatus[index] === WinStatus.Claimable
         ? "Claim"
@@ -59,7 +59,6 @@ function ClosedPositions({ closedMarkets, closedBets, loading }:any) {
           {(closedBets[index] || "0")}
         </span>
         <span className="Yes Prediction">
-          {getString(closedBets[index]?.outcomeAndBet.outcome.name || "0")}
         </span>
         
       </div>

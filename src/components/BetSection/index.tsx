@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useEffect, useRef, useState } from "react";
 import "./styles.scss";
 import BetHeroCard from "./BetHeroCard";
-import { FPMMMarket, FPMMMarketInfo, Market } from "../helpers/types";
+import {  FPMMMarketInfo } from "../helpers/types";
 import { motion } from "framer-motion";
 import CustomLoader from "../common/CustomLoader";
 import ContBetCard from "./ContBetCard";

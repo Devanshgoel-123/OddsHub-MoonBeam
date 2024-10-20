@@ -1,18 +1,3 @@
-import { CairoOption } from "starknet";
-
-export interface Market {
-  name: string;
-  category: string;
-  deadline: string;
-  description: string;
-  is_active: boolean;
-  is_settled: boolean;
-  outcomes: Outcome[];
-  winning_outcome: CairoOption<Outcome>;
-  money_in_pool: number;
-  image: string;
-  market_id: number;
-}
 
 export interface FPMMMarket {
   deadline: string;

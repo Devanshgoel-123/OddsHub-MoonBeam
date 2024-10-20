@@ -61,8 +61,8 @@ const ContBetCard: NextPage<Props> = ({
     if (!outcomes || outcomes.length == 0) return;
 
     const percentages = calcPrice([
-      outcomes[0].num_shares_in_pool.toString(),
-      outcomes[1].num_shares_in_pool.toString(),
+      outcomes[0].numSharesInPool.toString(),
+      outcomes[1].numSharesInPool.toString(),
     ]);
     setPrice1(percentages[0]);
     setPrice2(percentages[1]);
@@ -113,7 +113,7 @@ const ContBetCard: NextPage<Props> = ({
             <div className='DurationIcon'>
               <CustomLogo src={CLOCK_ICON} />
             </div>
-            {daysRemaining > 0  ? `${daysRemaining}d : ${hoursRemaining}h : ${minutes}m` : "Claimable"}
+            {isActive || daysRemaining > 0  ? `${daysRemaining}d : ${hoursRemaining}h : ${minutes}m` : "Claimable"}
           </div>
         </div>
         <div className='BetCard-DetailsWrapper'>
