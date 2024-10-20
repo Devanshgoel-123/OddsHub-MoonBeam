@@ -16,7 +16,7 @@ const tabList = [
 ];
 
 const BetSection: NextPage<Props> = ({}) => {
-  const [activeTab, setActiveTab] = useState<number>(1);
+  const [activeTab, setActiveTab] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const [contMarkets, setContMarkets] = useState<FPMMMarketInfo[]>([]);
   const betCardWrapperDiv = useRef<HTMLDivElement | null>(null);
@@ -77,24 +77,16 @@ const BetSection: NextPage<Props> = ({}) => {
       </div>
       <div ref={betCardWrapperDiv} className='BetSection-CardWrapper'>
         <div className='Tabs-Section'>
-          {tabList.map((item, index) => (
-            <div
-              key={index}
-              onClick={() => {
-                setActiveTab(index);
-              }}
-              className={activeTab === index ? "Tab-Active" : "Tab"}
-            >
-              {item.tabName}
+            <div className="Tab">
+              Markets
             </div>
-          ))}
         </div>
         <div className='BetCard-Wrapper'>
           {loading ? (
             <div className='LoaderDiv'>
               <CustomLoader size={"55"} color='#9C9C9C' />
             </div>
-          ) : activeTab == 1 ? (
+          ) : activeTab == 0 ? (
             contMarkets.filter((market) => market.active).length > 0 ? (
               contMarkets
                 .filter((market) => market.active)

@@ -42,10 +42,13 @@ function useCreateFPMMMarket({
   };
 
   const createFPMMMarket = async () => {
-    // await axios.get(`${process.env.SERVER_URL}/add-liquidity`)
-    // .then((res)=>{
-    //   console.log(res.data)
-    // })
+    await axios.get(`${process.env.SERVER_URL}/add-liquidity`)
+    .then((res)=>{
+      console.log(res.data)
+    })
+    setTimeout(()=>{
+
+    },5000)
     await axios
       .post(`${process.env.SERVER_URL}/create-market`, {
         question: heading,

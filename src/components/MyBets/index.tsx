@@ -36,8 +36,6 @@ function MyBets() {
       const closedMarketsRes: Market[] = [];
       const openBets: any[] = [];
       const closedBets: any[] = [];
-
-     
       for (const market of response.data) {
         console.log(market[0].hex)
         const marketId = parseInt(market[0].hex,16); 
@@ -47,7 +45,6 @@ function MyBets() {
         const marketDetails = await axios.get(
           `${process.env.SERVER_URL}/get-current-market/${marketId}`
         );
-        console.log(marketDetails.data);
         if (isActive) {
           openMarketsRes.push(marketDetails.data);
           openBets.push({Yes:parseInt(market[1][0].hex,16),No:parseInt(market[1][1].hex,16)});

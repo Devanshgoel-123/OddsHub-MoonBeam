@@ -1,5 +1,5 @@
 import { WagmiProvider, createConfig, http } from "wagmi";
-import { mainnet, baseSepolia} from "wagmi/chains";
+import { mainnet, baseSepolia,hardhat} from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { ReactNode } from "react";
@@ -7,14 +7,16 @@ import { ReactNode } from "react";
 export const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
-    chains: [baseSepolia],
+    chains: [baseSepolia,hardhat],
     transports: {
       [baseSepolia.id]: http(
         `https://base-sepolia.g.alchemy.com/v2/cB8d-av2mkW_a4Eftu_eIHsIjzwZOh5S`,
       ),
-    },
+      [hardhat.id]:http(
+        "http://127.0.0.1:8545/"
+      )
 
-    // Required API Keys
+    },
     walletConnectProjectId: "c0d339ed8343fed3a39dd6795c2244b8",
 
     // Required App Info
