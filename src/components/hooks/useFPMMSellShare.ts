@@ -44,10 +44,11 @@ const useFPMMSellShare = (
     hash?: string
   ) => {
     enqueueSnackbar(message, {
+      //@ts-ignore
       variant: "custom",
-      subHeading,
-      hash,
-      type,
+      subHeading: subHeading,
+      hash: hash,
+      type: type,
       anchorOrigin: {
         vertical: "top",
         horizontal: "right",
