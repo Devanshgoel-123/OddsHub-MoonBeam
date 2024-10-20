@@ -5,7 +5,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import useGetMinAmountOnSellShares from "./useGetMinAmountOnSellShares";
 import axios from "axios";
 import { useAccount } from "wagmi";
-import { getTransactionConfirmations, readContract, writeContract } from '@wagmi/core';
+import {  readContract, writeContract } from '@wagmi/core';
 import { config } from "../Web3provider";
 import { ConversionToUsd } from "../helpers/constants";
 import { parseEther } from "viem";

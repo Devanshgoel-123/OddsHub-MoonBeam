@@ -2,17 +2,13 @@ import { NextPage } from "next";
 import "./styles.scss";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import Select from "react-select";
 import { contractAddress } from "../helpers/constants";
 import {abi} from "../../abi/FPMMMarket.json";
 import {
   FPMMMarket,
-  ContractData,
   FPMMOutcome,
-  ContractReadResult
 } from "../helpers/types";
 import { Radio, RadioGroup } from "rsuite";
-import { getString } from "../helpers/functions";
 import useSettleFPMMMarket from "../hooks/useSettleFPMMMarket";
 import { useReadContract } from "wagmi";
 
@@ -23,7 +19,7 @@ const SettleFPMMMarkets: NextPage<Props> = ({}) => {
   const [marketId, setMarketId] = useState<any>(0);
   const [value, setValue] = useState<any>(0);
   const [market, setMarket] = useState<FPMMMarket | null>(null);
-  const [outcomes, setOutcomes] = useState<FPMMOutcome[]>([]);
+  const [outcomes, setOutcomes] = useState<any[]>([]);
   const {settleMarket}  = useSettleFPMMMarket({
     marketId: marketId,
     outcome: value,

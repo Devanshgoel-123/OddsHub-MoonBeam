@@ -1,7 +1,4 @@
 import { enqueueSnackbar } from "notistack";
-import { BigNumberish, shortString } from "starknet";
-
-
 export const getTimeBetween = (dateFuture: number, dateNow: number) => {
   var seconds = Math.floor((dateFuture - dateNow) / 1000);
   var minutes = Math.floor(seconds / 60);

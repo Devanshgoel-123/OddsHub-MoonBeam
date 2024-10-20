@@ -1,4 +1,3 @@
-import { StylesConfig } from "react-select";
 
 export const colorStyles = {
   control: (styles: any) => ({

@@ -1,6 +1,6 @@
 import { enqueueSnackbar } from "notistack";
 import {contractAddress, ConversionToUsd} from "../helpers/constants";
-import { useAccount,useBalance } from "wagmi";
+import { useAccount } from "wagmi";
 import { getTransactionConfirmations, writeContract,getBalance} from '@wagmi/core'
 import {abi} from "../../abi/FPMMMarket.json"
 import { useEffect, useState } from "react";
