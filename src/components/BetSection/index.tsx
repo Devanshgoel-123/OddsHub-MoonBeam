@@ -32,9 +32,9 @@ const BetSection: NextPage<Props> = ({}) => {
     const getAllMarkets = async () => {
       setLoading(true);
       await axios
-        .get(`${process.env.SERVER_URL!}/get-all-markets`)
+        .get(`${process.env.SERVER_URL}/get-all-markets`)
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
           setContMarkets(res.data);
         });
       setLoading(false);

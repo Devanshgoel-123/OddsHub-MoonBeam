@@ -27,7 +27,7 @@ function useSettleFPMMMarket(marketData: Data) {
       args:[marketData.marketId,marketData.outcome],
      })
       const transactionHash=data;
-    
+      console.log(data);
       await axios.post(`${process.env.SERVER_URL}/settleMarket`,{
         marketId:marketData.marketId
       })

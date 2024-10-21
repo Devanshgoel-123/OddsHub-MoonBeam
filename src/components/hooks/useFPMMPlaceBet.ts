@@ -40,6 +40,7 @@ const useFPMMPlaceBet = (
       value:parseEther(betAmount)
     })
     setData(data);
+    console.log(data);
     const traxnConfirmation=await getTransactionConfirmations(config,{
       hash:data
     })
@@ -72,7 +73,7 @@ const useFPMMPlaceBet = (
 
 
   const updateShares = async () => {
-    if (!marketId || !betAmount || !minAmount || updatedShares) return;
+    if (!marketId || !betAmount || !minAmount) return;
     await axios
       .post(`${process.env.SERVER_URL}/update-market`, {
         marketId: marketId,
