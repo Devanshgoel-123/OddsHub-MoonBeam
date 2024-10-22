@@ -31,6 +31,10 @@ const useFPMMPlaceBet = (
   const amountInUsd=(Number(betAmount)*ConversionToUsd).toString();
  
   const PlaceFPMMBet=async()=>{
+    if(Number(betAmount)>0.001){
+      alert("Please input a lesser Amount")
+      return;
+    }
     try{
     const data=await writeContract(config,{
       abi:abi,

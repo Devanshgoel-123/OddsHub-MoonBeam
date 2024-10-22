@@ -94,6 +94,9 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
             ? "Balance: " + parseFloat(balance).toFixed(6)+" ETH"
             : "Please connect your wallet."}{" "}
         </span>
+        <span className='BalanceField'>
+          Use Buy Values below 0.001 ETH to prevent disrupting liquidity pools due to limited testnet tokens
+        </span>
       </Box>
     );
   };
@@ -124,6 +127,9 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
           {address
             ? "User holded Shares: " + (Number(userMarketShare)/10**6).toFixed(2)
             : "Please connect your wallet."}{" "}
+        </span>
+        <span className='BalanceField'>
+        Use Sell Values below 0.001 ETH to prevent disrupting liquidity pools due to limited testnet tokens
         </span>
       </Box>
     );
@@ -312,6 +318,7 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
           Connect Wallet
         </Box>
       )}
+     
     </Box>
   );
 };

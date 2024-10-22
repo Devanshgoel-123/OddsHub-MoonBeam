@@ -105,7 +105,10 @@ const useFPMMSellShare = (
 
   const SellMarketShares = async () => {
     if (!marketId || betAmount==="") return;
-
+    if(Number(betAmount)>0.001){
+      alert("Please input a lesser Amount")
+      return;
+    }
     setTxStatus({ ...txStatus, pending: true, error: false });
     
     try {
