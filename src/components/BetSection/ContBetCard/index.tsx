@@ -113,7 +113,7 @@ const ContBetCard: NextPage<Props> = ({
             <div className='DurationIcon'>
               <CustomLogo src={CLOCK_ICON} />
             </div>
-            {isActive ||daysRemaining > 0  ? `${daysRemaining}d : ${hoursRemaining}h : ${minutes}m` : "Claimable"}
+            {daysRemaining > 0 && isActive  ? `${daysRemaining}d : ${hoursRemaining}h : ${minutes}m` : "Claimable"}
           </div>
         </div>
         <div className='BetCard-DetailsWrapper'>

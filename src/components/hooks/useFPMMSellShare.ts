@@ -93,7 +93,7 @@ const useFPMMSellShare = (
       await axios.post(`${process.env.SERVER_URL}/update-market`, {
         marketId,
         outcomeIndex: choice,
-        amount: (Number(amountInUsd) * 10**6).toString(),
+        amount: (Number(amountInUsd)*10**6).toString(),
         isBuy: false,
         sharesUpdated: Number(minAmountSell),
       });
@@ -103,9 +103,8 @@ const useFPMMSellShare = (
     }
   };
 
-  // Handle transaction
   const SellMarketShares = async () => {
-    if (!marketId || !betAmount) return;
+    if (!marketId || betAmount==="") return;
 
     setTxStatus({ ...txStatus, pending: true, error: false });
     
@@ -116,7 +115,7 @@ const useFPMMSellShare = (
         functionName: "sell",
         args: [
           marketId, 
-          Number(betAmount)*10**17,
+          parseEther(betAmount),
           choice,
           minAmountSell
         ]
@@ -139,7 +138,7 @@ const useFPMMSellShare = (
     }
   };
 
-  // Handle toast notifications
+
   useEffect(() => {
     if (!marketId || !address || isBuying) return;
 

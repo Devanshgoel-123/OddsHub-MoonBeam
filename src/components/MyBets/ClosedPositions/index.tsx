@@ -6,7 +6,11 @@ import EmptyBetComponent from "../EmptyBetComponent";
 import { motion } from "framer-motion";
 import { Box } from "@mui/material";
 import CustomLogo from "@/components/common/CustomIcons";
-
+import { writeContract } from "@wagmi/core";
+import { useAccount, useWriteContract } from "wagmi";
+import {config} from "../../Web3provider";
+import {abi} from "../../../abi/FPMMMarket.json"
+import { contractAddress } from "@/components/helpers/constants";
 interface ProcessedMarket {
   status: string;
   question: string;
@@ -14,6 +18,7 @@ interface ProcessedMarket {
   Outcome1Tokens: string;
   Outcome2Tokens: string;
   winner:string;
+  marketId:number;
 }
 
 interface ClosedPositionsProps {
@@ -27,20 +32,42 @@ enum WinStatus {
 }
 
 function ClosedPositions({ loading, closedMarkets }: ClosedPositionsProps) {
+  const {address}=useAccount();
   const renderMarket = (market: ProcessedMarket) => {
     const userPrediction=Number(market.Outcome1Tokens)!==0 ? "Yes" : "No";
-    const statusClass= userPrediction===market.winner?"Won":"Lost";
+    const outcomeIndex=market.winner=="Yes"?0:1;
+    const statusClass= userPrediction===market.winner?Number(market.Outcome1Tokens)>0?"Claim":"Won":"Lost";
     return (
       <div className="Data" key={market.question}>
-        <span className="Status">
+
+        {statusClass==="Claim"? <div className="Status">
+          <button onClick={async ()=>{
+            console.log("I got clicked")
+            const data=await writeContract(config,{
+              abi:abi,
+              address:`${contractAddress}`,
+              functionName:"claimWinnings",
+              args:[market.marketId,outcomeIndex]
+            })
+            if(data){
+              alert("Winnings have been Claimed and will be transferred shortly");
+              setTimeout(()=>{},2000);
+              window.location.reload();
+            }
+            }}>
+         {statusClass}
+        </button >
+        </div>:
+         <span className="Status" >
          {statusClass}
         </span>
+        }
         <span className="Event">{market.question}</span>
         <span className="DatePlaced">
           {market.deadline.toString().slice(0,10)}
         </span>
         <span className="StakedAmount">
-          {Number(market.Outcome1Tokens)!==0? (parseFloat(market.Outcome1Tokens)/10**8).toFixed(2):parseFloat(market.Outcome2Tokens)/10**8}
+          {Number(market.Outcome1Tokens)!==0? (parseFloat(market.Outcome1Tokens)/10**7).toFixed(2):(parseFloat(market.Outcome2Tokens)/10**7).toFixed(2)}
         </span>
         <span className="Yes Prediction">
           {Number(market.Outcome1Tokens)!==0 ? "Yes" : "No"}
@@ -66,7 +93,7 @@ function ClosedPositions({ loading, closedMarkets }: ClosedPositionsProps) {
               <span className="Status">Status</span>
               <span className="Event">Event</span>
               <span className="DatePlaced">Bet Deadline</span>
-              <span className="StakedAmount">Staked Amount</span>
+              <span className="StakedAmount">Shares Bought</span>
               <span className="Prediction">Prediction</span>
               <span className="Details"></span>
             </motion.div>

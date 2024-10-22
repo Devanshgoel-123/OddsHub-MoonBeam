@@ -58,6 +58,7 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
   }, [pathname, settled]);
 
   const { balance, PlaceFPMMBet,minAmount }=useFPMMPlaceBet(marketId, betAmount, choice); 
+  console.log(minAmount);
   const {  minAmountSell,userMarketShare,SellMarketShares} = useFPMMSellShare(marketId, betAmount, choice, isBuying);
   const { claimWinnings } = useFPMMClaimWinnings(marketId, choice);
   function handleBetAmount(value: string) {

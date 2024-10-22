@@ -41,7 +41,7 @@ function OpenPositions({ openMarkets, openBets, loading }: any) {
                 <span className="Event">{market.question}</span>
                 <span className="DatePlaced">{market.deadline.slice(0, 10)}</span>
                 <span className="StakedAmount">
-                  {market.Outcome1Tokens > 0 ? (market.Outcome1Tokens/10**8).toFixed(2):(market.Outcome2Tokens/10**8).toFixed(2)}
+                  {market.Outcome1Tokens > 0 ? (market.Outcome1Tokens/10**7).toFixed(2):(market.Outcome2Tokens/10**7).toFixed(2)}
                 </span>
                 <span className="Yes Prediction">
                   {market.Outcome1Tokens > 0 ? "Yes":"No"}

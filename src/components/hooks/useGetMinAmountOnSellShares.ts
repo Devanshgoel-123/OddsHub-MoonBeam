@@ -24,7 +24,7 @@ const useGetMinAmountOnSellShares = (
       };
   
       fetchMinAmountOnSell(); 
-    }, [minAmountSell,betAmount]);
+    }, [minAmountSell,betAmount,choice,isBuying,marketId]);
 
   return { minAmountSell };
 };

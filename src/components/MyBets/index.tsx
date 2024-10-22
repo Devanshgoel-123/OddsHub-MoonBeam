@@ -21,7 +21,8 @@ interface ProcessedMarket {
   deadline: string;
   Outcome1Tokens: string;
   Outcome2Tokens: string;
-  winner:string
+  winner:string;
+  marketId:number;
 }
 
 function MyBets() {
@@ -64,7 +65,9 @@ function MyBets() {
             question: currentMarket.question,
             deadline: currentMarket.deadline,
             Outcome1Tokens: market.Outcome1Tokens,
-            winner:currentMarket.outcomes[0].winner? currentMarket.outcomes[0].name:currentMarket.outcomes[1].name
+            Outcome2Tokens:market.Outcome2Tokens,
+            winner:currentMarket.outcomes[0].winner? currentMarket.outcomes[0].name:currentMarket.outcomes[1].name,
+            marketId:marketId
           };
         } catch (error) {
           console.error(`Error processing market:`, error);
