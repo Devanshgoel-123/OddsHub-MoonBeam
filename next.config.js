@@ -20,6 +20,10 @@ const nextConfig = {
         {
             source:'/api/get-all-markets',
             destination:"https://backend-base-sepolia-final.vercel.app/get-all-markets"
+        },
+        {
+            source:'/api/get-outcome-tokens/:marketId',
+            destination:"https://backend-base-sepolia-final.vercel.app/get-all-markets/:marketId"
         }
     ]
   }
