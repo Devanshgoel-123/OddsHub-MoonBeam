@@ -29,13 +29,14 @@ function useSettleFPMMMarket(marketData: Data) {
       const transactionHash=data;
       console.log(data);
       await axios.post(`${process.env.SERVER_URL}/settleMarket`,{
-        marketId:marketData.marketId
+        marketId:marketData.marketId,
+        outcomeIndex:marketData.outcome
       })
       .then((res)=>{
         console.log(res);
       })
     
-return transactionHash;
+   return transactionHash;
   }
   return {settleMarket};
 }

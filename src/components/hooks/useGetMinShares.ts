@@ -10,7 +10,7 @@ const useGetMinShares = (
   const [minAmount, setMinAmount] = useState<string>("");
 
   useEffect(() => {
-    if (marketId === undefined || betAmount === "" || Number(betAmount)==0) {
+    if (marketId === undefined || betAmount === "" || Number(betAmount)==0 ) {
       setMinAmount(""); 
       return;
     }

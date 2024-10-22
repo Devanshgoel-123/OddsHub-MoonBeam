@@ -9,7 +9,7 @@ const useGetMinAmountOnSellShares = (
 ) => {
   const [minAmountSell, setMinAmountSell] = useState<string>("0");
     useEffect(() => {
-      if(betAmount==="" || Number(betAmount)===0) {
+      if(betAmount==="" || Number(betAmount)===0 || isBuying) {
         return ;
       }
       const fetchMinAmountOnSell = async () => {

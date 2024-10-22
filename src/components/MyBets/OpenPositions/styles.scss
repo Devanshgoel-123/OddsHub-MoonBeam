@@ -136,23 +136,23 @@
       }
 
       .Event {
-        width: 50%;
+        width: 60%;
         text-align: left;
 
         @include md {
-          width: 30%;
+          width: 40%;
         }
 
         @include lg {
-          width: 30%;
+          width: 40%;
         }
 
         @include xl {
-          width: 30%;
+          width: 40%;
         }
 
         @include xxl {
-          width: 30%;
+          width: 40%;
         }
 
       }
@@ -284,22 +284,22 @@
       }
 
       .Event {
-        width: 50%;
+        width: 60%;
         text-align: left;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
 
         @include md {
-          width: 30%;
+          width: 40%;
         }
 
         @include lg {
-          width: 30%;
+          width: 40%;
         }
 
         @include xl {
-          width: 30%;
+          width: 40%;
         }
 
         @include xxl {}

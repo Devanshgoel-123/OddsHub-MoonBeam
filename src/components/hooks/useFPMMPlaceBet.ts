@@ -25,7 +25,7 @@ const useFPMMPlaceBet = (
     marketId,
     betAmount,
     outcomeIndex,
-    decimals,
+    decimals
   );
   
   const amountInUsd=(Number(betAmount)*ConversionToUsd).toString();
@@ -40,12 +40,8 @@ const useFPMMPlaceBet = (
       value:parseEther(betAmount)
     })
     setData(data);
-    console.log(data);
-    const traxnConfirmation=await getTransactionConfirmations(config,{
-      hash:data
-    })
-    
-    if(traxnConfirmation){
+    console.log(data);    
+    if(data){
       setPending(false);
     }
     return data;
@@ -73,14 +69,16 @@ const useFPMMPlaceBet = (
 
 
   const updateShares = async () => {
-    if (!marketId || !betAmount || !minAmount) return;
+    if (!marketId || !betAmount || !minAmount || pending) return;
+    console.log("Calling backend to update shares")
+    console.log("user bought this mych amount",amountInUsd);
     await axios
       .post(`${process.env.SERVER_URL}/update-market`, {
         marketId: marketId,
         outcomeIndex: outcomeIndex,
-        amount:(amountInUsd).toString(),
+        amount:(Number(amountInUsd)*10**6).toString(),
         isBuy: true,
-        sharesUpdated: parseInt(minAmount),
+        sharesUpdated: Number(minAmount),
       })
       .then((res) => {})
       .catch((error) => {

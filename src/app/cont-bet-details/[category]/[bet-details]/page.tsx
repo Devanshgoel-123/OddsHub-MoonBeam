@@ -60,7 +60,7 @@ const BetDetailView: NextPage = () => {
     };
 
     getOutcomes();
-  }, [marketId]); // Removed 'outcomes' dependency to prevent infinite loop
+  }, [marketId]); 
 
   useEffect(() => {
     const getMarketInfo = async () => {

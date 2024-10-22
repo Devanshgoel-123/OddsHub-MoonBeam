@@ -12,6 +12,7 @@ import {
   getTimeBetween,
 } from "@/components/helpers/functions";
 import Image from "next/image";
+import axios from "axios";
 
 
 interface Props {
@@ -42,7 +43,6 @@ const ContBetCard: NextPage<Props> = ({
   const isInView = useInView(ref, { once: true });
   const [price1, setPrice1] = useState(0);
   const [price2, setPrice2] = useState(0);
-
   const [hoursRemaining, setHoursRemaining] = useState(0);
   const [daysRemaining, setDaysRemaining] = useState(0);
   const [minutes, setMinutesRemaining] = useState(0);
@@ -50,7 +50,6 @@ const ContBetCard: NextPage<Props> = ({
   useEffect(() => {
     const currentTime = new Date().getTime();
     const deadlineDate = new Date(deadline).getTime();
-
     const timeBetween = getTimeBetween(deadlineDate, currentTime);
     setDaysRemaining(timeBetween[0]);
     setHoursRemaining(timeBetween[1]);
@@ -64,6 +63,7 @@ const ContBetCard: NextPage<Props> = ({
       outcomes[0].numSharesInPool.toString(),
       outcomes[1].numSharesInPool.toString(),
     ]);
+    console.log(percentages);
     setPrice1(percentages[0]);
     setPrice2(percentages[1]);
   }, [outcomes]);

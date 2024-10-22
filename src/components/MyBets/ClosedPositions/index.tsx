@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./styles.scss";
-import { UserBet } from "@/components/helpers/types";
 import { USDC_LOGO } from "@/components/helpers/icons";
 import LoaderComponent from "../LoaderComponent";
 import EmptyBetComponent from "../EmptyBetComponent";
@@ -8,59 +7,44 @@ import { motion } from "framer-motion";
 import { Box } from "@mui/material";
 import CustomLogo from "@/components/common/CustomIcons";
 
+interface ProcessedMarket {
+  status: string;
+  question: string;
+  deadline: string;
+  Outcome1Tokens: string;
+  Outcome2Tokens: string;
+  winner:string;
+}
+
+interface ClosedPositionsProps {
+  loading: boolean;
+  closedMarkets: ProcessedMarket[];
+}
 
 enum WinStatus {
   Won = "Won",
   Lost = "Lost",
-  Claimable = "Claim",
 }
 
-function ClosedPositions({ closedMarkets, closedBets, loading }:any) {
-  const [winStatus, setWinStatus] = useState<WinStatus[]>([]);
-
-  useEffect(() => {
-    const newWinStatus = closedMarkets.map((market:any, index:number) => {
-      const bet = closedBets[index]?.outcomeAndBet;
-
-      if (!bet) return WinStatus.Lost;
-      if (
-        market.winning_outcome?.Some &&
-        market.winning_outcome.Some.name === bet.outcome.name
-      ) {
-        return bet.position.has_claimed ? WinStatus.Won : WinStatus.Claimable;
-      } else {
-        return WinStatus.Lost;
-      }
-    });
-    setWinStatus(newWinStatus);
-  }, [closedMarkets, closedBets]);
-
-  const renderMarket = (market: any, index: number) => {
-    const statusClass =
-      winStatus[index] === WinStatus.Claimable
-        ? "Claim"
-        : winStatus[index] === WinStatus.Won
-        ? "Won"
-        : "Lost";
-
+function ClosedPositions({ loading, closedMarkets }: ClosedPositionsProps) {
+  const renderMarket = (market: ProcessedMarket) => {
+    const userPrediction=Number(market.Outcome1Tokens)!==0 ? "Yes" : "No";
+    const statusClass= userPrediction===market.winner?"Won":"Lost";
     return (
-      <div className="Data" key={market.market_id}>
-        <span className={`Status`}>
-          <span className={`${statusClass}`}>{winStatus[index]}</span>
+      <div className="Data" key={market.question}>
+        <span className="Status">
+         {statusClass}
         </span>
-        <span className="Event">{market.name}</span>
+        <span className="Event">{market.question}</span>
         <span className="DatePlaced">
-          {new Date(parseInt(market.deadline)).toString().split("GMT")[0]}
+          {market.deadline.toString().slice(0,10)}
         </span>
-        <span className="BetToken StakedAmount">
-          <Box className="TokenLogo">
-            <CustomLogo src={USDC_LOGO} />
-          </Box>
-          {(closedBets[index] || "0")}
+        <span className="StakedAmount">
+          {Number(market.Outcome1Tokens)!==0? (parseFloat(market.Outcome1Tokens)/10**8).toFixed(2):parseFloat(market.Outcome2Tokens)/10**8}
         </span>
         <span className="Yes Prediction">
+          {Number(market.Outcome1Tokens)!==0 ? "Yes" : "No"}
         </span>
-        
       </div>
     );
   };

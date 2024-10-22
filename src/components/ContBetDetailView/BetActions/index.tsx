@@ -41,7 +41,7 @@ const BetActions: NextPage<Props> = ({ outcomes, duration, settled }) => {
       outcomes[0].numSharesInPool.toString(),
       outcomes[1].numSharesInPool.toString(),
     ]);
-    // console.log(percentages)
+    console.log("The details in the next page is:",percentages)
     setPrice1(percentages[0]);
     setPrice2(percentages[1]);
   }, [outcomes]);
