@@ -10,7 +10,7 @@ interface Props {
   subHeading: string;
   fightImage?: string;
 }
-
+// This is the bet details sections
 const BetDetails: NextPage<Props> = ({
   logo,
   heading,
