@@ -8,8 +8,9 @@ import { DatePicker } from "rsuite";
 import { colorStyles } from "@/components/helpers/menuStyles";
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import useCreateFPMMMarket from "@/components/hooks/useCreateFPMMMarket";
+import useCreateMarket from "@/components/hooks/useCreateMarket";
 import SettleFPMMMarkets from "@/components/SettleFPMMMarkets";
+import { useAccount } from "wagmi";
 
 const categories = [
   {
@@ -40,24 +41,35 @@ export default function AdminPortal() {
   const [description, setDescription] = useState("");
   const [outcome1, setOutcome1] = useState("");
   const [outcome2, setOutcome2] = useState("");
-  const [deadline, setDeadline] = useState(new Date());
+  const [deadline, setDeadline] = useState(Number(new Date().getTime)/1000);
   const [image, setImage] = useState("");
   const [fightImage, setFightImage] = useState("");
   const [canCreate, setCanCreate] = useState(false);
+
+  const {address}=useAccount();
+
+  useEffect(()=>{
+    if(address===undefined || address===null || !address){
+      setCanCreate(false)
+    }else{
+      setCanCreate(true)
+    }
+    console.log("the value of can create is",canCreate)
+  },[address])
   const [action, setAction] = useState(0);
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBBOnIaqM2JbY2Ddjnx4cCHOn-unlhwUCM",
-  authDomain: "baseforesight.firebaseapp.com",
-  projectId: "baseforesight",
-  storageBucket: "baseforesight.appspot.com",
-  messagingSenderId: "208805678834",
-  appId: "1:208805678834:web:ebd18499dd40958c640a6b"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBBOnIaqM2JbY2Ddjnx4cCHOn-unlhwUCM",
+//   authDomain: "baseforesight.firebaseapp.com",
+//   projectId: "baseforesight",
+//   storageBucket: "baseforesight.appspot.com",
+//   messagingSenderId: "208805678834",
+//   appId: "1:208805678834:web:ebd18499dd40958c640a6b"
+// };
 
-  const app = initializeApp(firebaseConfig);
+  // const app = initializeApp(firebaseConfig);
   
-  const { createFPMMMarket } = useCreateFPMMMarket({
+  const { createMarket } = useCreateMarket({
     heading,
     category,
     description,
@@ -97,20 +109,20 @@ const firebaseConfig = {
     fightImage,
   ]);
 
-  const handleImageUpload = (e: any, icon: boolean) => {
-    const storage = getStorage();
-    const file = e.target.files[0];
-    const storageRef = ref(storage, `market_icons/${file.name}`);
-    uploadBytes(storageRef, file).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((downloadURL) => {
-        if (icon) {
-          setImage(downloadURL);
-          return;
-        }
-        setFightImage(downloadURL);
-      });
-    });
-  };
+  // const handleImageUpload = (e: any, icon: boolean) => {
+  //   const storage = getStorage();
+  //   const file = e.target.files[0];
+  //   const storageRef = ref(storage, `market_icons/${file.name}`);
+  //   uploadBytes(storageRef, file).then((snapshot) => {
+  //     getDownloadURL(snapshot.ref).then((downloadURL) => {
+  //       if (icon) {
+  //         setImage(downloadURL);
+  //         return;
+  //       }
+  //       setFightImage(downloadURL);
+  //     });
+  //   });
+  // };
 
   return (
     <main className='Admin'>
@@ -123,6 +135,9 @@ const firebaseConfig = {
         </button>
         <button className='Action-Button' onClick={() => setAction(1)}>
           Settle Market
+        </button>
+        <button className='Action-Button' onClick={() => setAction(0)}>
+         Toggle Market
         </button>
       </div>
       {action == 0 && (
@@ -204,8 +219,8 @@ const firebaseConfig = {
                   <DatePicker
                     placeholder='Select Deadline'
                     format='MM/dd/yyyy HH:mm'
-                    onChange={(value) => setDeadline(value!)}
-                    value={deadline}
+                    onChange={(value) => setDeadline(value?.getTime() as number)}
+                    value={new Date()}
                   />
                 </Box>
               </Box>
@@ -213,24 +228,13 @@ const firebaseConfig = {
             <Box className='InputContainer'>
               <span className='Label'>Image</span>
               <Box className='Input'>
-                {image == "" ? (
                   <input
                     className='InputField'
-                    type='file'
+                    type='text'
                     value={image}
-                    onChange={(e) => handleImageUpload(e, true)}
+                    onChange={(e) => setImage(e.target.value)}
                     required
                   />
-                ) : (
-                  <input
-                    className='InputField'
-                    type='string'
-                    id='numberInput'
-                    name='numberInput'
-                    value={image}
-                    disabled
-                  />
-                )}
               </Box>
             </Box>
             <Box className='InputContainer'>
@@ -239,9 +243,9 @@ const firebaseConfig = {
                 {fightImage == "" ? (
                   <input
                     className='InputField'
-                    type='file'
+                    type='text'
                     value={fightImage}
-                    onChange={(e) => handleImageUpload(e, false)}
+                    onChange={(e) => setFightImage(e.target.value)}
                     required
                   />
                 ) : (
@@ -256,21 +260,20 @@ const firebaseConfig = {
                 )}
               </Box>
             </Box>
-            {category == "Crypto Market"}
-            {category == "Sports"}
+
             <Box className='Submit'>
               <button
                 disabled={!canCreate}
-                onClick={createFPMMMarket}
-                className={`SubmitButton ${canCreate ? "" : "Disabled"}`}
+                onClick={createMarket}
+                className={`SubmitButton`}
               >
-                Create Market
+                {canCreate ? "Create Market" : "Connect Wallet"} 
               </button>
             </Box>
           </div>
         </>
       )}
-      {action == 1 && (
+      {/* {action == 1 && (
         <>
           <div className='Heading-Section'>
             <div>Settle FPMM Markets</div>
@@ -279,7 +282,7 @@ const firebaseConfig = {
             <SettleFPMMMarkets />
           </div>
         </>
-      )}
+      )} */}
     </main>
   );
 }

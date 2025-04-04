@@ -6,7 +6,12 @@ import {  FPMMMarketInfo } from "../helpers/types";
 import { motion } from "framer-motion";
 import CustomLoader from "../common/CustomLoader";
 import ContBetCard from "./ContBetCard";
+import abi from "@/abi/MarketFactory";
 import axios from "axios";
+import { useReadContract } from "wagmi";
+import { CONTRACT_ADDRESS } from "../helpers/constants";
+import { useGetMarket } from "../hooks/useGetMarkets";
+
 interface Props {}
 
 const tabList = [
@@ -27,20 +32,24 @@ const BetSection: NextPage<Props> = ({}) => {
     }
   };
 
- 
-  useEffect(() => {
-    const getAllMarkets = async () => {
-      setLoading(true);
-      await axios
-        .get(`${process.env.SERVER_URL}/get-all-markets`)
-        .then((res) => {
-          console.log(res.data);
-          setContMarkets(res.data);
-        });
-      setLoading(false);
-    };
-    getAllMarkets();
-  }, []);
+  const result=useGetMarket(0);
+  // useEffect(() => {
+  //   const getAllMarkets = async () => {
+  //     setLoading(true);
+  //     const markets: FPMMMarketInfo[] = [];
+  //   try {
+      
+  //       console.log(result, 'market fetched');
+  //       // markets.push(market as FPMMMarketInfo);
+  //     setContMarkets(markets);
+  //   } catch (err) {
+  //     console.error('Error fetching markets:', err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  //   };
+  //   getAllMarkets();
+  // }, []);
 
 
   return (

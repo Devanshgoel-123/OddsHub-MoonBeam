@@ -90,13 +90,13 @@ const useFPMMSellShare = (
     if (updatedShares || !marketId || !betAmount) return;
     
     try {
-      await axios.post(`${process.env.SERVER_URL}/update-market`, {
-        marketId,
-        outcomeIndex: choice,
-        amount: (Number(amountInUsd)*10**6).toString(),
-        isBuy: false,
-        sharesUpdated: Number(minAmountSell),
-      });
+      // await axios.post(`${process.env.SERVER_URL}/update-market`, {
+      //   marketId,
+      //   outcomeIndex: choice,
+      //   amount: (Number(amountInUsd)*10**6).toString(),
+      //   isBuy: false,
+      //   sharesUpdated: Number(minAmountSell),
+      // });
       setUpdatedShares(true);
     } catch (error) {
       console.error("Error updating market:", error);

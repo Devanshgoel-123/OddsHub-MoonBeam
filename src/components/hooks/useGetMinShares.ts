@@ -17,9 +17,9 @@ const useGetMinShares = (
 
     const fetchMinShares = async () => {
       try {
-        const response = await axios.get(`${process.env.SERVER_URL}/min-shares-buy/${marketId}/${choice}/${betAmount}`);
-        const minSharesToBuy = parseInt(response.data.toString(), 16);
-        setMinAmount(minSharesToBuy.toString());
+        // const response = await axios.get(`${process.env.SERVER_URL}/min-shares-buy/${marketId}/${choice}/${betAmount}`);
+        // const minSharesToBuy = parseInt(response.data.toString(), 16);
+        // setMinAmount(minSharesToBuy.toString());
       } catch (error) {
         console.error("Error fetching minimum shares to buy:", error);
       }

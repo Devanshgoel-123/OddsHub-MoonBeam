@@ -1,4 +1,4 @@
-export const contractAddress="0x7e8Ab6F75139a65383DC8EBF9c89232F3BA311C6"; //Contract on sepolia
+export const CONTRACT_ADDRESS="0x40Cfe44ad64128d648aEd2a0Dd8c6E4616b95738"; //Contract on sepolia
 export const ConversionToUsd=2569;
 export const options = {
     weekday: "short" as "short",
