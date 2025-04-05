@@ -11,6 +11,7 @@ import axios from "axios";
 import { useReadContract } from "wagmi";
 import { CONTRACT_ADDRESS } from "../helpers/constants";
 import { useGetMarket } from "../hooks/useGetMarkets";
+import { Market } from "../helpers/types";
 
 interface Props {}
 
@@ -23,7 +24,7 @@ const tabList = [
 const BetSection: NextPage<Props> = ({}) => {
   const [activeTab, setActiveTab] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
-  const [contMarkets, setContMarkets] = useState<FPMMMarketInfo[]>([]);
+  const [contMarkets, setContMarkets] = useState<Market[]>([]);
   const betCardWrapperDiv = useRef<HTMLDivElement | null>(null);
 
   const scrollToElement = () => {
@@ -32,7 +33,13 @@ const BetSection: NextPage<Props> = ({}) => {
     }
   };
 
-  const result=useGetMarket(0);
+  const {finalData}=useGetMarket(0);
+  useEffect(()=>{
+    if(finalData){
+      setContMarkets(finalData)
+    }
+  },[finalData])
+  
   // useEffect(() => {
   //   const getAllMarkets = async () => {
   //     setLoading(true);
@@ -96,20 +103,21 @@ const BetSection: NextPage<Props> = ({}) => {
               <CustomLoader size={"55"} color='#9C9C9C' />
             </div>
           ) : activeTab == 0 ? (
-            contMarkets.filter((market) => market.active).length > 0 ? (
+            contMarkets.length > 0 && contMarkets.filter((market) => market.is_active).length > 0 ? (
               contMarkets
-                .filter((market) => market.active)
+                .filter((market) => market.is_active)
                 .map((item, index) => (
                   <div key={index} className='BetCard-Container'>
                     <ContBetCard
-                      marketId={item.market_id}
+                      marketId={Number(item.market_id.toString())}
                       category={item.category}
-                      logo={item.icon}
-                      deadline={item.deadline}
-                      heading={item.question}
+                      logo={item.image}
+                      deadline={item.deadline.toString()}
+                      heading={item.name.toString()}
                       subHeading={item.description}
                       outcomes={item.outcomes}
-                      isActive={item.active}
+                      isActive={item.is_active}
+                      moneyInPool={item.money_in_pool}
                     />
                   </div>
                 ))

@@ -1,3 +1,4 @@
+import { formatUnits } from "viem";
 
 export interface FPMMMarket {
   deadline: string;
@@ -22,7 +23,7 @@ export interface FPMMMarketInfo {
 
 export interface Outcome {
   name: string;
-  bought_shares: string;
+  bought_shares: string | bigint;
 }
 
 export interface FPMMOutcome {
@@ -53,4 +54,19 @@ export interface ContractReadResult {
   isLoading: boolean;
   isSuccess: boolean;
   status: string;
+}
+
+
+export interface Market{
+  deadline:number;
+  category:string;
+  name:string;
+  description:string;
+  image:string;
+  is_active:boolean;
+  is_settled:boolean;
+  market_id:number  | bigint;
+  money_in_pool:number  | bigint;
+  winning_outcome:Outcome;
+  outcomes:Outcome[];
 }

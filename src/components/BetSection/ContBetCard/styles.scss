@@ -1,28 +1,25 @@
 @import "../../../app/mixin.scss";
-@import url('https://use.typekit.net/your-kit-id.css');
 
-.BetBorder {
-  border-radius: 10px;
-  max-width: 500px;
+.BetCard {
   width: 100%;
-  height: 320px;
-  padding: 1px;
-  background: linear-gradient(135deg, #0095E2 0%, #111111 40%);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  height: 100%;
+  background-color: #161617;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 25px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  gap: 20px;
   position: relative;
-
-  @include md {
-    height: 280px;
-  }
+  overflow: hidden;
 
   .MarketClosed {
     position: absolute;
     top: 0;
     left: 0;
     background-color: red;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
     height: 100%;
     backdrop-filter: blur(6px);
@@ -35,15 +32,13 @@
     color: #909090;
     font-size: 30px;
 
-    @include md {
-    }
+    @include md {}
 
     @include lg {
       font-size: 25px;
     }
 
-    @include xl {
-    }
+    @include xl {}
 
     @include xxl {
       font-size: 30px;
@@ -51,42 +46,23 @@
 
     span {
       font-size: 20px;
-      font-family: "Manrope-Regular";
+      font-family: "GilmerRegular";
 
-      @include md {
-      }
+      @include md {}
 
       @include lg {
         font-size: 18px;
       }
 
-      @include xl {
-      }
+      @include xl {}
 
       @include xxl {
         font-size: 20px;
       }
     }
   }
-}
 
-.ContBetCard {
-  max-width: 500px;
-  width: 100%;
-  height: 100%;
-  background-color: #111111;
-  border-radius: 10px;
-  box-sizing: border-box;
-  padding: 25px;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  gap: 20px;
-  position: relative;
-  overflow: hidden;
-
-  @include md {
-  }
+  @include md {}
 
   @include lg {
     gap: 5px;
@@ -129,15 +105,14 @@
       }
 
       .CategoryName {
-        font-family: "Manrope-SemiBold";
+        font-family: "GilmerRegular";
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
-        line-height: 16px;
-        color: #ffffff;
+        line-height: 24px;
+        color: #909090;
 
-        @include md {
-        }
+        @include md {}
 
         @include lg {
           font-size: 12px;
@@ -151,15 +126,13 @@
           font-size: 14px;
         }
       }
-
-      
     }
 
     .Bet-Duration {
       display: flex;
       align-items: center;
       gap: 5px;
-      font-family: "Manrope-Regular";
+      font-family: "GilmerRegular";
       font-style: normal;
       font-weight: 600;
       font-size: 12px;
@@ -170,8 +143,7 @@
       background-clip: text;
       text-fill-color: transparent;
 
-      @include md {
-      }
+      @include md {}
 
       @include lg {
         font-size: 10px;
@@ -181,8 +153,7 @@
         font-size: 12px;
       }
 
-      @include xxl {
-      }
+      @include xxl {}
 
       .DurationIcon {
         width: 10px;
@@ -199,63 +170,57 @@
     align-items: center;
 
     .Heading {
-      font-family: "Manrope-Bold";
+      font-family: "GilmerBold";
       font-style: normal;
       font-weight: 700;
+      font-size: 24px;
       background: linear-gradient(90deg, #fcfcfb 0%, #e6e5e5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       text-align: center;
-      font-size: 20px;
       text-fill-color: transparent;
 
-      @include md {
-        font-size: 18px;
-      }
+      @include md {}
 
       @include lg {
         font-size: 20px;
       }
 
       @include xl {
-        font-size: 20px;
+        font-size: 22px;
       }
 
       @include xxl {
-        font-size: 22px;
+        font-size: 24px;
       }
     }
 
     .Sub-Heading {
-      font-family: "Manrope-Medium";
+      font-family: "GilmerRegular";
       font-style: normal;
       text-align: center;
       font-weight: 600;
-      margin-top: 6px;
       font-size: 14px;
-      background: #D5D5D5;
+      background: linear-gradient(90deg, #fcfcfb 0%, #e6e5e5 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       text-fill-color: transparent;
 
-      @include md {
-        line-height: 14px;
-      }
+      @include md {}
 
       @include lg {
         font-size: 12px;
-        line-height: 14px;
       }
 
       @include xl {
-        line-height: 16px;
+        line-height: 20px;
         font-size: 13px;
       }
 
       @include xxl {
-        line-height: 18px;
+        line-height: 24px;
         font-size: 14px;
       }
     }
@@ -278,8 +243,7 @@
       border-radius: 10px;
       cursor: pointer;
 
-      @include md {
-      }
+      @include md {}
 
       @include lg {
         border-radius: 8px;
@@ -291,23 +255,21 @@
         padding: 10px 20px;
       }
 
-      @include xxl {
-      }
+      @include xxl {}
 
       &:hover {
         opacity: 0.8;
       }
 
       .Green-Text {
-        font-family: "Manrope-Medium";
+        font-family: "GilmerMedium";
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
         line-height: 24px;
-        color: #83D5FF;
+        color: #3dd179;
 
-        @include md {
-        }
+        @include md {}
 
         @include lg {
           font-size: 12px;
@@ -317,20 +279,19 @@
           font-size: 14px;
         }
 
-        @include xxl {
-        }
+        @include xxl {}
+
       }
 
       .Bet-Stat {
-        font-family: "Manrope-Regular";
+        font-family: "GilmerRegular";
         font-style: normal;
         font-weight: 700;
         font-size: 14px;
         line-height: 24px;
         color: #d9d9d9;
 
-        @include md {
-        }
+        @include md {}
 
         @include lg {
           font-size: 12px;
@@ -340,20 +301,18 @@
           font-size: 14px;
         }
 
-        @include xxl {
-        }
+        @include xxl {}
       }
 
       .Red-Text {
-        font-family: "Manrope-Medium";
+        font-family: "GilmerMedium";
         font-style: normal;
         font-weight: 600;
         font-size: 14px;
         line-height: 24px;
-        color: #A0A0A0;
+        color: #dd7168;
 
-        @include md {
-        }
+        @include md {}
 
         @include lg {
           font-size: 12px;
@@ -363,8 +322,7 @@
           font-size: 14px;
         }
 
-        @include xxl {
-        }
+        @include xxl {}
       }
     }
   }
@@ -373,7 +331,7 @@
     display: flex;
     justify-content: center;
     gap: 10px;
-    font-family: "Manrope-Regular";
+    font-family: "GilmerRegular";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -384,8 +342,7 @@
     background-clip: text;
     text-fill-color: transparent;
 
-    @include md {
-    }
+    @include md {}
 
     @include lg {
       font-size: 12px;
@@ -395,19 +352,17 @@
       font-size: 14px;
     }
 
-    @include xxl {
-    }
+    @include xxl {}
 
     .Pool-Value {
-      font-family: "Manrope-Medium";
+      font-family: "GilmerMedium";
     }
 
     .Starknet-logo {
       width: 20px;
       height: 20px;
 
-      @include md {
-      }
+      @include md {}
 
       @include lg {
         width: 18px;
@@ -419,8 +374,7 @@
         height: 20px;
       }
 
-      @include xxl {
-      }
+      @include xxl {}
     }
   }
 }

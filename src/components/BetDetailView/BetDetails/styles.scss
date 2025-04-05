@@ -1,39 +1,30 @@
 @import "../../../app/mixin.scss";
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 
 .BetModal-DetailsContainer {
-  width: 500px;
+  width: 80%;
+  background-color: #17171b;
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 20px;
   border-radius: 10px;
 
-  .FightImage {
-    display: flex;
-    justify-content: center;
-    align-items: centers;
-    @media only screen and (max-width: 768px) {
-      display: none;
-    }
-  }
   @include md {
     gap: 20px;
     padding: 20px;
-    width: 400px;
+    width: 100%;
   }
 
-  @include lg {
-  }
+  @include lg {}
 
   @include xl {
     gap: 15px;
-    width: 400px;
+    // width: 400px;
   }
 
   @include xxl {
     gap: 20px;
-    width: 400px;
+   // width: 500px;
   }
 
   .HeadingContainer {
@@ -42,27 +33,52 @@
     justify-content: space-between;
 
     .BetName {
-      font-family: "Manrope-Bold";
+      font-family: "GilmerRegular";
       font-style: normal;
       font-weight: 600;
       font-size: 14px;
       line-height: 24px;
+      color: #909090;
       display: flex;
       align-items: center;
       gap: 10px;
+
+      @include md{
+        gap: 15px;
+      }
 
       span {
         margin-top: 2px;
       }
 
       .BetDetails-Logo {
-        width: 40px;
-        height: 40px;
-        img {
-          border-radius: 50%;
-          width: 40px;
-          height: 40px;
-        }
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .BetDuration {
+      font-family: "GilmerRegular";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 17px;
+      background: linear-gradient(90deg, #fcfcfb 0%, #e6e5e5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      span {
+        margin-top: 1px;
+      }
+
+      .BetDetails-Logo {
+        width: 12px;
+        height: 12px;
       }
     }
   }
@@ -73,18 +89,22 @@
     gap: 5px;
 
     .Heading {
-      font-family: "Manrope-Bold";
+      font-family: "GilmerRegular";
       font-style: normal;
       font-weight: 700;
       font-size: 18px;
-      color: #848484;
+      background: linear-gradient(90deg, #fcfcfb 0%, #e6e5e5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+
 
       @include md {
         font-size: 20px;
       }
 
-      @include lg {
-      }
+      @include lg {}
 
       @include xl {
         font-size: 18px;
@@ -96,19 +116,19 @@
     }
 
     .Sub-Heading {
-      font-family: "Manrope-Medium";
+      font-family: "GilmerRegular";
       font-style: normal;
       font-weight: 600;
       font-size: 12px;
       line-height: 24px;
       color: #d5d5d5;
 
+
       @include md {
         font-size: 13px;
       }
 
-      @include lg {
-      }
+      @include lg {}
 
       @include xl {
         font-size: 12px;
@@ -124,7 +144,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-family: "Manrope-Medium";
+    font-family: "GilmerMedium";
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -135,12 +155,12 @@
     background-clip: text;
     text-fill-color: transparent;
 
+
     @include md {
       font-size: 15px;
     }
 
-    @include lg {
-    }
+    @include lg {}
 
     @include xl {
       font-size: 14px;

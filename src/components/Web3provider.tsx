@@ -8,12 +8,12 @@ export const config = createConfig(
   getDefaultConfig({
     chains: [hardhat,moonbaseAlpha],
     transports: {
-      // [hardhat.id]:http(
-      //   "http://127.0.0.1:8545/"
-      // ),
-      [moonbaseAlpha.id]:http(
-        "https://rpc.api.moonbase.moonbeam.network"
-      )
+      [hardhat.id]:http(
+        "http://127.0.0.1:8545/"
+      ),
+      // [moonbaseAlpha.id]:http(
+      //   "https://rpc.api.moonbase.moonbeam.network"
+      // )
     },
     walletConnectProjectId: "c0d339ed8343fed3a39dd6795c2244b8",
     appName: "BaseForeCast",

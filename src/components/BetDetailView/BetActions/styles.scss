@@ -1,57 +1,4 @@
 @import "../../../app/mixin.scss";
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
-
-.BuySellSwitches {
-  display: flex;
-  gap: 20px;
-  .BuySellSwitch {
-    width: 120px;
-    border: 1px solid #161616;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-inline: 8px;
-    border-radius: 45px;
-    cursor: pointer;
-    padding-block: 10px;
-    .BuySellLabel {
-      font-family: "Manrope-Medium";
-      font-style: normal;
-      font-weight: 600;
-      font-size: 16px;
-      color: #f2f2f2;
-    }
-    .BuySellLabel.active {
-      color: #B2C2FF;
-    }
-  }
-  .BuySellSwitch.active {
-    background-color: #161616;
-    border: 1px solid #333333;
-  }
-
-  .BetDuration {
-    font-family: "Manrope-Medium";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 17px;
-    color: #f2f2f2;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-
-    span {
-      width: 100px;
-    }
-
-    .BetDetails-Logo {
-      width: 12px;
-      height: 12px;
-      display: flex;
-    }
-  }
-}
 
 .BetActions {
   width: 80%;
@@ -63,13 +10,9 @@
   border-radius: 10px;
   margin-top: 20px;
 
-  @media screen and (max-width: 768px) {
-    margin-inline: auto;
-  }
-
   @include md {
     gap: 20px;
-    width: 400px;
+    width:100%;
   }
 
   @include lg {
@@ -77,16 +20,16 @@
 
   @include xl {
     gap: 15px;
-    width: 400px;
+    // width: 400px;
   }
 
   @include xxl {
     gap: 20px;
-    width: 400px;
+   // width: 500px;
   }
 
   .BetActions-Label {
-    font-family: "Manrope-Medium";
+    font-family: "GilmerRegular";
     font-style: normal;
     font-weight: 600;
     font-size: 11px;
@@ -114,11 +57,11 @@
     gap: 10px;
 
     .BetOptionsLabel {
-      font-family: "Manrope-Medium";
+      font-family: "GilmerRegular";
       font-style: normal;
       font-weight: 600;
       font-size: 10px;
-      color: #848484;
+      color: #818181;
 
       @include md {
         font-size: 11px;
@@ -166,11 +109,11 @@
       }
 
       .Green {
-        font-family: "Manrope-Medium";
+        font-family: "GilmerRegular";
         font-style: normal;
         font-weight: 700;
         font-size: 12px;
-        color: #6FB0D3;
+        color: #3dd179;
 
         @include md {
           font-size: 13px;
@@ -189,11 +132,11 @@
       }
 
       .Red {
-        font-family: "Manrope-Medium";
+        font-family: "GilmerRegular";
         font-style: normal;
         font-weight: 700;
         font-size: 12px;
-        color: #A0A0A0;
+        color: #dd7168;
 
         @include md {
           font-size: 13px;
@@ -216,7 +159,7 @@
         gap: 8px;
 
         .RadioLabel {
-          font-family: "Manrope-Medium";
+          font-family: "GilmerRegular";
           font-style: normal;
           font-weight: 700;
           font-size: 12px;
@@ -279,7 +222,7 @@
       align-items: center;
       justify-content: space-between;
       background-color: #1f1f24;
-      border: 1px solid #C2CDF9;
+      border: 1px solid #7B8ED8;
       cursor: pointer;
 
       @include md {
@@ -301,11 +244,11 @@
       }
 
       .Green {
-        font-family: "Manrope-Medium";
+        font-family: "GilmerRegular";
         font-style: normal;
         font-weight: 700;
         font-size: 12px;
-        color: #6FB0D3;
+        color: #3dd179;
 
         @include md {
           font-size: 13px;
@@ -323,11 +266,11 @@
       }
 
       .Red {
-        font-family: "Manrope-Medium";
+        font-family: "GilmerRegular";
         font-style: normal;
         font-weight: 700;
         font-size: 12px;
-        color: #A0A0A0;
+        color: #dd7168;
 
         @include md {
           font-size: 13px;
@@ -350,7 +293,7 @@
         gap: 8px;
 
         .RadioLabel {
-          font-family: "Manrope-Medium";
+          font-family: "GilmerRegular";
           font-style: normal;
           font-weight: 700;
           font-size: 12px;
@@ -376,7 +319,7 @@
           width: 10px;
           height: 10px;
           border-radius: 50%;
-          border: 1px solid #6FB0D3;
+          border: 1px solid #7B8ED8;
           padding: 1px;
           box-sizing: border-box;
 
@@ -397,7 +340,7 @@
           .RadioButtonInner {
             width: 100%;
             height: 100%;
-            background-color: #1030AB;
+            background-color:  #7B8ED8;
             border-radius: 50%;
           }
         }
@@ -411,7 +354,7 @@
     gap: 10px;
 
     .Label {
-      font-family: "Manrope-Medium";
+      font-family: "GilmerRegular";
       font-style: normal;
       font-weight: 600;
       font-size: 10px;
@@ -476,7 +419,7 @@
       }
 
       .InputField {
-        font-family: "Manrope-Medium";
+        font-family: "GilmerMedium";
         background-color: transparent;
         outline: none;
         border: none;
@@ -500,7 +443,7 @@
       }
     }
     .BalanceField {
-      font-family: "Manrope-Medium";
+      font-family: "GilmerMedium";
       font-style: normal;
       font-weight: 700;
       font-size: 10px;
@@ -522,6 +465,85 @@
     }
   }
 
+  .ReturnStats {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .ReturnLabel {
+      font-family: "GilmerMedium";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 24px;
+      color: #ffffff;
+
+      @include md {
+        font-size: 15px;
+      }
+
+      @include lg {
+      }
+
+      @include xl {
+      }
+
+      @include xxl {
+        font-size: 16px;
+      }
+    }
+
+    .ReturnValue {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .Green {
+        font-family: "GilmerMedium";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 15px;
+        text-align: right;
+        color: #00ff67;
+        margin-top: 5px;
+
+        @include md {
+          font-size: 16px;
+        }
+
+        @include lg {
+        }
+
+        @include xl {
+        }
+
+        @include xxl {
+          font-size: 17px;
+        }
+      }
+
+      .Starknet-logo {
+        width: 20px;
+        height: 20px;
+
+        @include md {
+        }
+
+        @include lg {
+        }
+
+        @include xl {
+        }
+
+        @include xxl {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+
   .ActionBtn {
     width: 100%;
     padding: 10px;
@@ -531,14 +553,14 @@
     box-sizing: border-box;
     background: linear-gradient(
       90deg,
-      #143CD9 0%,
-      #1337C8 25%,
-      #1133B7 50%,
-      #0D2994 75%,
-      #0D278C 100%
+      #f5841f 0%,
+      #ed801e 25%,
+      #e57b1d 50%,
+      #d5731b 75%,
+      #c66b19 100%
     );
     border-radius: 8px;
-    font-family: "Manrope-Medium";
+    font-family: "GilmerMedium";
     font-style: normal;
     font-weight: 800;
     font-size: 14px;
@@ -599,7 +621,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: #1f1f24;
-  border: 1px solid #C2CDF9;
+  border: 1px solid #f5841f;
   cursor: pointer;
 
   &:hover {
@@ -607,19 +629,19 @@
   }
 
   .Green {
-    font-family: "Manrope-Medium";
+    font-family: "GilmerRegular";
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
-    color: #6FB0D3;
+    color: #3dd179;
   }
 
   .Red {
-    font-family: "Manrope-Medium";
+    font-family: "GilmerRegular";
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
-    color: #A0A0A0;
+    color: #dd7168;
   }
 
   .RadioButtonContainer {
@@ -628,7 +650,7 @@
     gap: 8px;
 
     .RadioLabel {
-      font-family: "Manrope-Medium";
+      font-family: "GilmerRegular";
       font-style: normal;
       font-weight: 700;
       font-size: 14px;
@@ -640,14 +662,14 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      border: 1px solid #6FB0D3;
+      border: 1px solid #f5841f;
       padding: 1px;
       box-sizing: border-box;
 
       .RadioButtonInner {
         width: 100%;
         height: 100%;
-        background-color: 1030AB;
+        background-color: #f5841f;
         border-radius: 50%;
       }
     }
@@ -660,7 +682,7 @@
   gap: 10px;
 
   .Label {
-    font-family: "Manrope-Medium";
+    font-family: "GilmerRegular";
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
@@ -695,7 +717,7 @@
       height: 24px;
     }
 
-    fieldset {
+    fieldset{
       border: none;
     }
 
@@ -711,7 +733,7 @@
     }
 
     .InputField {
-      font-family: "Manrope-Medium";
+      font-family: "GilmerMedium";
       background-color: transparent;
       outline: none;
       border: none;
@@ -727,34 +749,13 @@
   justify-content: space-between;
   align-items: center;
 
-  @media screen and (max-width: 768px) {
-    width: 80%;
-    margin-block: 5px;
-    padding-inline: 20px;
-    margin-inline: auto;
-  }
-
   .ReturnLabel {
-    font-family: "Manrope-Medium";
+    font-family: "GilmerMedium";
     font-style: normal;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 24px;
     color: #ffffff;
-
-    @include md {
-      font-size: 15px;
-    }
-
-    @include lg {
-    }
-
-    @include xl {
-    }
-
-    @include xxl {
-      font-size: 16px;
-    }
   }
 
   .ReturnValue {
@@ -762,71 +763,29 @@
     align-items: center;
     gap: 10px;
 
-    .Green {
-      font-family: "Manrope-Medium";
-      font-style: normal;
-      font-weight: 700;
-      font-size: 15px;
-      text-align: right;
-      color: #00ff67;
-      margin-top: 5px;
-
-      @include md {
-        font-size: 16px;
-      }
-
-      @include lg {
-      }
-
-      @include xl {
-      }
-
-      @include xxl {
-        font-size: 17px;
-      }
-    }
-
     .Gray {
-      font-family: "Manrope-Medium";
+      font-family: "GilmerMedium";
       font-style: normal;
       font-weight: 700;
       font-size: 17px;
       line-height: 34px;
       text-align: right;
       color: #818181;
+    }
 
-      @include md {
-        font-size: 16px;
-      }
-
-      @include lg {
-      }
-
-      @include xl {
-      }
-
-      @include xxl {
-        font-size: 17px;
-      }
+    .Green {
+      font-family: "GilmerMedium";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 34px;
+      text-align: right;
+      color: #00ff67;
     }
 
     .Starknet-logo {
       width: 20px;
       height: 20px;
-
-      @include md {
-      }
-
-      @include lg {
-      }
-
-      @include xl {
-      }
-
-      @include xxl {
-        width: 20px;
-        height: 20px;
-      }
     }
   }
 }
@@ -840,26 +799,22 @@
   box-sizing: border-box;
   background: linear-gradient(
     90deg,
-    #143CD9 0%,
-    #1337C8 25%,
-    #1133B7 50%,
-    #0D2994 75%,
-    #0D278C 100%
+    #f5841f 0%,
+    #ed801e 25%,
+    #e57b1d 50%,
+    #d5731b 75%,
+    #c66b19 100%
   );
   border-radius: 8px;
-  font-family: "Manrope-Medium";
+  font-family: "GilmerMedium";
   font-style: normal;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 16px;
   margin-bottom: 20px;
   line-height: 24px;
   color: #ffffff;
   cursor: pointer;
 
-  @media screen and (max-width: 768px) {
-    width: 80%;
-    margin-inline: auto;
-  }
   &:hover {
     opacity: 0.8;
   }

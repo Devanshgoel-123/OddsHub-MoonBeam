@@ -50,25 +50,23 @@
     font-weight: 600;
     font-size: 18px;
     color: #ffffff;
-    width: 500px;
     margin-bottom: 20px;
     cursor: pointer;
+    padding-inline: 20px;
+    @include md{
 
-    @include md {
-      width: 800px;
     }
-
     @include lg {
+      width: 50%;
     }
 
     @include xl {
       font-size: 15px;
-      width: 800px;
+      width: 40%;
     }
 
     @include xxl {
       font-size: 18px;
-      width: 800px;
     }
 
     .GoBackLogo {
@@ -95,9 +93,17 @@
   }
   .DetailsAndActions {
     display: flex;
-    @media (max-width: 768px) {
+     @include md{
       flex-direction: column;
       align-items: center;
     }
+    @include lg {
+      width: 50%;
+    }
+
+    @include xl{
+      width: 40%;
+    }
   }
 }
+

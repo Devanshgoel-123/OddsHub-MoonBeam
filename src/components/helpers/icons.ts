@@ -12,3 +12,4 @@ export const UEFA_LOGO = "/assets/logos/uefalogo.svg";
 export const BACK_LOGO = "/assets/icons/arrow.svg";
 export const FIGHTER_IMAGE = "/assets/images/fight.png"
 export const AMMA_IMAGE = "/assets/icons/amma.png"
+export const GLMR_LOGO='https://media-hosting.imagekit.io/77a8bb2a3fb34b73/image%2026GLMR.svg?Expires=1838457672&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=nZWlzAv8ZsyC5eoF7W~t867xP0NaSu~8l5pC4d2vZi3F8BRcvgjis4KgqsW10gPuCNFkM~5Z0Nt2YQr-mg1~boLCdVr3Ecn889kxfrk2UHCwjxMxHtGYxr8-hSRekN~B2rJHGJ3~aMuSe5GpGC5-hT1l7bXClFiuNxr4pKvrqviKVWLtIioAeTGcZNoH0~ahry02TPpkb3J6BssEjDLJLaDRuElf04tyuLJEsun7MgoiXgLtNBUXOI1wU1MzWc-49KkUK5LDM1-dbFMwkyZI6DhZd9w5jpgwCozKvM4xvsNMKEXJ77Sr1TQTwHUJEFkL-MWCNQH55Zc2vfA6z6l8kA__'
