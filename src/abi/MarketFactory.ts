@@ -1,5 +1,5 @@
 
- const abi=[
+ const abi= [
   {
     "inputs": [
       {
@@ -322,6 +322,11 @@
         "internalType": "uint128",
         "name": "amount",
         "type": "uint128"
+      },
+      {
+        "internalType": "uint256",
+        "name": "categoryId",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -335,6 +340,120 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "get_all_crypto_markets",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "market_id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "bought_shares",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct Outcome[2]",
+            "name": "outcomes",
+            "type": "tuple[2]"
+          },
+          {
+            "internalType": "string",
+            "name": "category",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "image",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "is_settled",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint64",
+            "name": "deadline",
+            "type": "uint64"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "bought_shares",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct Outcome",
+            "name": "winning_outcome",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "money_in_pool",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint8",
+            "name": "conditions",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint64",
+            "name": "price_key",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint128",
+            "name": "amount",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint256",
+            "name": "categoryId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct CryptoMarket[]",
+        "name": "",
+        "type": "tuple[]"
       }
     ],
     "stateMutability": "view",
@@ -424,9 +543,123 @@
             "internalType": "uint256",
             "name": "money_in_pool",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "categoryId",
+            "type": "uint256"
           }
         ],
         "internalType": "struct Market[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "get_all_sports_markets",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "market_id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "bought_shares",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct Outcome[2]",
+            "name": "outcomes",
+            "type": "tuple[2]"
+          },
+          {
+            "internalType": "string",
+            "name": "category",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "image",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "is_settled",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint64",
+            "name": "deadline",
+            "type": "uint64"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "bought_shares",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct Outcome",
+            "name": "winning_outcome",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "money_in_pool",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint64",
+            "name": "api_event_id",
+            "type": "uint64"
+          },
+          {
+            "internalType": "bool",
+            "name": "is_home",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "categoryId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct SportsMarket[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -552,6 +785,11 @@
             "internalType": "uint128",
             "name": "amount",
             "type": "uint128"
+          },
+          {
+            "internalType": "uint256",
+            "name": "categoryId",
+            "type": "uint256"
           }
         ],
         "internalType": "struct CryptoMarket[]",
@@ -652,9 +890,133 @@
             "internalType": "uint256",
             "name": "money_in_pool",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "categoryId",
+            "type": "uint256"
           }
         ],
         "internalType": "struct Market[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userWallet",
+        "type": "address"
+      }
+    ],
+    "name": "get_user_positions_market",
+    "outputs": [
+      {
+        "components": [
+          {
+            "components": [
+              {
+                "components": [
+                  {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "bought_shares",
+                    "type": "uint256"
+                  }
+                ],
+                "internalType": "struct Outcome",
+                "name": "outcome",
+                "type": "tuple"
+              },
+              {
+                "components": [
+                  {
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "bool",
+                    "name": "has_claimed",
+                    "type": "bool"
+                  }
+                ],
+                "internalType": "struct UserPosition",
+                "name": "position",
+                "type": "tuple"
+              }
+            ],
+            "internalType": "struct UserBet",
+            "name": "user_bet",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "market_id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint64",
+            "name": "deadline",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint256",
+            "name": "money_in_pool",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "categoryId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "is_settled",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "bought_shares",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct Outcome",
+            "name": "winning_outcome",
+            "type": "tuple"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "betId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct UserPositionsForMarket[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -762,6 +1124,11 @@
             "internalType": "bool",
             "name": "is_home",
             "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "categoryId",
+            "type": "uint256"
           }
         ],
         "internalType": "struct SportsMarket[]",
@@ -861,6 +1228,11 @@
       {
         "internalType": "uint256",
         "name": "money_in_pool",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "categoryId",
         "type": "uint256"
       }
     ],
@@ -1057,6 +1429,11 @@
         "internalType": "bool",
         "name": "is_home",
         "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "categoryId",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -1157,5 +1534,4 @@
     "type": "function"
   }
 ]
-
   export default abi;

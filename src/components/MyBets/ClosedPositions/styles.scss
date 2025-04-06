@@ -118,23 +118,23 @@
       }
 
       .Event {
-        width:60%;
+        width: 50%;
         text-align: left;
 
         @include md {
-          width: 60%;
+          width: 30%;
         }
 
         @include lg {
-          width: 40%;
+          width: 30%;
         }
 
         @include xl {
-          width: 40%;
+          width: 30%;
         }
 
         @include xxl {
-          width: 40%;
+          width: 30%;
         }
       }
 
@@ -260,7 +260,7 @@
         }
 
         .Claim {
-          background-color: #1336C0;
+          background-color: #d5741c;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -272,7 +272,7 @@
 
           &:hover {
             background-color: white;
-            color: #1336C0;
+            color: #d5741c;
           }
 
           @include md {
@@ -288,34 +288,33 @@
           }
         }
         .Won {
-          color: #B2C2FF;
+          color: #3dd179;
         }
         .Lost {
-          color: #858585;
+          color: #dd7168;
         }
       }
 
       .Event {
-        width: 60%;
+        width: 50%;
         text-align: left;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
 
         @include md {
-          width: 40%;
+          width: 30%;
         }
 
         @include lg {
-          width: 40%;
+          width: 30%;
         }
 
         @include xl {
-          width: 40%;
+          width: 30%;
         }
 
         @include xxl {
-          width: 40%;
         }
       }
 

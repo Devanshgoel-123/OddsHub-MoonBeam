@@ -34,7 +34,6 @@ interface Props {
 const BetActions: NextPage<Props> = ({ outcomes, moneyInPool, category }) => {
   const { address } = useAccount();
   const pathname = usePathname();
-  const { choice, setChoice } = useContext(MarketContext);
   const [userChoice,setUserChoice]=useState<number>(0);
   const [betAmount, setBetAmount] = useState("");
   const [marketId, setMarketId] = useState(0);
@@ -42,7 +41,7 @@ const BetActions: NextPage<Props> = ({ outcomes, moneyInPool, category }) => {
   const [percent1, setPercent1] = useState(0);
   const [userBalance,setBalance]=useState<number>(0);
   const [percent2, setPercent2] = useState(0);
-
+  const [marketType,setMarketType]=useState<number | null>(null);
   const logoOptions = [
     { value: ETH_ADDRESS, label: "GLMR", src: GLMR_LOGO },
   ];
@@ -61,7 +60,11 @@ const BetActions: NextPage<Props> = ({ outcomes, moneyInPool, category }) => {
     const encoded = pathname.split("/")[3];
     const hexPart = encoded.slice(0, -4);
     const marketId = parseInt(hexPart, 16);
+    const category=pathname.split("/")[2];
+    const categoryId = (category.toLowerCase().includes("sports") || category.toLowerCase().includes("amma")) ? 0 : 
+                     (category.toLocaleLowerCase().includes("politics") || category.toLowerCase().includes("pop")) ? 2 : 1;
     setMarketId(marketId);
+    setMarketType(categoryId)
   }, [pathname]);
 
   const {sendTransaction}=usePlaceBet(category);
@@ -93,7 +96,7 @@ const BetActions: NextPage<Props> = ({ outcomes, moneyInPool, category }) => {
   useEffect(() => {
       if (moneyInPool && betAmount != "" ) {
         
-        if (choice == 0) {
+        if (userChoice == 0) {
           setPotentialWinnings(
             (
               parseFloat(BigInt(Number(betAmount)).toString()) *
@@ -117,7 +120,7 @@ const BetActions: NextPage<Props> = ({ outcomes, moneyInPool, category }) => {
           );
         }
     }
-  }, [choice, betAmount, moneyInPool]);
+  }, [userChoice, betAmount, moneyInPool]);
 
   const handleToast = (
     message: string,
@@ -145,10 +148,9 @@ const BetActions: NextPage<Props> = ({ outcomes, moneyInPool, category }) => {
         <span className='BetOptionsLabel'>Choose your option</span>
         <Box
           onClick={() => {
-            setChoice(0);
             setUserChoice(0)
           }}
-          className={choice === 0 ? "BetOptionActive" : "BetOption"}
+          className={userChoice === 0 ? "BetOptionActive" : "BetOption"}
         >
           <span className='Green'>
             {outcomes ? (outcomes[0].name.toString()) : "Yes"}
@@ -162,10 +164,9 @@ const BetActions: NextPage<Props> = ({ outcomes, moneyInPool, category }) => {
         </Box>
         <Box
           onClick={() => {
-            setChoice(1);
             setUserChoice(1)
           }}
-          className={choice === 1 ? "BetOptionActive" : "BetOption"}
+          className={userChoice === 1 ? "BetOptionActive" : "BetOption"}
         >
           <span className='Red'>
             {outcomes ? outcomes[1].name.toString() : "No"}
@@ -198,10 +199,6 @@ const BetActions: NextPage<Props> = ({ outcomes, moneyInPool, category }) => {
               required
             />
           </Box>
-         {/* <span className='BalanceField'> */}
-            {/* $
-            {betAmount
-          </span> */}
         </Box>
         <span className='BalanceField'>
           {address
@@ -222,7 +219,8 @@ const BetActions: NextPage<Props> = ({ outcomes, moneyInPool, category }) => {
       </Box>
       {address ? (
         <Box onClick={() => {
-          sendTransaction(betAmount,marketId,2,userChoice)
+          if(marketType===null) return;
+          sendTransaction(betAmount,marketId,marketType,userChoice)
         }} className={`ActionBtn`}>
           {betAmount == ""
             ? "Enter Amount"

@@ -1,10 +1,9 @@
 import { enqueueSnackbar } from "notistack";
 import axios from "axios";
 import abi from "@/abi/MarketFactory";
-import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
+import {useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 import { CONTRACT_ADDRESS } from "../helpers/constants";
 import { config } from "../Web3provider";
-import { moonbaseAlpha } from "viem/chains";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
 interface Data {
@@ -18,7 +17,7 @@ interface Data {
   fightImage?: string;
 }
 
-function useCreateMarket({
+function useCreateSportsMarket({
   heading,
   category,
   deadline,
@@ -103,14 +102,16 @@ function useCreateMarket({
    }
   },[])
 
-  const createMarket = async () => {
+  const createSportsMarket = async () => {
     try{
-      console.log("Creating market for user");
+      const api_event_id=1;
+      const is_home=false;
+      console.log("Creating sports market for user");
       setEnableQuery(true)
       writeContract({
         abi:abi,
         address:CONTRACT_ADDRESS,
-        functionName:'create_market',
+        functionName:'create_sports_market',
         args:[
           heading,
           description,
@@ -118,7 +119,9 @@ function useCreateMarket({
           outcome2,
           category,
           image,
-          deadline
+          deadline,
+          api_event_id,
+          is_home
         ]
       })
       
@@ -135,7 +138,7 @@ function useCreateMarket({
    
   };
 
-  return { createMarket };
+  return { createSportsMarket };
 }
 
-export default useCreateMarket;
+export default useCreateSportsMarket;

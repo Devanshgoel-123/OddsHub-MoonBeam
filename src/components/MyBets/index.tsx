@@ -1,126 +1,48 @@
 "use client";
-
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import OpenPositions from "./OpenPositions";
 import ClosedPositions from "./ClosedPositions";
 import "./styles.scss";
+import { Market, UserBet } from "../helpers/types";
 import { useAccount } from "wagmi";
-import axios from "axios";
-import { FPMMMarketInfo } from "../helpers/types";
+import { CONTRACT_ADDRESS } from "../helpers/constants";
+import abi from "@/abi/MarketFactory";
+import { useGetUserPosition } from "../hooks/useGetUserPosition";
+import { UserPositionMarkets } from "../helpers/types";
 
-interface Market {
-  marketId: { hex: string };
-  isActive: boolean;
-  Outcome1Tokens: string;
-  Outcome2Tokens: string;
-}
-
-interface ProcessedMarket {
-  status: string;
-  question: string;
-  deadline: string;
-  Outcome1Tokens: string;
-  Outcome2Tokens: string;
-  winner:string;
-  marketId:number;
-}
 
 function MyBets() {
-  const { address, isConnected } = useAccount();
-  const [markets, setMarkets] = useState<ProcessedMarket[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const { address } = useAccount();
 
-  const fetchMarketData = useCallback(async (marketId: number)=> {
-    try {
-      // const response = await axios.get<FPMMMarketInfo[]>(`${process.env.SERVER_URL}/get-current-market/${marketId}`);
-      // console.log(`Fetched market data for ID ${marketId}:`, response.data);
-      // return response.data[0];
-    } catch (error) {
-      console.error(`Error fetching market data for ID ${marketId}:`, error);
-      throw error;
-    }
-  }, []);
+  const [openUserPosition, setOpenUserPosition] = useState<UserPositionMarkets[]>([]);
+  const [closedUserPosition, setClosedUserPosition] = useState<UserPositionMarkets[]>([]);
 
-  const processMarkets = useCallback(async (userMarkets: Market[]) => {
-    const marketsToProcess = userMarkets.filter(market => 
-      parseFloat(market.Outcome1Tokens) > 0 || parseFloat(market.Outcome2Tokens) > 0
-    );
-
-    console.log(`Processing ${marketsToProcess.length} out of ${userMarkets.length} markets`);
-
-    // const processedMarkets = await Promise.all(
-    //   marketsToProcess.map(async (market) => {
-    //     try {
-    //       const marketId = parseInt(market.marketId.hex, 16);
-    //       console.log(`Processing market ID: ${marketId}`);
-    //       const currentMarket = await fetchMarketData(marketId);
-          
-    //       if (!currentMarket.question || !currentMarket.deadline) {
-    //         console.error(`Invalid data for market ID ${marketId}:`, currentMarket);
-    //         return null;
-    //       }
-
-    //       return {
-    //         status: market.isActive ? "Open" : "Closed",
-    //         question: currentMarket.question,
-    //         deadline: currentMarket.deadline,
-    //         Outcome1Tokens: market.Outcome1Tokens,
-    //         Outcome2Tokens:market.Outcome2Tokens,
-    //         winner:currentMarket.outcomes[0].winner? currentMarket.outcomes[0].name:currentMarket.outcomes[1].name,
-    //         marketId:marketId
-    //       };
-    //     } catch (error) {
-    //       console.error(`Error processing market:`, error);
-    //       return null;
-    //     }
-    //   })
-    // );
-    
-    // return processedMarkets.filter((market): market is ProcessedMarket => market !== null);
-  }, [fetchMarketData]);
+   const {
+    userOpenPositions,
+    userClosedPositions,
+    isLoading
+   }=useGetUserPosition();
 
   useEffect(() => {
-    const getAllMarkets = async () => {
-      if (!address || !isConnected) return;
-
-      setLoading(true);
-      try {
-        // const response = await axios.get<Market[]>(`${process.env.SERVER_URL}/getmarketsforUser/${address}`);
-        // console.log("User markets response:", response.data);
-        
-        // if (response.data.length === 0) {
-        //   console.log("No markets found for user");
-        //   setMarkets([]);
-        //   return;
-        // }
-
-        // const processedMarkets = await processMarkets(response.data);
-        // console.log("Processed markets:", processedMarkets);
-        // setMarkets(processedMarkets);
-      } catch (error) {
-        console.error("Error fetching markets:", error);
-        setMarkets([]);
-      } finally {
-        setLoading(false);
+      if(address===undefined) return;
+      if(userOpenPositions){
+        setOpenUserPosition(userOpenPositions)
       }
-    };
+      if(userClosedPositions){
+        setClosedUserPosition(userClosedPositions)
+      }
+  
+  }, [address,userOpenPositions,userClosedPositions]);
 
-    getAllMarkets();
-  }, [address, isConnected, processMarkets]);
-
-  const openMarkets = markets.filter(market => market.status === "Open");
-  const closedMarkets = markets.filter(market => market.status === "Closed");
-  console.log(openMarkets);
-  console.log(closedMarkets)
   return (
-    <div className="MyBets">
+    <div className='MyBets'>
       <OpenPositions
-        loading={loading}
-        openMarkets={openMarkets}
+        loading={isLoading}
+        openPositions={openUserPosition}
       />
       <ClosedPositions
-        loading={loading}
-        closedMarkets={closedMarkets}
+        loading={isLoading}
+        closedMarkets={closedUserPosition}
       />
     </div>
   );

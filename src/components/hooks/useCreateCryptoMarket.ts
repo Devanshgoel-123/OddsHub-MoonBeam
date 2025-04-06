@@ -1,10 +1,9 @@
 import { enqueueSnackbar } from "notistack";
 import axios from "axios";
 import abi from "@/abi/MarketFactory";
-import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
+import {useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 import { CONTRACT_ADDRESS } from "../helpers/constants";
 import { config } from "../Web3provider";
-import { moonbaseAlpha } from "viem/chains";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
 interface Data {
@@ -18,7 +17,7 @@ interface Data {
   fightImage?: string;
 }
 
-function useCreateMarket({
+function useCreateCryptoMarket({
   heading,
   category,
   deadline,
@@ -103,14 +102,17 @@ function useCreateMarket({
    }
   },[])
 
-  const createMarket = async () => {
+  const createCryptoMarket = async () => {
     try{
+      const condition=1;
+      const priceKey=2;
+      const amount=500;
       console.log("Creating market for user");
       setEnableQuery(true)
       writeContract({
         abi:abi,
         address:CONTRACT_ADDRESS,
-        functionName:'create_market',
+        functionName:'create_crypto_market',
         args:[
           heading,
           description,
@@ -118,7 +120,10 @@ function useCreateMarket({
           outcome2,
           category,
           image,
-          deadline
+          deadline,
+          condition,
+          priceKey,
+          amount
         ]
       })
       
@@ -135,7 +140,7 @@ function useCreateMarket({
    
   };
 
-  return { createMarket };
+  return { createCryptoMarket };
 }
 
-export default useCreateMarket;
+export default useCreateCryptoMarket;

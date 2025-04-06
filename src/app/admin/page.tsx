@@ -9,8 +9,10 @@ import { colorStyles } from "@/components/helpers/menuStyles";
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import useCreateMarket from "@/components/hooks/useCreateMarket";
-import SettleFPMMMarkets from "@/components/SettleFPMMMarkets";
+import SettleMarkets from "@/components/SettleMarkets";
 import { useAccount } from "wagmi";
+import useCreateCryptoMarket from "@/components/hooks/useCreateCryptoMarket";
+import useCreateSportsMarket from "@/components/hooks/useCreateSportsMarket";
 
 const categories = [
   {
@@ -49,12 +51,11 @@ export default function AdminPortal() {
   const {address}=useAccount();
 
   useEffect(()=>{
-    if(address===undefined || address===null || !address){
+    if(address===undefined){
       setCanCreate(false)
     }else{
       setCanCreate(true)
     }
-    console.log("the value of can create is",canCreate)
   },[address])
   const [action, setAction] = useState(0);
 
@@ -80,6 +81,27 @@ export default function AdminPortal() {
     fightImage,
   });
 
+  const { createSportsMarket}=useCreateSportsMarket({
+    heading,
+    category,
+    description,
+    outcome1,
+    outcome2,
+    deadline,
+    image,
+    fightImage,
+  })
+
+  const {createCryptoMarket}=useCreateCryptoMarket({
+    heading,
+    category,
+    description,
+    outcome1,
+    outcome2,
+    deadline,
+    image,
+    fightImage,
+  })
   useEffect(() => {
     const validateMarket = () => {
       if (
@@ -130,17 +152,17 @@ export default function AdminPortal() {
         <div>Market Dashboard</div>
       </div>
       <div className='Action-Choice'>
-        <button className='Action-Button' onClick={() => setAction(0)}>
+        <button className='Action-Button' onClick={() => setAction(1)}>
           Create Market
         </button>
-        <button className='Action-Button' onClick={() => setAction(1)}>
+        <button className='Action-Button' onClick={() => setAction(0)}>
           Settle Market
         </button>
-        <button className='Action-Button' onClick={() => setAction(0)}>
+        <button className='Action-Button' onClick={() => setAction(2)}>
          Toggle Market
         </button>
       </div>
-      {action == 0 && (
+      {action == 1 && (
         <>
           <div className='Content-Section'>
             <Box className='InputContainer'>
@@ -220,7 +242,7 @@ export default function AdminPortal() {
                     placeholder='Select Deadline'
                     format='MM/dd/yyyy HH:mm'
                     onChange={(value) => setDeadline(value?.getTime() as number)}
-                    value={new Date()}
+                    value={new Date(deadline)}
                   />
                 </Box>
               </Box>
@@ -264,7 +286,16 @@ export default function AdminPortal() {
             <Box className='Submit'>
               <button
                 disabled={!canCreate}
-                onClick={createMarket}
+                onClick={()=>{
+                  console.log("i got clicked",category)
+                  if(category.toLowerCase().includes("sports") || category.toLowerCase().includes("amma")){
+                    createSportsMarket()
+                  }else if(category.toLowerCase().includes("crypto")){
+                    createCryptoMarket()
+                  }else{
+                    createMarket()
+                  }
+                }}
                 className={`SubmitButton`}
               >
                 {canCreate ? "Create Market" : "Connect Wallet"} 
@@ -273,16 +304,16 @@ export default function AdminPortal() {
           </div>
         </>
       )}
-      {/* {action == 1 && (
+      {action == 0 && (
         <>
           <div className='Heading-Section'>
-            <div>Settle FPMM Markets</div>
+            <div>Settle Markets</div>
           </div>
           <div className='Content-Section'>
-            <SettleFPMMMarkets />
+            <SettleMarkets />
           </div>
         </>
-      )} */}
+      )}
     </main>
   );
 }

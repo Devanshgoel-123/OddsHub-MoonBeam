@@ -5,21 +5,31 @@ import { motion } from "framer-motion";
 import CustomLogo from "@/components/common/CustomIcons";
 import LoaderComponent from "../LoaderComponent";
 import EmptyBetComponent from "../EmptyBetComponent";
-import { ETH_LOGO } from "@/components/helpers/icons";
+import { ETH_LOGO, GLMR_LOGO } from "@/components/helpers/icons";
+import { UserPositionMarkets } from "@/components/helpers/types";
+import { useGetParticularMarket } from "@/components/hooks/useGetMarkets";
+import Image from "next/image";
+import { getTimeForDisplay } from "@/components/helpers/functions";
 
 interface Bet {
   Yes: number;
   No: number;
 }
 
-function OpenPositions({ openMarkets, openBets, loading }: any) {
+interface Props{
+  openPositions:UserPositionMarkets[];
+  loading:boolean;
+}
+
+function OpenPositions({ loading, openPositions }:Props) {
+  console.log("the open positiions are",openPositions)
   return (
     <div className="OpenPositions">
       <div className="Heading">Open Positions</div>
       <div className="Container">
         {loading ? (
           <LoaderComponent />
-        ) : openMarkets.length > 0 ? (
+        ) : openPositions.length > 0 ? (
           <>
             <motion.div
               initial={{ opacity: 0 }}
@@ -35,16 +45,17 @@ function OpenPositions({ openMarkets, openBets, loading }: any) {
               <span className="Details"></span>
             </motion.div>
 
-            {openMarkets.map((market: any, index: number) => (
+            {openPositions.map((market: UserPositionMarkets, index: number) => (
               <div className="Data" key={index}>
                 <span className="Status">Open</span>
-                <span className="Event">{market.question}</span>
-                <span className="DatePlaced">{market.deadline.slice(0, 10)}</span>
+                <span className="Event">{market.name}</span>
+                <span className="DatePlaced">{getTimeForDisplay(Number(market.deadline))}</span>
                 <span className="StakedAmount">
-                  {market.Outcome1Tokens > 0 ? (market.Outcome1Tokens/10**7).toFixed(2):(market.Outcome2Tokens/10**7).toFixed(2)}
+                <Image src={GLMR_LOGO} height={22} width={22} alt="GLMR"/>
+                  {Number(market.user_bet.position.amount)/1e18 || 0.00}
                 </span>
                 <span className="Yes Prediction">
-                  {market.Outcome1Tokens > 0 ? "Yes":"No"}
+                  {market.user_bet.outcome.name}
                 </span>
               </div>
             ))}

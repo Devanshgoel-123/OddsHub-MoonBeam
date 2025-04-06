@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useReadContract } from "wagmi";
 import abi from "@/abi/MarketFactory";
 import { CONTRACT_ADDRESS } from "@/components/helpers/constants";
-import { Outcome, Market} from "@/components/helpers/types";
+import { Outcome, Market, SportsMarket, CryptoMarket} from "@/components/helpers/types";
 import { NextPage } from "next";
 import CustomLogo from "@/components/common/CustomIcons";
 import { BACK_LOGO } from "@/components/helpers/icons";
@@ -35,13 +35,15 @@ interface ContractReadResult {
 const BetDetailView: NextPage = () => {
   const router = useRouter();
   const pathname = usePathname();
-
+  const category=pathname.split("/")[2];
   const encoded = pathname.split("/")[3];
   const hexPart = encoded.slice(0, -4);
   console.log("the hex part is",hexPart)
   const marketId = parseInt(hexPart, 16);
-  const [market, setMarket] = useState<Market | null>(null);
+  const [market, setMarket] = useState<Market | SportsMarket | CryptoMarket | null>(null);
   const [outcomes, setOutcomes] = useState<Outcome[]>([]);
+  const categoryId = (category.toLowerCase().includes("sports") || category.toLowerCase().includes("amma")) ? 0 : 
+                     (category.toLocaleLowerCase().includes("politics") || category.toLowerCase().includes("pop")) ? 2 : 1;
   // useEffect(() => {
   //   const convertToOutcome = (outcome: any)=> {
   //     // return {
@@ -64,7 +66,7 @@ const BetDetailView: NextPage = () => {
   //   getOutcomes();
   // }, [marketId]); 
 
-  const {data}=useGetParticularMarket(marketId)
+  const {data}=useGetParticularMarket(marketId,categoryId)
 
   useEffect(() => {
     if(data){

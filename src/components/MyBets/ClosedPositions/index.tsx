@@ -9,21 +9,17 @@ import CustomLogo from "@/components/common/CustomIcons";
 import { writeContract } from "@wagmi/core";
 import { useAccount, useWriteContract } from "wagmi";
 import {config} from "../../Web3provider";
-import {abi} from "../../../abi/FPMMMarket.json"
-import { contractAddress } from "@/components/helpers/constants";
-interface ProcessedMarket {
-  status: string;
-  question: string;
-  deadline: string;
-  Outcome1Tokens: string;
-  Outcome2Tokens: string;
-  winner:string;
-  marketId:number;
-}
+import abi from "@/abi/MarketFactory";
+import { CONTRACT_ADDRESS } from "@/components/helpers/constants";
+import { UserPositionMarkets } from "@/components/helpers/types";
+import { getTimeForDisplay } from "@/components/helpers/functions";
+import Image from "next/image";
+import { GLMR_LOGO } from "@/components/helpers/icons";
+import useClaimWinnings from "@/components/hooks/useClaimWinnings";
 
 interface ClosedPositionsProps {
   loading: boolean;
-  closedMarkets: ProcessedMarket[];
+  closedMarkets: UserPositionMarkets[];
 }
 
 enum WinStatus {
@@ -33,27 +29,28 @@ enum WinStatus {
 
 function ClosedPositions({ loading, closedMarkets }: ClosedPositionsProps) {
   const {address}=useAccount();
-  const renderMarket = (market: ProcessedMarket) => {
-    const userPrediction=Number(market.Outcome1Tokens)!==0 ? "Yes" : "No";
-    const outcomeIndex=market.winner=="Yes"?0:1;
-    const statusClass= userPrediction===market.winner?Number(market.Outcome1Tokens)>0?"Claim":"Won":"Lost";
+  const {
+    claimWinnings
+  }=useClaimWinnings();
+  console.log(closedMarkets);
+  const renderMarket = (market: UserPositionMarkets) => {
+    console.log("THe market is",market)
+    if(!market) return;
+    const userPrediction=market.user_bet.outcome.name;
+    const outcomeIndex=market.winning_outcome.name == "Yes" ? 0 : 1;
+    const statusClass= userPrediction===market.winning_outcome.name? !market.user_bet.position.has_claimed ? "Claim" : "Won" : "Lost";
     return (
-      <div className="Data" key={market.question}>
-
-        {statusClass==="Claim"? <div className="Status">
+      <div className="Data" key={market.market_id}>
+        {statusClass==="Claim" ? 
+        <div className="Status">
           <button onClick={async ()=>{
             console.log("I got clicked")
-            const data=await writeContract(config,{
-              abi:abi,
-              address:`${contractAddress}`,
-              functionName:"claimWinnings",
-              args:[market.marketId,outcomeIndex]
-            })
-            if(data){
-              alert("Winnings have been Claimed and will be transferred shortly");
-              setTimeout(()=>{},2000);
-              window.location.reload();
-            }
+            const market_type= Number(market.categoryId);
+            claimWinnings({
+              marketId: Number(market.market_id),
+              market_type,
+              bet_num:Number(market.betId)
+          })
             }}>
          {statusClass}
         </button >
@@ -62,15 +59,16 @@ function ClosedPositions({ loading, closedMarkets }: ClosedPositionsProps) {
          {statusClass}
         </span>
         }
-        <span className="Event">{market.question}</span>
+        <span className="Event">{market.name}</span>
         <span className="DatePlaced">
-          {market.deadline.toString().slice(0,10)}
+          {getTimeForDisplay(Number(market.deadline))}
         </span>
         <span className="StakedAmount">
-          {Number(market.Outcome1Tokens)!==0? (parseFloat(market.Outcome1Tokens)/10**7).toFixed(2):(parseFloat(market.Outcome2Tokens)/10**7).toFixed(2)}
+          <Image src={GLMR_LOGO} height={22} width={22} alt="GLMR"/>
+          {Number(market.user_bet.outcome.bought_shares)/1e18}
         </span>
         <span className="Yes Prediction">
-          {Number(market.Outcome1Tokens)!==0 ? "Yes" : "No"}
+          {market.user_bet.outcome.name}
         </span>
       </div>
     );

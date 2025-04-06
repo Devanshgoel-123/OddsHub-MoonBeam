@@ -1,6 +1,6 @@
 // export const CONTRACT_ADDRESS="0x40Cfe44ad64128d648aEd2a0Dd8c6E4616b95738"; //Contract on sepolia
 
-export const CONTRACT_ADDRESS="0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f"; //hardhat
+export const CONTRACT_ADDRESS="0x73511669fd4de447fed18bb79bafeac93ab7f31f"; //hardhat
 export const options = {
     weekday: "short" as "short",
     year: "numeric" as "numeric",

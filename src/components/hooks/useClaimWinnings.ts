@@ -1,34 +1,19 @@
 import { enqueueSnackbar } from "notistack";
 import axios from "axios";
 import abi from "@/abi/MarketFactory";
-import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
+import {useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 import { CONTRACT_ADDRESS } from "../helpers/constants";
 import { config } from "../Web3provider";
-import { moonbaseAlpha } from "viem/chains";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
-interface Data {
-  heading: string;
-  category: string;
-  description: string;
-  outcome1: string;
-  outcome2: string;
-  deadline: number;
-  image: string;
-  fightImage?: string;
+
+interface props{
+    marketId:number;
+    market_type:number;
+    bet_num:number;
 }
 
-function useCreateMarket({
-  heading,
-  category,
-  deadline,
-  description,
-  image,
-  outcome1,
-  outcome2,
-  fightImage,
-}: Data) {
-
+function useClaimWinnings() {
   const [enableQuery, setEnableQuery] = useState(false);
   const handleToast = (
     message: string,
@@ -75,50 +60,19 @@ function useCreateMarket({
     }
   }) 
 
-  
-  useEffect(()=>{
-   if(data && isConfirming){
-      handleToastRef.current(
-        heading,
-        "Market Creating Pending",
-        category,
-      )
-    setEnableQuery(false);
-   }else if(data && isSuccess){
-    handleToastRef.current(
-      heading,
-      "Market Creation Successful",
-      category,
-    )
-    setEnableQuery(false);
-   }
-   if(contractError){
-    console.log("The Error faced is",contractError.message)
-    handleToastRef.current(
-      heading,
-      "Error creating the market",
-      category,
-    )
-    setEnableQuery(false);
-   }
-  },[])
 
-  const createMarket = async () => {
+  const claimWinnings = async ({marketId,market_type,bet_num}:props) => {
     try{
       console.log("Creating market for user");
       setEnableQuery(true)
       writeContract({
         abi:abi,
         address:CONTRACT_ADDRESS,
-        functionName:'create_market',
+        functionName:'claim_winnings',
         args:[
-          heading,
-          description,
-          outcome1,
-          outcome2,
-          category,
-          image,
-          deadline
+          marketId,
+          market_type,
+          bet_num
         ]
       })
       
@@ -126,16 +80,11 @@ function useCreateMarket({
     }catch(err){
       setEnableQuery(false)
       console.log(err)
-      handleToastRef.current(
-        heading,
-        "Error creating the market",
-        category,
-      )
     }
    
   };
 
-  return { createMarket };
+  return { claimWinnings };
 }
 
-export default useCreateMarket;
+export default useClaimWinnings;

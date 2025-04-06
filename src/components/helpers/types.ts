@@ -33,7 +33,7 @@ export interface FPMMOutcome {
 }
 
 export interface UserPosition {
-  amount: number;
+  amount: bigint ;
   has_claimed: boolean;
 }
 export interface UserBet {
@@ -69,4 +69,56 @@ export interface Market{
   money_in_pool:number  | bigint;
   winning_outcome:Outcome;
   outcomes:Outcome[];
+  categoryId:number;
+}
+
+export interface SportsMarket{
+  deadline:number;
+  category:string;
+  name:string;
+  description:string;
+  image:string;
+  is_active:boolean;
+  is_settled:boolean;
+  market_id:number  | bigint;
+  money_in_pool:number  | bigint;
+  winning_outcome:Outcome;
+  outcomes:Outcome[];
+  api_event_id:boolean;
+  is_home:boolean;
+  categoryId:number;
+}
+
+export interface CryptoMarket{
+  deadline:number;
+  category:string;
+  name:string;
+  description:string;
+  image:string;
+  is_active:boolean;
+  is_settled:boolean;
+  market_id:number  | bigint;
+  money_in_pool:number  | bigint;
+  winning_outcome:Outcome;
+  outcomes:Outcome[];
+  conditions:number;
+  price_key:number;
+  amount:number;
+  categoryId:number;
+}
+
+export interface UserPositionMarkets{
+  categoryId:bigint;
+  deadline:bigint;
+  description:string;
+  image:string;
+  is_active:boolean;
+  is_settled:boolean;
+  market_id:bigint;
+  money_in_pool:bigint;
+  name:string;
+  outcomes:Outcome[];
+  winning_outcome:Outcome;
+  user_bet:UserBet;
+  betId : bigint;
 }
