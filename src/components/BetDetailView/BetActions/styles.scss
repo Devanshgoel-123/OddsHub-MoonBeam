@@ -590,7 +590,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: #1f1f24;
-  border: 1px solid #f5841f;
+  border: 1px solid #2043cf;
   cursor: pointer;
 
   &:hover {
@@ -631,14 +631,14 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      border: 1px solid #f5841f;
+      border: 1px solid #2043cf;
       padding: 1px;
       box-sizing: border-box;
 
       .RadioButtonInner {
         width: 100%;
         height: 100%;
-        background-color: #f5841f;
+        background-color: #2043cf;
         border-radius: 50%;
       }
     }

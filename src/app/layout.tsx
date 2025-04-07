@@ -25,7 +25,7 @@ export default function RootLayout({
         <link rel="icon" href="/assets/icons/Logo.svg" />
       </head>
       <body>
-        <NextTopLoader showSpinner={false} color='#F5841F' />
+        <NextTopLoader showSpinner={false} color='#2043cf' />
         <Web3Provider>
           <Header />
           <HeaderMobile />
