@@ -48,6 +48,8 @@ function useClaimWinnings() {
     error:contractError
   }=useWriteContract();
 
+
+  
   const {
    isSuccess,
    isLoading:isConfirming,
@@ -60,6 +62,16 @@ function useClaimWinnings() {
     }
   }) 
 
+  useEffect(() => {
+    if (isSuccess) {
+      handleToastRef.current(
+        "Winnings Claimed!",
+        "Your transaction was confirmed.",
+        "success",
+        data
+      );
+    }
+  }, [isSuccess]);
 
   const claimWinnings = async ({marketId,market_type,bet_num}:props) => {
     try{
@@ -74,10 +86,21 @@ function useClaimWinnings() {
           bet_num
         ]
       })
-      
+      handleToastRef.current(
+        "Transaction Sent",
+        "Claiming your winnings...",
+        "info",
+        data
+      );
+  
       return data;
     }catch(err){
       setEnableQuery(false)
+      handleToastRef.current(
+        "Transaction Failed",
+        "Something went wrong.",
+        "error"
+      );
       console.log(err)
     }
    

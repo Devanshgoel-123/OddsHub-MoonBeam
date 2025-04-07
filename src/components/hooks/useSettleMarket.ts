@@ -64,7 +64,6 @@ function useSettleMarket() {
   const settleMarket = async ({marketId,winning_outcome,categoryId}:props) => {
     try{
     const functionName= categoryId===0 ? 'settle_sports_market' : categoryId === 1 ? 'settle_crypto_market_manually' : 'settle_market';
-      console.log("Creating market for user");
       setEnableQuery(true)
       writeContract({
         abi:abi,

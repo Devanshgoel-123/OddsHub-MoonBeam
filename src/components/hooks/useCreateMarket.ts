@@ -77,35 +77,36 @@ function useCreateMarket({
 
   
   useEffect(()=>{
-   if(data && isConfirming){
+    if(data && isConfirming){
       handleToastRef.current(
-        heading,
-        "Market Creating Pending",
-        category,
+        "Transaction Pending",
+        "Your market is being made, please wait for a few seconds.",
+        "info",
+        data as string
       )
     setEnableQuery(false);
    }else if(data && isSuccess){
     handleToastRef.current(
-      heading,
-      "Market Creation Successful",
-      category,
+        "Market Created Succesfully!",
+        "Your market is now live, let's start trading.",
+        "success",
+        data as string
     )
     setEnableQuery(false);
    }
    if(contractError){
     console.log("The Error faced is",contractError.message)
     handleToastRef.current(
-      heading,
-      "Error creating the market",
-      category,
+      "Oh shoot!",
+      "Something unexpected happened, check everything from your side while we check what happened on our end and try again.",
+      "info"
     )
     setEnableQuery(false);
    }
-  },[])
+  },[data,isSuccess,isConfirming,contractError])
 
   const createMarket = async () => {
     try{
-      console.log("Creating market for user");
       setEnableQuery(true)
       writeContract({
         abi:abi,

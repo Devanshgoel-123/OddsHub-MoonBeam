@@ -285,7 +285,7 @@ export default function AdminPortal() {
             </Box>
 
             <Box className='Submit'>
-              {canCreate ? <button
+              {address!==undefined ? <button
                 disabled={!canCreate}
                 onClick={()=>{
                   if(canCreate){
@@ -300,10 +300,10 @@ export default function AdminPortal() {
                 }}
                 className={`SubmitButton`}
               >
-                {canCreate ? "Create Market" : "Connect Wallet"} 
+                {address !== undefined? "Create Market" : "Connect Wallet"} 
               </button>
               :
-              <WalletConnectButton/>
+              <WalletConnectButton />
               }
             </Box>
           </div>

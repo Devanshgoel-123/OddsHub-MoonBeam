@@ -28,8 +28,6 @@ export const useGetUserPosition=()=>{
       
       const openMarkets = userMarkets.filter(item => item.is_active);
       const closeMarkets = userMarkets.filter(item => !item.is_active);
-      console.log(openMarkets)
-      console.log(closeMarkets)
       return {
         userOpenPositions: openMarkets,
         userClosedPositions: closeMarkets

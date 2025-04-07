@@ -14,7 +14,7 @@ import { getTimeBetween } from "@/components/helpers/functions";
 import { Box } from "@mui/material";
 import { HiLockClosed } from "react-icons/hi2";
 import { GLMR_LOGO } from "@/components/helpers/icons";
-
+import Image from "next/image";
 interface Props {
   category: string;
   logo: string;
@@ -109,7 +109,7 @@ const ContBetCard: NextPage<Props> = ({
         <div className="BetCard-HeadingContainer">
           <div className="BetCard-CategoryContainer">
             <div className="CategoryLogo">
-              {/* <Image src={} alt="Logo" width={30} height={30} /> */}
+              <Image src={logo} alt="Logo" width={30} height={30} />
             </div>
             <div className="CategoryName">{category}</div>
           </div>

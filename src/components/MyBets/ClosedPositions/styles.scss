@@ -117,28 +117,7 @@
         }
       }
 
-      .StatusClaim{
-        width: 30%;
-        text-align: left;
-        color: #fff;
-        background-color: #7B8ED8;
-
-        @include md {
-          width: 20%;
-        }
-
-        @include lg {
-          width: 20%;
-        }
-
-        @include xl {
-          width: 20%;
-        }
-
-        @include xxl {
-          width: 20%;
-        }
-      }
+     
       .Event {
         width: 50%;
         text-align: left;
@@ -315,6 +294,8 @@
         .Lost {
           color: #dd7168;
         }
+
+        
       }
 
       .Event {
@@ -434,5 +415,33 @@
         }
       }
     }
+  }
+}
+
+.StatusClaim{
+  min-width: 10%;
+  text-align: left;
+
+  button{
+    background-color: #1133B7;
+    padding: 6px 22px;
+    border-radius: 12px;
+    border: 0px;
+    color: #fff;
+  }
+  @include md {
+    width: 20%;
+  }
+
+  @include lg {
+    width: 20%;
+  }
+
+  @include xl {
+    width: 20%;
+  }
+
+  @include xxl {
+    width: 20%;
   }
 }

@@ -51,7 +51,8 @@ function ClosedPositions({ loading, closedMarkets }: ClosedPositionsProps) {
             }}>
          {statusClass}
         </button >
-        </div>:
+        </div>
+        :
          <span className="Status" >
          {statusClass}
         </span>

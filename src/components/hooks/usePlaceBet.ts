@@ -40,7 +40,7 @@ export const usePlaceBet=(category:string)=>{
         chainId?: number | undefined
       ) => void
     >(handleToast);
-    const {
+  const {
         isSuccess,
         isLoading:isConfirming,
        }=useWaitForTransactionReceipt({
@@ -51,32 +51,34 @@ export const usePlaceBet=(category:string)=>{
            enabled:enableQuery
          }
        }) 
-       useEffect(()=>{
-        if(data && isConfirming){
+  useEffect(()=>{
+    if(data && isConfirming){
            handleToastRef.current(
-             "Placing Bet",
-             "Bet Placing Pending",
-             category,
+            "Transaction Pending",
+             "Your transaction is being processed, please wait for a few seconds.",
+            "info",
+            data as string
            )
          setEnableQuery(false);
-        }else if(data && isSuccess){
+    }else if(data && isSuccess){
          handleToastRef.current(
-           "Placing Bet ",
-           "Market Creation Successful",
-           category,
+          "Prediction Placed Successfully!",
+          "Watch out for the results in “My bets” section. PS - All the best for this and your next prediction.",
+          "success",
+           data as string
          )
          setEnableQuery(false);
-        }
-        if(contractError){
+    }
+    if(contractError){
          console.log("The Error faced is",contractError.message)
          handleToastRef.current(
-           "Error Placing bet",
-           "Error placing the bet inside the market",
-           category,
+          "Oh shoot!",
+          "Something unexpected happened, check everything from your side while we check what happened on our end and try again.",
+          "info"
          )
          setEnableQuery(false);
         }
-       },[])
+  },[data, isSuccess, isConfirming,contractError])
      
     const sendTransaction=async (amount:string, market_id:number, market_type:number,token_to_mint:number)=>{
         if(amount==="" || !Number(amount)) return;
@@ -93,8 +95,14 @@ export const usePlaceBet=(category:string)=>{
             ],
             value:parseEther(amount)
         })
+
         }catch(err){
           console.log("Faced error during contract interactions")
+          handleToastRef.current(
+            "Oh shoot!",
+            "Something unexpected happened, check everything from your side while we check what happened on our end and try again.",
+            "info"
+          )
           setEnableQuery(false)
         }
        
