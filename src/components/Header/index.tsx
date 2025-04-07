@@ -16,10 +16,10 @@ const Header: NextPage<Props> = ({}) => {
       className="Header-Wrapper"
     >
       <div className="Header-LogoContainer">
-      <div className="Header-Logo">
+      {/* <div className="Header-Logo">
           <Image src={RAIZE_LOGO} height={22} width={22} alt="logo" className="Logo"/>
-        </div>
-        <span className="HeaderText">Raize Club</span>
+        </div> */}
+        <span className="HeaderText">OddsHub</span>
       </div>
       <div className="Header-LinksContainer">
         <HeaderLink

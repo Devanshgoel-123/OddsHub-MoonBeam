@@ -17,11 +17,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <head>
-      <title>Raize Club | Turn Insights into Income</title>
+      <title>OddsHub | Turn Insights into Income</title>
         <meta
-          name='RaizeClub'
-          content='On-chain prediction market on the Starknet ecosystem.'
+          name='OddsHub'
+          content='On-chain prediction market on the Moonbeam ecosystem.'
         />
+        <link rel="icon" href="/assets/icons/Logo.svg" />
       </head>
       <body>
         <NextTopLoader showSpinner={false} color='#F5841F' />
