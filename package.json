@@ -21,6 +21,7 @@
     "axios": "^1.7.4",
     "connectkit": "^1.8.2",
     "dotenv": "^16.4.5",
+    "elliptic": "^6.6.1",
     "encoding": "^0.1.13",
     "ethers": "5.7.2",
     "firebase": "^10.12.3",
