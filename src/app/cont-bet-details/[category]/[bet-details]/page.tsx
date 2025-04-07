@@ -38,39 +38,16 @@ const BetDetailView: NextPage = () => {
   const category=pathname.split("/")[2];
   const encoded = pathname.split("/")[3];
   const hexPart = encoded.slice(0, -4);
-  console.log("the hex part is",hexPart)
   const marketId = parseInt(hexPart, 16);
   const [market, setMarket] = useState<Market | SportsMarket | CryptoMarket | null>(null);
   const [outcomes, setOutcomes] = useState<Outcome[]>([]);
   const categoryId = (category.toLowerCase().includes("sports") || category.toLowerCase().includes("amma")) ? 0 : 
                      (category.toLocaleLowerCase().includes("politics") || category.toLowerCase().includes("pop")) ? 2 : 1;
-  // useEffect(() => {
-  //   const convertToOutcome = (outcome: any)=> {
-  //     // return {
-  //     //   name: outcome[0], 
-  //     //   : parseInt(outcome[1].hex, 16), 
-  //     //   winner: outcome[2], 
-  //     // };
-  //   };
-  //   const getOutcomes = async () => {
-  //     try {
-  //       const response = await axios.get(`${process.env.SERVER_URL}/get-outcomes/${marketId}`);
-  //       const transformedOutcomes = response.data.map((outcome: any) => convertToOutcome(outcome));
-  //       console.log("Transformed Outcomes:", transformedOutcomes);
-  //       setOutcomes(transformedOutcomes);
-  //     } catch (error) {
-  //       console.error("Error fetching outcomes:", error);
-  //     }
-  //   };
-
-  //   getOutcomes();
-  // }, [marketId]); 
 
   const {data}=useGetParticularMarket(marketId,categoryId)
 
   useEffect(() => {
     if(data){
-      console.log("setting maret as",data)
       setMarket(data as Market)
     }
   }, [marketId,data]);

@@ -17,10 +17,10 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <head>
-        <title>ForeCast</title>
+      <title>Raize Club | Turn Insights into Income</title>
         <meta
-          name='ForeCast'
-          content= 'India’s Primary Prediction Market - built on Base.'
+          name='RaizeClub'
+          content='On-chain prediction market on the Starknet ecosystem.'
         />
       </head>
       <body>

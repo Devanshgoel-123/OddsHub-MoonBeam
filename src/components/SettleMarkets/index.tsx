@@ -11,6 +11,8 @@ import { Radio, RadioGroup } from "rsuite";
 import useSettleMarket from "../hooks/useSettleMarket";
 import axios from "axios";
 import { useGetCryptoMarket, useGetMarket, useGetSportsMarket } from "../hooks/useGetMarkets";
+import WalletConnectButton from "../Header/WalletButtons";
+import { useAccount } from "wagmi";
 interface Props {}
 
 const settel_categories = [
@@ -35,8 +37,7 @@ const SettleMarkets: NextPage<Props> = ({}) => {
   const [allMarkets, setAllMarkets] = useState<Market[]>([]);
   const [allSportsMarkets,setSportsMarkets]=useState<SportsMarket[]>([]);
   const [allCryptoMarkets,setCryptoMarkets]=useState<CryptoMarket[]>([]);
-
-
+  const {address}=useAccount();
 //   const { settleMarket, } = useSettleMarket({
 //     category: category,
 //     marketId: marketId,
@@ -155,12 +156,12 @@ useEffect(()=>{
       {category === "crypto" && returnAllCryptoMarkets()}
       {category === "sports" && returnAllSportsMarkets()}
       {}
-      {marketId!==undefined && (
+      {marketId!==undefined && category!=="" && (
         <Box className='InputContainer'>
           <span className='Label'>Market Id: {Number(marketId)}</span>
         </Box>
       )}
-      {marketId!==undefined && (
+      {marketId!==undefined && category!=="" && (
         <Box className='InputContainer'>
           <span className='Label'>Outcome</span>
           <Box className='Input'>
@@ -178,9 +179,8 @@ useEffect(()=>{
       )}
       {marketId!==undefined && (
         <Box className='Submit'>
-          {
+          {address!==undefined ?
            <button type="button" onClick={()=>{
-            console.log("Settling markets")
             const outcome=value==="Yes" ? 0 : 1;
             const marketID=Number(marketId);
             const categoryId= category.toLowerCase().includes("all") ? 2 : category.toLowerCase().includes("sports") ? 0 : 1;
@@ -192,8 +192,9 @@ useEffect(()=>{
            }} className='SubmitButton'>
             Settle Market
           </button>
+          :
+          <WalletConnectButton/>
           }
-          
         </Box>
       
       )}

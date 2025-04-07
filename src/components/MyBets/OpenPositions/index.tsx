@@ -22,7 +22,6 @@ interface Props{
 }
 
 function OpenPositions({ loading, openPositions }:Props) {
-  console.log("the open positiions are",openPositions)
   return (
     <div className="OpenPositions">
       <div className="Heading">Open Positions</div>

@@ -78,6 +78,10 @@
             font-family: 'Manrope-Regular';
             font-weight: 300;
             font-style: normal;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 5px;
             font-size: 16px;
             //background: linear-gradient(270deg, rgba(250, 249, 249, 0.8) 0%, rgba(205, 205, 204, 0.8) 100%);
             color: #FFFFFF;
@@ -98,6 +102,12 @@
             @include xxl {
                 font-size: 18px;
                 line-height: 34px;
+            }
+            .chainLogo{
+                height: 22px;
+                width: 22px;
+                border: 1px solid solid;
+                border-radius: 50%;
             }
         }
 

@@ -26,48 +26,70 @@
 
 
     .Header-LogoContainer {
-        grid-column: 1 / 2;
+       
+        display: flex;
+        flex-direction: row;
+        justify-content:flex-start;
+        align-items: center;
 
         @include md {}
 
         @include lg {}
 
-        @include xl {}
+        @include xl {
+        gap: 20px;
+        }
 
         @include xxl {}
 
+        .HeaderText{
+            font-family: "Manrope";
+            background: linear-gradient(270deg, #4463dd 0%, #99a2c6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            @include md{
+                font-size: 18px;
+            }
+            @include lg{
+                font-size: 20px;
+            }
+            @include xl{
+                font-size: 22px;
+            }
+        }
         .Header-Logo {
-            width: 110px;
-            height: 20px;
-            background-image: url("/assets/logos/fClonglogo.svg");
+            
             background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;
 
-            @include md {
-                width: 110px;
-                height: 20px;
-                background-image: url("/assets/logos/fClonglogo.svg");
+            
+            .Logo{
+                width: 22px;
+                height: 22px;
+                @include md {
+                    width: 22px;
+                    height: 22px;
+                }
+    
+                @include lg {
+                    font-size: 10px;
+                    object-fit:contain;
+                }
+    
+                @include xl {
+                    width: 32px;
+                    height: 32px;
+                    object-fit: contain;
+                }
+    
+                @include xxl {
+                    width: 35px;
+                    height: 25px;
+                    object-fit: contain;
+                }
             }
-
-            @include lg {
-                font-size: 10px;
-                width: 115px;
-                height: 21px;
-                object-fit:contain;
-            }
-
-            @include xl {
-                width: 130px;
-                height: 23px;
-                object-fit: contain;
-            }
-
-            @include xxl {
-                width: 150px;
-                height: 27px;
-                object-fit: contain;
-            }
+           
 
         }
     }

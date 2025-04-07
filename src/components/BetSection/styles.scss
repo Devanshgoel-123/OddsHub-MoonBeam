@@ -1,11 +1,10 @@
 @import "../../app/mixin.scss";
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 
 .BetSection {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 30px;
 
   .BetSection-Hero {
     width: 100%;
@@ -51,17 +50,17 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 20px;
     flex: 1;
     transition: all 0.2s ease-in-out;
 
     .Tabs-Section {
       display: flex;
       align-items: center;
-      justify-content: center; // This will center the tabs
+      justify-content: center;
       flex-wrap: nowrap;
       gap: 20px;
-      overflow-x: auto;
+      overflow-x: scroll;
 
       @include md {}
 
@@ -76,10 +75,10 @@
       .Tab {
         flex: 0 0 auto;
         padding: 5px 10px;
-        font-family: "Manrope-Medium";
+        font-family: "GilmerMedium";
         font-style: normal;
-        font-weight: 600;
-        font-size: 25px;
+        font-weight: 700;
+        font-size: 11px;
         line-height: 24px;
         background: linear-gradient(270deg, #faf9f9 0%, #d7d7d7 100%);
         -webkit-background-clip: text;
@@ -98,14 +97,14 @@
 
         @include lg {
           padding: 5px 20px;
-          font-size: 25px;
+          font-size: 12px;
         }
 
         @include xl {}
 
         @include xxl {
           padding: 8px 20px;
-          font-size: 30px;
+          font-size: 14px;
         }
 
         &:hover {
@@ -113,21 +112,23 @@
         }
       }
 
-      .Tab-Section {
+      .Tab-Active {
         flex: 0 0 auto;
-        padding: 10px 20px;
+        padding: 5px 10px;
         box-sizing: border-box;
-        background: linear-gradient(90deg,
-            #f5841f 0%,
-            #ed801e 25%,
-            #e57b1d 50%,
-            #d5731b 75%,
-            #c66b19 100%);
-        border-radius: 4px;
-        font-family: "Manrope-Medium";
+        background: linear-gradient(
+          90deg,
+          #2043cf 0%,
+          #1f43d5 25%,
+          #3a59d6 50%,
+          #1f43d5 75%,
+          #2043cf 100%
+        );
+        border-radius: 8px;
+        font-family: "GilmerMedium";
         font-style: normal;
-        font-weight: 400;
-        font-size: 25px;
+        font-weight: 700;
+        font-size: 11px;
         display: flex;
         justify-content: center;
         line-height: 24px;
@@ -142,21 +143,21 @@
         }
 
         @include lg {
-          padding: 10px 20px;
-          font-size: 25px;
-          border-radius: 4px;
+          padding: 5px 20px;
+          font-size: 12px;
+          border-radius: 8px;
         }
 
         @include xl {
-          padding: 8px 18px;
-          font-size: 25px;
-          border-radius: 4px;
+          padding: 6px 18px;
+          font-size: 13px;
+          border-radius: 8px;
         }
 
         @include xxl {
-          padding: 10px 20px;
-          font-size: 30px;
-          border-radius: 6px;
+          padding: 8px 20px;
+          font-size: 14px;
+          border-radius: 10px;
         }
       }
     }
@@ -191,7 +192,7 @@
         width: 100%;
         padding-top: 100px;
         text-align: center;
-        font-family: 'Manrope-Medium';
+        font-family: 'GilmerMedium';
         font-style: normal;
         font-weight: 600;
         font-size: 16px;

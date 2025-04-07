@@ -106,7 +106,6 @@ function useCreateSportsMarket({
     try{
       const api_event_id=1;
       const is_home=false;
-      console.log("Creating sports market for user");
       setEnableQuery(true)
       writeContract({
         abi:abi,

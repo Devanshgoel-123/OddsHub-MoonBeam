@@ -20,7 +20,7 @@ const CustomLogo: NextPage<Props> = ({ src, width, height, radius }) => {
         width={0}
         height={0}
         src={src}
-        alt="BaseForeCast"
+        alt="RaizeClub"
       />
     </>
   );

@@ -37,8 +37,6 @@ const BetSection: NextPage<Props> = ({}) => {
    const {sportsMarket,isLoading,error}=useGetSportsMarket()
   useEffect(()=>{
     if(finalData){
-      //console.log(cryptoMarket)
-      console.log(sportsMarket)
       setContMarkets(finalData)
       setCryptoMarkets(cryptoMarket)
       setSportsMarkets(sportsMarket)
@@ -96,7 +94,10 @@ const BetSection: NextPage<Props> = ({}) => {
       <div ref={betCardWrapperDiv} className='BetSection-CardWrapper'>
         <div className='Tabs-Section'>
             {Tabs.map((item)=>{
-              return <div className="Tab" onClick={()=>{setActiveTab(item.activeTab)}}>
+              return <div key={item.activeTab}
+              onClick={()=>{setActiveTab(item.activeTab)}}
+              className={activeTab === item.activeTab ? "Tab-Active" : "Tab"}
+              >
               {item.name}
             </div>
             })}

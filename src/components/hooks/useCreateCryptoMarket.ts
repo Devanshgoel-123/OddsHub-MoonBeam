@@ -107,7 +107,6 @@ function useCreateCryptoMarket({
       const condition=1;
       const priceKey=2;
       const amount=500;
-      console.log("Creating market for user");
       setEnableQuery(true)
       writeContract({
         abi:abi,

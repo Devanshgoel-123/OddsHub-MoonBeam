@@ -72,7 +72,7 @@ const BetDetails: NextPage<Props> = ({
       </Box>
       <Box className='BetPool'>
         Prize-Pool{" "}
-        <span className='Colored'>{(moneyInPool/1e18)}</span>{" "}
+        <span className='Colored'>{(moneyInPool/1e18).toFixed(6)}</span>{" "}
         <Box className='Starknet-logo'>
           <CustomLogo src={GLMR_LOGO} />
         </Box>

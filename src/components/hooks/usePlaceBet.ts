@@ -80,7 +80,6 @@ export const usePlaceBet=(category:string)=>{
      
     const sendTransaction=async (amount:string, market_id:number, market_type:number,token_to_mint:number)=>{
         if(amount==="" || !Number(amount)) return;
-        console.log("The values are",amount,market_id,market_type,token_to_mint)
         setEnableQuery(true)
         try{
           writeContract({

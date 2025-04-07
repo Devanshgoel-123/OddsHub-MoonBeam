@@ -63,7 +63,6 @@ function useClaimWinnings() {
 
   const claimWinnings = async ({marketId,market_type,bet_num}:props) => {
     try{
-      console.log("Creating market for user");
       setEnableQuery(true)
       writeContract({
         abi:abi,

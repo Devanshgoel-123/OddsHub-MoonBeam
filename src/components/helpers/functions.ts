@@ -1,11 +1,9 @@
 import { enqueueSnackbar } from "notistack";
 export const getTimeBetween = (dateFuture: number, dateNow: number) => {
-  console.log(dateFuture,dateNow)
   var seconds = Math.floor((dateFuture - dateNow) / 1000);
   var minutes = Math.floor(seconds / 60);
   var hours = Math.floor(minutes / 60);
   var days = Math.floor(hours / 24);
-  console.log(seconds,minutes,hours,days)
   hours = hours - days * 24;
   minutes = minutes - days * 24 * 60 - hours * 60;
   return [days, hours, minutes];
@@ -39,7 +37,6 @@ export const handleToast = (
 };
 
 export const calcPrice = (poolBalances: any[]): number[] => {
-  console.log(poolBalances);
   const hasZeroBalances = poolBalances.every((h) => h.toString() === "0");
   if (hasZeroBalances) {
     return poolBalances.map(() => 0);

@@ -13,6 +13,7 @@ import SettleMarkets from "@/components/SettleMarkets";
 import { useAccount } from "wagmi";
 import useCreateCryptoMarket from "@/components/hooks/useCreateCryptoMarket";
 import useCreateSportsMarket from "@/components/hooks/useCreateSportsMarket";
+import WalletConnectButton from "@/components/Header/WalletButtons";
 
 const categories = [
   {
@@ -284,22 +285,26 @@ export default function AdminPortal() {
             </Box>
 
             <Box className='Submit'>
-              <button
+              {canCreate ? <button
                 disabled={!canCreate}
                 onClick={()=>{
-                  console.log("i got clicked",category)
-                  if(category.toLowerCase().includes("sports") || category.toLowerCase().includes("amma")){
-                    createSportsMarket()
-                  }else if(category.toLowerCase().includes("crypto")){
-                    createCryptoMarket()
-                  }else{
-                    createMarket()
-                  }
+                  if(canCreate){
+                    if(category.toLowerCase().includes("sports") || category.toLowerCase().includes("amma")){
+                      createSportsMarket()
+                    }else if(category.toLowerCase().includes("crypto")){
+                      createCryptoMarket()
+                    }else{
+                      createMarket()
+                    }
+                  }             
                 }}
                 className={`SubmitButton`}
               >
                 {canCreate ? "Create Market" : "Connect Wallet"} 
               </button>
+              :
+              <WalletConnectButton/>
+              }
             </Box>
           </div>
         </>

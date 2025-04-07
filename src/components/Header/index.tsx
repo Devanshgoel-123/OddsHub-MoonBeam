@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import CustomLogo from "../common/CustomIcons";
 import HeaderLink from "./HeaderLink";
 import WalletButton from "./WalletButtons/index";
-
+import Image from "next/image";
+import { RAIZE_LOGO } from "../helpers/icons";
 interface Props {}
 
 const Header: NextPage<Props> = ({}) => {
@@ -15,9 +16,10 @@ const Header: NextPage<Props> = ({}) => {
       className="Header-Wrapper"
     >
       <div className="Header-LogoContainer">
-        <div className="Header-Logo">
-          <CustomLogo src="https://firebasestorage.googleapis.com/v0/b/baseforesight.appspot.com/o/ForeCast.png?alt=media&token=37adfd91-84dc-42a0-b671-af8dc2eefeb9" />
+      <div className="Header-Logo">
+          <Image src={RAIZE_LOGO} height={22} width={22} alt="logo" className="Logo"/>
         </div>
+        <span className="HeaderText">Raize Club</span>
       </div>
       <div className="Header-LinksContainer">
         <HeaderLink

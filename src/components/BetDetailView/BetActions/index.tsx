@@ -5,6 +5,7 @@ import { useAccount, useBalance } from "wagmi";
 import { MenuItem, Select } from "@mui/material";
 import { Box } from "@mui/material";
 import "./styles.scss";
+import { parseUnits } from "viem";
 import CustomLogo from "@/components/common/CustomIcons";
 import {
   ETH_LOGO,
@@ -77,13 +78,7 @@ const BetActions: NextPage<Props> = ({ outcomes, moneyInPool, category }) => {
       setBalance(Number(balance.data.value.toString())/10**18)
     }
   },[balance])
-//   const { balance, writeAsync } = usePlaceBet(
-//     marketId,
-//     betAmount,
-//     choice,
-//     currentToken,
-//     quote?.buyAmount
-//   );
+
   function handleBetAmount(value: string) {
     if (value == "") {
       setBetAmount("");
@@ -95,30 +90,17 @@ const BetActions: NextPage<Props> = ({ outcomes, moneyInPool, category }) => {
 
   useEffect(() => {
       if (moneyInPool && betAmount != "" ) {
-        
-        if (userChoice == 0) {
+        const betAmountParsed = parseUnits(betAmount, 18).toString();
+        const poolAmount = moneyInPool;
+        const outcomeShares =userChoice === 0
+              ? outcomes[0].bought_shares.toString()
+              : outcomes[1].bought_shares.toString()
+        const numerator = parseFloat(betAmountParsed) *(parseFloat(betAmountParsed) + poolAmount);
+        const denominator = parseFloat(betAmountParsed) + parseFloat(outcomeShares);
+        const result=numerator / denominator;       
           setPotentialWinnings(
-            (
-              parseFloat(BigInt(Number(betAmount)).toString()) *
-              (parseFloat(BigInt(Number(betAmount)).toString()) + parseFloat(BigInt(moneyInPool).toString()) / 1e18)
-            ) /
-            ( 
-              parseFloat(BigInt(Number(betAmount)).toString()) +
-                parseFloat(outcomes[0].bought_shares.toString()) / 1e18
-            )
+            result/1e18
           );
-        } else {
-          setPotentialWinnings(
-            (
-              parseFloat(BigInt(Number(betAmount)).toString()) *
-              (parseFloat(BigInt(Number(betAmount)).toString()) + parseFloat(BigInt(moneyInPool).toString()) / 1e18)
-            ) /
-            ( 
-              parseFloat(BigInt(Number(betAmount)).toString()) +
-                parseFloat(outcomes[1].bought_shares.toString()) / 1e18
-            )
-          );
-        }
     }
   }, [userChoice, betAmount, moneyInPool]);
 
@@ -230,7 +212,6 @@ const BetActions: NextPage<Props> = ({ outcomes, moneyInPool, category }) => {
         </Box>
       ) : (
         <Box
-        //   onClick={() => connect({ connector: connectors[0] })}
           className='ActionBtn'
         >
           Connect Wallet

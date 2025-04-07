@@ -24,7 +24,6 @@ export const useGetParticularMarket = <T extends CategoryType>(index: number,cat
   type SelectedMarket = MarketTypeMap[T];
   const finalData = (data as SelectedMarket[]) || [];
   const market: SelectedMarket | undefined = finalData[index];
-  console.log(market,"the market data is")
   return {
     data: market,
     isLoading,
@@ -38,7 +37,6 @@ export const useGetMarket = () => {
     address: CONTRACT_ADDRESS,
     functionName: 'get_all_markets',
   });
-  console.log("the data is",data)
   const finalData:Market[]=data as Market[];
   
   return {finalData};
@@ -52,7 +50,6 @@ export const useGetCryptoMarket = () => {
     address: CONTRACT_ADDRESS,
     functionName: 'get_all_crypto_markets',
   });
-  console.log(data,"the market data is")
   const finalData: CryptoMarket[] = (data as CryptoMarket[]);
   return {
     cryptoMarket: finalData || [],
@@ -69,8 +66,7 @@ export const useGetSportsMarket = () => {
   });
  
   const finalData: SportsMarket[] = (data as SportsMarket[]) || [];
-  const market:SportsMarket[] = finalData;
-  console.log(market,"the sports market data is")
+  const market:SportsMarket[] = finalData ;
   return {
     sportsMarket: market || [],
     isLoading,

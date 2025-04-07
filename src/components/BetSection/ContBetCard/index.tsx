@@ -77,9 +77,7 @@ const ContBetCard: NextPage<Props> = ({
 
   const handleOpen = (outcome: number) => {
     setChoice(outcome);
-    console.log(outcome)
     const encodedId = stringToHex(marketId);
-    console.log("the encode id is",encodedId)
     router.push(`/cont-bet-details/${category.replace(" ", "-")}/${encodedId}`);
   };
 
@@ -149,8 +147,8 @@ const ContBetCard: NextPage<Props> = ({
         <div className="Pool-Stats">
           Prize Pool
           <span className="Pool-Value">
-            {(parseFloat(BigInt(moneyInPool).toString()) / 1e18)
-              .toString()
+            {(parseFloat(BigInt(moneyInPool).toString())/ 1e18)
+              .toFixed(6)
             }
           </span>
           <div className="Starknet-logo">

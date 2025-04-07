@@ -32,9 +32,7 @@ function ClosedPositions({ loading, closedMarkets }: ClosedPositionsProps) {
   const {
     claimWinnings
   }=useClaimWinnings();
-  console.log(closedMarkets);
   const renderMarket = (market: UserPositionMarkets) => {
-    console.log("THe market is",market)
     if(!market) return;
     const userPrediction=market.user_bet.outcome.name;
     const outcomeIndex=market.winning_outcome.name == "Yes" ? 0 : 1;
@@ -42,9 +40,8 @@ function ClosedPositions({ loading, closedMarkets }: ClosedPositionsProps) {
     return (
       <div className="Data" key={market.market_id}>
         {statusClass==="Claim" ? 
-        <div className="Status">
+        <div className="StatusClaim">
           <button onClick={async ()=>{
-            console.log("I got clicked")
             const market_type= Number(market.categoryId);
             claimWinnings({
               marketId: Number(market.market_id),

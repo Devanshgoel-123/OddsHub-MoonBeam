@@ -117,6 +117,28 @@
         }
       }
 
+      .StatusClaim{
+        width: 30%;
+        text-align: left;
+        color: #fff;
+        background-color: #7B8ED8;
+
+        @include md {
+          width: 20%;
+        }
+
+        @include lg {
+          width: 20%;
+        }
+
+        @include xl {
+          width: 20%;
+        }
+
+        @include xxl {
+          width: 20%;
+        }
+      }
       .Event {
         width: 50%;
         text-align: left;
