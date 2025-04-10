@@ -12,14 +12,9 @@ import { Market } from "../helpers/types";
 
 interface Props {}
 
-const tabList = [
-  {
-    tabName: "Markets",
-  },
-];
 
 const BetSection: NextPage<Props> = ({}) => {
-  const [activeTab, setActiveTab] = useState<number>(0);
+  const [activeTab, setActiveTab] = useState<number>(2);
   const [loading, setLoading] = useState<boolean>(false);
   const [contMarkets, setContMarkets] = useState<Market[]>([]);
   const [sportsMarkets,setSportsMarkets]=useState<SportsMarket[]>([]);
@@ -46,7 +41,7 @@ const BetSection: NextPage<Props> = ({}) => {
 
   const Tabs=[
     {
-      name:"Markets",
+      name:"Trending Markets",
       activeTab:2
     },
     {
@@ -65,7 +60,7 @@ const BetSection: NextPage<Props> = ({}) => {
         <div className='BetSection-HeroCard'>
           <BetHeroCard
             setActiveTab={setActiveTab}
-            categoryIndex={1}
+            categoryIndex={0}
             category='Sports'
             categoryLogo='/assets/logos/WC.jpeg'
             categoryName='India vs Pakistan'
